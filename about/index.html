@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="这是一个非常矛盾的矛盾结合体">
+  <meta name="description" content="正则表达式  复习html学习css深入js  了解Dart  容器化docker">
 <meta property="og:type" content="website">
-<meta property="og:title" content="自我评价?">
+<meta property="og:title" content="学习兴趣方向">
 <meta property="og:url" content="http://yoursite.com/about/index.html">
 <meta property="og:site_name" content="oneto1">
-<meta property="og:description" content="这是一个非常矛盾的矛盾结合体">
+<meta property="og:description" content="正则表达式  复习html学习css深入js  了解Dart  容器化docker">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-27T12:33:39.554Z">
+<meta property="og:updated_time" content="2019-05-26T04:15:08.644Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自我评价?">
-<meta name="twitter:description" content="这是一个非常矛盾的矛盾结合体">
+<meta name="twitter:title" content="学习兴趣方向">
+<meta name="twitter:description" content="正则表达式  复习html学习css深入js  了解Dart  容器化docker">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>自我评价? | oneto1</title>
+  <title>学习兴趣方向 | oneto1</title>
   
 
 
@@ -280,7 +280,7 @@
         
         
           
-          <li class="menu-item menu-item-about menu-item-active">
+          <li class="menu-item menu-item-坑 menu-item-active">
 
     
     
@@ -290,7 +290,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-lightbulb"></i> <br>坑</a>
 
   </li>
 
@@ -362,7 +362,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">自我评价?
+<h1 class="post-title" itemprop="name headline">学习兴趣方向
 
 </h1>
 
@@ -383,7 +383,14 @@
         
         
           <ul>
-<li>这是一个非常矛盾的矛盾结合体</li>
+<li><p>正则表达式</p>
+</li>
+<li><p>复习html学习css深入js</p>
+</li>
+<li><p>了解Dart</p>
+</li>
+<li><p>容器化docker</p>
+</li>
 </ul>
 
         
@@ -443,7 +450,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -464,7 +471,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -487,7 +496,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -722,6 +737,38 @@
   
 
   
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
 
   
 

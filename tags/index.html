@@ -280,7 +280,7 @@
         
         
           
-          <li class="menu-item menu-item-about">
+          <li class="menu-item menu-item-坑">
 
     
     
@@ -290,7 +290,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-lightbulb"></i> <br>坑</a>
 
   </li>
 
@@ -398,11 +398,23 @@
                   
                 
               
-              目前共计 3 个标签
+                
+                  
+                
+              
+                
+                  
+                
+              
+                
+                  
+                
+              
+              目前共计 6 个标签
             </div>
             <div class="tag-cloud-tags">
               
-                <a href="/tags/xmind/" style="font-size: 12px; color: #ccc">xmind</a> <a href="/tags/代理/" style="font-size: 12px; color: #ccc">代理</a> <a href="/tags/工具/" style="font-size: 30px; color: #111">工具</a>
+                <a href="/tags/http/" style="font-size: 12px; color: #ccc">http</a> <a href="/tags/xmind/" style="font-size: 12px; color: #ccc">xmind</a> <a href="/tags/乱七八糟/" style="font-size: 12px; color: #ccc">乱七八糟</a> <a href="/tags/代理/" style="font-size: 12px; color: #ccc">代理</a> <a href="/tags/工具/" style="font-size: 30px; color: #111">工具</a> <a href="/tags/笔记/" style="font-size: 12px; color: #ccc">笔记</a>
               
             </div>
           </div>
@@ -463,7 +475,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -484,7 +496,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -507,7 +521,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -742,6 +762,38 @@
   
 
   
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
 
   
 
