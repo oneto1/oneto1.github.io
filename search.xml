@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>LVS学习</title>
-    <url>/2020/05/10/LVS%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<hr>
-<span id="more"></span>
-
-<p>记录的非常详细,值得学习–&gt; <a href="http://superproxy.github.io/docs/lvs/index.html">LVS介绍</a></p>
-]]></content>
-      <tags>
-        <tag>LVS</tag>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UNIX下信号与进程关系学习</title>
     <url>/2019/10/06/UNIX%E4%B8%8B%E4%BF%A1%E5%8F%B7%E4%B8%8E%E8%BF%9B%E7%A8%8B%E5%85%B3%E7%B3%BB%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<hr>
@@ -238,8 +225,21 @@
 <p><a href="http://m.elecfans.com/article/579913.html">参考资料</a><br><a href="https://blog.csdn.net/return_cc/article/details/78845346">完善版signal</a></p>
 ]]></content>
       <tags>
-        <tag>linux</tag>
         <tag>c</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LVS学习</title>
+    <url>/2020/05/10/LVS%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<hr>
+<span id="more"></span>
+
+<p>记录的非常详细,值得学习–&gt; <a href="http://superproxy.github.io/docs/lvs/index.html">LVS介绍</a></p>
+]]></content>
+      <tags>
+        <tag>linux</tag>
+        <tag>LVS</tag>
       </tags>
   </entry>
   <entry>
@@ -408,8 +408,8 @@
 </ul>
 ]]></content>
       <tags>
-        <tag>linux</tag>
         <tag>c</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -562,8 +562,8 @@
 <hr>
 ]]></content>
       <tags>
-        <tag>linux</tag>
         <tag>c</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -780,8 +780,8 @@
 
 ]]></content>
       <tags>
-        <tag>linux</tag>
         <tag>c</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -967,8 +967,8 @@
 </ul>
 ]]></content>
       <tags>
-        <tag>linux</tag>
         <tag>c</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -1120,196 +1120,8 @@
 </ul>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> i;</span><br><span class="line">   <span class="type">float</span> f;</span><br><span class="line">   <span class="type">char</span>  str[<span class="number">20</span>];</span><br><span class="line">&#125; data;  </span><br><span class="line"><span class="comment">//占20个字节，而不是20+4+4</span></span><br></pre></td></tr></table></figure>]]></content>
       <tags>
-        <tag>linux</tag>
         <tag>c</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UNIX下进程环境与控制学习</title>
-    <url>/2019/10/01/UNIX%E4%B8%8B%E8%BF%9B%E7%A8%8B%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<hr>
-<span id="more"></span>
-
-<h1 id="进程环境"><a href="#进程环境" class="headerlink" title="进程环境"></a>进程环境</h1><h3 id="main"><a href="#main" class="headerlink" title="main()"></a>main()</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(argc,<span class="type">char</span> *argv[])</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>c语言程序从main()开始执行</li>
-<li>argc指命令行参数数目，argv指向命令行参数指针</li>
-<li>argv[argc]为一个空指针</li>
-</ul>
-<h3 id="进程终止"><a href="#进程终止" class="headerlink" title="进程终止"></a>进程终止</h3><ol>
-<li>正常终止</li>
-</ol>
-<ul>
-<li>从main()返回</li>
-<li>调用exit()</li>
-<li>调用_exit()或_Exit()</li>
-<li>最后一个线程从器其启动例程返回</li>
-<li>从最后一个线程调用pthread_exit</li>
-</ul>
-<ol start="2">
-<li>非正常终止</li>
-</ol>
-<ul>
-<li>调用abort()</li>
-<li>接到一个信号</li>
-<li>最后一个线程响应取消请求</li>
-</ul>
-<blockquote>
-<p>关于线程部分之后再写</p>
-</blockquote>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;stdio.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">exit</span><span class="params">(<span class="type">int</span> __status)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">void</span> _<span class="title">Exit</span><span class="params">(<span class="type">int</span> __status)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span></span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">void</span> _<span class="title">exit</span><span class="params">(<span class="type">int</span> __status)</span></span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>_exit()和_Exit()立即进入内核,exit()则会先进行相关清理操作,如fclose、flush等</li>
-<li>这三个函数都带一个整型参数，称作终止状态或退出状态</li>
-<li>main()的返回类型是int，且main执行到最后一条语句隐式返回(没有用return或exit)，那么其终止状态为0</li>
-<li>main()返回的整数值等同于用该值调用exit()，即exit(0) &#x3D;&#x3D; return (0)</li>
-</ul>
-<figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;stdlib.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> atexit(<span class="type">void</span> (*__func)(<span class="type">void</span>))</span><br><span class="line"></span><br><span class="line">成功返回<span class="number">0</span>，失败返回非<span class="number">0</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>该函数用于登记终止处理函数(exit handler)，由exit()调用，其执行顺序与登记顺序相反<br><img src="/images/20191001=0.png"></li>
-</ul>
-<h3 id="存储空间布局"><a href="#存储空间布局" class="headerlink" title="存储空间布局"></a>存储空间布局</h3><p><img src="/images/20191001=1.png"></p>
-<ul>
-<li>正文段保存的是只读的机器指令</li>
-<li>初始化数据段称为数据段，存放的是非函数任何形式的数据，形如 int num&#x3D;1</li>
-<li>未初始化数据段被称为bss段，存放的形如 char str[50] ,程序开始执行时被内核初始化为0或空指针</li>
-<li>栈，自动变量及每次函数调用所需信息保存于此。</li>
-<li>堆，用于动态存储分配</li>
-</ul>
-<h3 id="存储空间分配"><a href="#存储空间分配" class="headerlink" title="存储空间分配"></a>存储空间分配</h3><figure class="highlight stan"><table><tr><td class="code"><pre><span class="line"><span class="meta">#include”<span class="string">stdlib.h</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *malloc(size_t __<span class="built_in">size</span>)</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *calloc(size_t __nmemb, size_t __<span class="built_in">size</span>)</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *realloc(<span class="type">void</span> *__ptr, size_t __<span class="built_in">size</span>)</span><br><span class="line"></span><br><span class="line">成功返回非<span class="number">0</span>指针，失败返回NULL</span><br></pre></td></tr></table></figure>
-<ul>
-<li>所返回的是  void * ，也叫通用指针</li>
-<li>大部分实现其存储空间分配会比所要求空间稍大，额外的空用于记录管理信息————分配块长度、指向下一个分配块指针等</li>
-<li>程序结束前记得用free()</li>
-</ul>
-<hr>
-<h1 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h1><h3 id="进程标识"><a href="#进程标识" class="headerlink" title="进程标识"></a>进程标识</h3><figure class="highlight fsharp"><table><tr><td class="code"><pre><span class="line">#include<span class="string">&quot;unistd.h&quot;</span></span><br><span class="line"></span><br><span class="line">__pid_t getpid(<span class="keyword">void</span>)            返回pid</span><br><span class="line"></span><br><span class="line">__pid_t getppid(<span class="keyword">void</span>)          返回父<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line">__pid_t getuid(<span class="keyword">void</span>)            返回进程的实际用户<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line">__pid_t geteuid(<span class="keyword">void</span>)           返回有效<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line">__pid_t getgid(<span class="keyword">void</span>)            返回实际组<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line">__pid_t getegid(<span class="keyword">void</span>)           返回有效组<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>pid为0的被叫做调度进程也叫交换进程，该进程为内核的一部分，它不执行磁盘上的任何程序，为系统进程</li>
-<li>pid为1的是init进程，它负责自举内核后启动UNIX系统，它会成为所有孤儿进程的父进程，称这些进程被init进程收养</li>
-</ul>
-<h3 id="fork"><a href="#fork" class="headerlink" title="fork()"></a>fork()</h3><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">__pid_t fork(<span class="type">void</span>)</span><br><span class="line"></span><br><span class="line">成功子进程返回<span class="number">0</span>，父进程返回子进程<span class="type">id</span>，失败返回<span class="number">-1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>子进程是父进程的副本，拥有相同的数据段、堆、栈，但不是共享的,共享的是正文段</li>
-<li>子进程与父进程的执行顺序取决于内核的调度算法</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;stdio.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> i=<span class="number">0</span>;   </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hi\n&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(fork()==<span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;i&#x27;m child!\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;   </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;i&#x27;m father\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;this is a test%d\n&quot;</span>,i++);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; gcc test.c &amp;&amp; ./a.out </span><br><span class="line"></span><br><span class="line">hi</span><br><span class="line">i<span class="number">&#x27;</span>m father</span><br><span class="line">i<span class="number">&#x27;</span>m child!</span><br><span class="line"><span class="keyword">this</span> is a test0</span><br><span class="line"><span class="keyword">this</span> is a test0</span><br><span class="line"></span><br><span class="line">&gt; gcc test.c &amp;&amp; ./a.out &gt; test &amp;&amp; cat test</span><br><span class="line"></span><br><span class="line">hi</span><br><span class="line">i<span class="number">&#x27;</span>m father</span><br><span class="line"><span class="keyword">this</span> is a test0</span><br><span class="line">hi</span><br><span class="line">i<span class="number">&#x27;</span>m child!</span><br><span class="line"><span class="keyword">this</span> is a test0</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>从这个实例可以看出父进程与子进程之间并不共享变量即数据段</p>
-</li>
-<li><p>子进程继承父进程的输出重定向</p>
-</li>
-<li><p>为什么之前hi只输出了一次？</p>
-<ol>
-<li>这是因为标准I&#x2F;O默认是带缓冲的(默认为全缓冲 终端设备为行缓冲)而这里(指的是shell即终端)的\n 刷洗了缓冲，导致只输出了一次hi</li>
-<li>flush有两种意思。在标准I&#x2F;O库方面，flush以为这将缓冲区中的内容写到磁盘上。在终端驱动程序方面flush表示丢弃已存储在缓冲区中的数据</li>
-<li>而第二个重定向至文本却有两个hi ，这是因为在fork()之前就已经被缓冲了，fork()之后便有两个带缓冲的程序输出被重定向至文件</li>
-</ol>
-</li>
-</ul>
-<p><img src="/images/20191001=2.png"></p>
-<ul>
-<li>这里fd0、1、2对应stdin、stdout、stderr</li>
-</ul>
-<p><img src="/images/20191001=3.png"></p>
-<ul>
-<li>父子进程完整继承关系</li>
-</ul>
-<p><em>fork()的两种常见用法</em></p>
-<ol>
-<li>fork()自身以完成不同的事情</li>
-<li>fork()后执行exec()执行不同程序。如shell</li>
-</ol>
-<h3 id="wait"><a href="#wait" class="headerlink" title="wait()"></a>wait()</h3><p>调用wait()、waitpid()可能会出现的情况：</p>
-<ul>
-<li>子进程还在运行，则发生堵塞</li>
-<li>一个子进程已终止，正等待父进程获取其终止状态，则获得该子进程终止状态并返回</li>
-<li>它没有任何子进程，则立即出错返回<figure class="highlight sqf"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;sys/wait.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="variable">__pid_t</span> wait(int *<span class="variable">__stat_loc</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable">__pid_t</span> waitpid(<span class="variable">__pid_t</span> <span class="variable">__pid</span>, int *<span class="variable">__stat_loc</span>, int <span class="variable">__options</span>)</span><br><span class="line"></span><br><span class="line">成功返回进程id，失败返回<span class="number">0</span>或-<span class="number">1</span></span><br></pre></td></tr></table></figure></li>
-<li>__stat_loc为一个整型指针，用于存放退出状态，若不在意其退出状态，可设为NULL</li>
-<li>在一个进程结束前，wait()使调用者堵塞，而waitpid()有一选项，可使其不堵塞</li>
-<li>wait()是waitpid()的一种特殊情况</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">pid参数</th>
-<th align="center">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">pid&#x3D;&#x3D;-1</td>
-<td align="center">等待任意一个子进程 &#x3D;&#x3D;wait()</td>
-</tr>
-<tr>
-<td align="center">pid&gt;0</td>
-<td align="center">等待进程id等于pid的子进程</td>
-</tr>
-<tr>
-<td align="center">pid&#x3D;&#x3D;0</td>
-<td align="center">等待组id等于调用进程组id的任一子进程</td>
-</tr>
-<tr>
-<td align="center">pid&lt;-1</td>
-<td align="center">等待组id等于pid绝对值的任一子进程</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">__option(常量)</th>
-<th align="center">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">WCONTINUED (0)</td>
-<td align="center">若该实现支持作业控制，那么由pid指定的子进程在停止后已经继续，但其状态尚未报告，则返回状态</td>
-</tr>
-<tr>
-<td align="center">WNOHANG (1)</td>
-<td align="center">若pid指定的子进程立即不可用，则waitpid不堵塞，而返回0</td>
-</tr>
-<tr>
-<td align="center">WUNTRACEO (2)</td>
-<td align="center">若该实现支持作业控制，那么由pid指定的子进程已在停止状态，且自停止以来没有报告过状态，则返回其状态</td>
-</tr>
-</tbody></table>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">include</span><span class="string">&quot;sys/wait.h&quot;</span>    </span></span><br><span class="line">    <span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span>  </span></span><br><span class="line">    <span class="meta">#<span class="keyword">include</span><span class="string">&quot;stdlib.h&quot;</span>  </span></span><br><span class="line">    <span class="meta">#<span class="keyword">include</span><span class="string">&quot;stdio.h&quot;</span></span></span><br><span class="line">      </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function">      </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">      </span><br><span class="line">    <span class="type">pid_t</span> pc,pr;  </span><br><span class="line">      </span><br><span class="line">    pc=fork();  </span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span>(pc&lt;<span class="number">0</span>)                   </span><br><span class="line">      </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;error ocurred!\n&quot;</span>);  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(pc==<span class="number">0</span>)&#123;            </span><br><span class="line">      </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;This is child process with pid of %d\n&quot;</span>,<span class="built_in">getpid</span>());  </span><br><span class="line">      </span><br><span class="line">            <span class="built_in">sleep</span>(<span class="number">1</span>);        </span><br><span class="line">      </span><br><span class="line">                &#125;  </span><br><span class="line">      </span><br><span class="line">            <span class="keyword">else</span>&#123;                     </span><br><span class="line">      </span><br><span class="line">                pr=<span class="built_in">waitpid</span>(pc,<span class="literal">NULL</span>,<span class="number">0</span>);  </span><br><span class="line">      </span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;I catched a child process with pid of %d\n&quot;</span>,pr);</span><br><span class="line">      </span><br><span class="line">                &#125;                 </span><br><span class="line">      </span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);  </span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; This is child process with pid of <span class="number">2390</span></span><br><span class="line">I catched a child process with pid of <span class="number">2390</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="exec"><a href="#exec" class="headerlink" title="exec()"></a>exec()</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span> </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">execl</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname,<span class="type">const</span> <span class="type">char</span> *arg0,... <span class="comment">/* (char *)0 */</span> )</span> </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">execv</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname,<span class="type">char</span> *<span class="type">const</span> argv[])</span> </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">execle</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname,<span class="type">const</span> <span class="type">char</span> *arg0,... <span class="comment">/* (char *)0, char *const envp[] */</span> )</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">execve</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname,<span class="type">char</span> *<span class="type">const</span> argv[], <span class="type">char</span> *<span class="type">const</span> envp[])</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">execlp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *ﬁlename,<span class="type">const</span> <span class="type">char</span> *arg0,... <span class="comment">/* (char *)0 */</span> )</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">execvp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *ﬁlename,<span class="type">char</span> *<span class="type">const</span> argv[])</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">fexecve</span><span class="params">(<span class="type">int</span> fd,<span class="type">char</span> *<span class="type">const</span> argv[], <span class="type">char</span> *<span class="type">const</span> envp[])</span></span>;</span><br><span class="line"></span><br><span class="line">成功不返回，失败返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>这七个函数统称exec函数，其调用不创建新进程，只是用一个新程序替换当前进程的正文段、数据段、堆、栈</li>
-<li>指定filename时，若带&#x2F; 则被看作pathname，否则按PATH环境变量寻找程序</li>
-<li>execl、execle、execlp说明最后一个参数后接一个空指针((char*)0),否则会出错</li>
-<li>exec后的字母l表示list，v表示vector(矢量)，即关系到参数的传入方法，带l的用列表传入，带v的用指针数组传入</li>
-<li>函数名末尾带e的与传递环境表有关，带e的可手动指定环境表，不带e的复制现有环境</li>
-</ul>
-<p><img src="/images/20191001=4.png"></p>
-<ul>
-<li>只有execve()是系统调用，其他6个都要调用该系统调用实现</li>
-</ul>
-<h3 id="解释器文件"><a href="#解释器文件" class="headerlink" title="解释器文件"></a>解释器文件</h3><p>解释器文件是文本文件，其形式是</p>
-<figure class="highlight d"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! pathname[optinal-argument]</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>对这种文件的识别是通过内核调用exec实现的</li>
-<li>内核使调用exec函数的进程实际执行的不是解释器文本，而是第一行pathname指定的文件</li>
-</ul>
-<h3 id="system"><a href="#system" class="headerlink" title="system()"></a>system()</h3><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;stdlib.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> system(<span class="keyword">const</span> <span class="type">char</span> *__command)</span><br><span class="line"></span><br><span class="line">返回值有多种情况</span><br></pre></td></tr></table></figure>
-<ul>
-<li>system()在其实现时调用了fork()、exec()、waitpid(),故有3种返回值<ol>
-<li>fork()失败或waitpid()除了EINTR之外的错误，则返回-1,并设置errno指示错误类型</li>
-<li>exec()失败(表示不能执行)，返回值为exit(127).   &#x2F;bin&#x2F;sh当在PATH系统变量中未找到给定命令且它不是内置的shell命令时，将返回值127。换句话说，系统不理解您的命令，因为它不知道在哪里找到您要调用的二进制文件</li>
-<li>除非fork、exec、waitpid都成功，否则返回值为waitpid的返回值</li>
-</ol>
-</li>
-</ul>
-<p><img src="/images/20191001=5.png"></p>
-]]></content>
-      <tags>
         <tag>linux</tag>
-        <tag>c</tag>
       </tags>
   </entry>
   <entry>
@@ -1543,6 +1355,194 @@
       </tags>
   </entry>
   <entry>
+    <title>UNIX下进程环境与控制学习</title>
+    <url>/2019/10/01/UNIX%E4%B8%8B%E8%BF%9B%E7%A8%8B%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<hr>
+<span id="more"></span>
+
+<h1 id="进程环境"><a href="#进程环境" class="headerlink" title="进程环境"></a>进程环境</h1><h3 id="main"><a href="#main" class="headerlink" title="main()"></a>main()</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(argc,<span class="type">char</span> *argv[])</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>c语言程序从main()开始执行</li>
+<li>argc指命令行参数数目，argv指向命令行参数指针</li>
+<li>argv[argc]为一个空指针</li>
+</ul>
+<h3 id="进程终止"><a href="#进程终止" class="headerlink" title="进程终止"></a>进程终止</h3><ol>
+<li>正常终止</li>
+</ol>
+<ul>
+<li>从main()返回</li>
+<li>调用exit()</li>
+<li>调用_exit()或_Exit()</li>
+<li>最后一个线程从器其启动例程返回</li>
+<li>从最后一个线程调用pthread_exit</li>
+</ul>
+<ol start="2">
+<li>非正常终止</li>
+</ol>
+<ul>
+<li>调用abort()</li>
+<li>接到一个信号</li>
+<li>最后一个线程响应取消请求</li>
+</ul>
+<blockquote>
+<p>关于线程部分之后再写</p>
+</blockquote>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;stdio.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">exit</span><span class="params">(<span class="type">int</span> __status)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">void</span> _<span class="title">Exit</span><span class="params">(<span class="type">int</span> __status)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span></span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">void</span> _<span class="title">exit</span><span class="params">(<span class="type">int</span> __status)</span></span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>_exit()和_Exit()立即进入内核,exit()则会先进行相关清理操作,如fclose、flush等</li>
+<li>这三个函数都带一个整型参数，称作终止状态或退出状态</li>
+<li>main()的返回类型是int，且main执行到最后一条语句隐式返回(没有用return或exit)，那么其终止状态为0</li>
+<li>main()返回的整数值等同于用该值调用exit()，即exit(0) &#x3D;&#x3D; return (0)</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;stdlib.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> atexit(<span class="type">void</span> (*__func)(<span class="type">void</span>))</span><br><span class="line"></span><br><span class="line">成功返回<span class="number">0</span>，失败返回非<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>该函数用于登记终止处理函数(exit handler)，由exit()调用，其执行顺序与登记顺序相反<br><img src="/images/20191001=0.png"></li>
+</ul>
+<h3 id="存储空间布局"><a href="#存储空间布局" class="headerlink" title="存储空间布局"></a>存储空间布局</h3><p><img src="/images/20191001=1.png"></p>
+<ul>
+<li>正文段保存的是只读的机器指令</li>
+<li>初始化数据段称为数据段，存放的是非函数任何形式的数据，形如 int num&#x3D;1</li>
+<li>未初始化数据段被称为bss段，存放的形如 char str[50] ,程序开始执行时被内核初始化为0或空指针</li>
+<li>栈，自动变量及每次函数调用所需信息保存于此。</li>
+<li>堆，用于动态存储分配</li>
+</ul>
+<h3 id="存储空间分配"><a href="#存储空间分配" class="headerlink" title="存储空间分配"></a>存储空间分配</h3><figure class="highlight stan"><table><tr><td class="code"><pre><span class="line"><span class="meta">#include”<span class="string">stdlib.h</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *malloc(size_t __<span class="built_in">size</span>)</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *calloc(size_t __nmemb, size_t __<span class="built_in">size</span>)</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *realloc(<span class="type">void</span> *__ptr, size_t __<span class="built_in">size</span>)</span><br><span class="line"></span><br><span class="line">成功返回非<span class="number">0</span>指针，失败返回NULL</span><br></pre></td></tr></table></figure>
+<ul>
+<li>所返回的是  void * ，也叫通用指针</li>
+<li>大部分实现其存储空间分配会比所要求空间稍大，额外的空用于记录管理信息————分配块长度、指向下一个分配块指针等</li>
+<li>程序结束前记得用free()</li>
+</ul>
+<hr>
+<h1 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h1><h3 id="进程标识"><a href="#进程标识" class="headerlink" title="进程标识"></a>进程标识</h3><figure class="highlight fsharp"><table><tr><td class="code"><pre><span class="line">#include<span class="string">&quot;unistd.h&quot;</span></span><br><span class="line"></span><br><span class="line">__pid_t getpid(<span class="keyword">void</span>)            返回pid</span><br><span class="line"></span><br><span class="line">__pid_t getppid(<span class="keyword">void</span>)          返回父<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line">__pid_t getuid(<span class="keyword">void</span>)            返回进程的实际用户<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line">__pid_t geteuid(<span class="keyword">void</span>)           返回有效<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line">__pid_t getgid(<span class="keyword">void</span>)            返回实际组<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line">__pid_t getegid(<span class="keyword">void</span>)           返回有效组<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>pid为0的被叫做调度进程也叫交换进程，该进程为内核的一部分，它不执行磁盘上的任何程序，为系统进程</li>
+<li>pid为1的是init进程，它负责自举内核后启动UNIX系统，它会成为所有孤儿进程的父进程，称这些进程被init进程收养</li>
+</ul>
+<h3 id="fork"><a href="#fork" class="headerlink" title="fork()"></a>fork()</h3><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">__pid_t fork(<span class="type">void</span>)</span><br><span class="line"></span><br><span class="line">成功子进程返回<span class="number">0</span>，父进程返回子进程<span class="type">id</span>，失败返回<span class="number">-1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>子进程是父进程的副本，拥有相同的数据段、堆、栈，但不是共享的,共享的是正文段</li>
+<li>子进程与父进程的执行顺序取决于内核的调度算法</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;stdio.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> i=<span class="number">0</span>;   </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hi\n&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(fork()==<span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;i&#x27;m child!\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;   </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;i&#x27;m father\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;this is a test%d\n&quot;</span>,i++);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; gcc test.c &amp;&amp; ./a.out </span><br><span class="line"></span><br><span class="line">hi</span><br><span class="line">i<span class="number">&#x27;</span>m father</span><br><span class="line">i<span class="number">&#x27;</span>m child!</span><br><span class="line"><span class="keyword">this</span> is a test0</span><br><span class="line"><span class="keyword">this</span> is a test0</span><br><span class="line"></span><br><span class="line">&gt; gcc test.c &amp;&amp; ./a.out &gt; test &amp;&amp; cat test</span><br><span class="line"></span><br><span class="line">hi</span><br><span class="line">i<span class="number">&#x27;</span>m father</span><br><span class="line"><span class="keyword">this</span> is a test0</span><br><span class="line">hi</span><br><span class="line">i<span class="number">&#x27;</span>m child!</span><br><span class="line"><span class="keyword">this</span> is a test0</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>从这个实例可以看出父进程与子进程之间并不共享变量即数据段</p>
+</li>
+<li><p>子进程继承父进程的输出重定向</p>
+</li>
+<li><p>为什么之前hi只输出了一次？</p>
+<ol>
+<li>这是因为标准I&#x2F;O默认是带缓冲的(默认为全缓冲 终端设备为行缓冲)而这里(指的是shell即终端)的\n 刷洗了缓冲，导致只输出了一次hi</li>
+<li>flush有两种意思。在标准I&#x2F;O库方面，flush以为这将缓冲区中的内容写到磁盘上。在终端驱动程序方面flush表示丢弃已存储在缓冲区中的数据</li>
+<li>而第二个重定向至文本却有两个hi ，这是因为在fork()之前就已经被缓冲了，fork()之后便有两个带缓冲的程序输出被重定向至文件</li>
+</ol>
+</li>
+</ul>
+<p><img src="/images/20191001=2.png"></p>
+<ul>
+<li>这里fd0、1、2对应stdin、stdout、stderr</li>
+</ul>
+<p><img src="/images/20191001=3.png"></p>
+<ul>
+<li>父子进程完整继承关系</li>
+</ul>
+<p><em>fork()的两种常见用法</em></p>
+<ol>
+<li>fork()自身以完成不同的事情</li>
+<li>fork()后执行exec()执行不同程序。如shell</li>
+</ol>
+<h3 id="wait"><a href="#wait" class="headerlink" title="wait()"></a>wait()</h3><p>调用wait()、waitpid()可能会出现的情况：</p>
+<ul>
+<li>子进程还在运行，则发生堵塞</li>
+<li>一个子进程已终止，正等待父进程获取其终止状态，则获得该子进程终止状态并返回</li>
+<li>它没有任何子进程，则立即出错返回<figure class="highlight sqf"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;sys/wait.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="variable">__pid_t</span> wait(int *<span class="variable">__stat_loc</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable">__pid_t</span> waitpid(<span class="variable">__pid_t</span> <span class="variable">__pid</span>, int *<span class="variable">__stat_loc</span>, int <span class="variable">__options</span>)</span><br><span class="line"></span><br><span class="line">成功返回进程id，失败返回<span class="number">0</span>或-<span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+<li>__stat_loc为一个整型指针，用于存放退出状态，若不在意其退出状态，可设为NULL</li>
+<li>在一个进程结束前，wait()使调用者堵塞，而waitpid()有一选项，可使其不堵塞</li>
+<li>wait()是waitpid()的一种特殊情况</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">pid参数</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">pid&#x3D;&#x3D;-1</td>
+<td align="center">等待任意一个子进程 &#x3D;&#x3D;wait()</td>
+</tr>
+<tr>
+<td align="center">pid&gt;0</td>
+<td align="center">等待进程id等于pid的子进程</td>
+</tr>
+<tr>
+<td align="center">pid&#x3D;&#x3D;0</td>
+<td align="center">等待组id等于调用进程组id的任一子进程</td>
+</tr>
+<tr>
+<td align="center">pid&lt;-1</td>
+<td align="center">等待组id等于pid绝对值的任一子进程</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">__option(常量)</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">WCONTINUED (0)</td>
+<td align="center">若该实现支持作业控制，那么由pid指定的子进程在停止后已经继续，但其状态尚未报告，则返回状态</td>
+</tr>
+<tr>
+<td align="center">WNOHANG (1)</td>
+<td align="center">若pid指定的子进程立即不可用，则waitpid不堵塞，而返回0</td>
+</tr>
+<tr>
+<td align="center">WUNTRACEO (2)</td>
+<td align="center">若该实现支持作业控制，那么由pid指定的子进程已在停止状态，且自停止以来没有报告过状态，则返回其状态</td>
+</tr>
+</tbody></table>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">include</span><span class="string">&quot;sys/wait.h&quot;</span>    </span></span><br><span class="line">    <span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span>  </span></span><br><span class="line">    <span class="meta">#<span class="keyword">include</span><span class="string">&quot;stdlib.h&quot;</span>  </span></span><br><span class="line">    <span class="meta">#<span class="keyword">include</span><span class="string">&quot;stdio.h&quot;</span></span></span><br><span class="line">      </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function">      </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">      </span><br><span class="line">    <span class="type">pid_t</span> pc,pr;  </span><br><span class="line">      </span><br><span class="line">    pc=fork();  </span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span>(pc&lt;<span class="number">0</span>)                   </span><br><span class="line">      </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;error ocurred!\n&quot;</span>);  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(pc==<span class="number">0</span>)&#123;            </span><br><span class="line">      </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;This is child process with pid of %d\n&quot;</span>,<span class="built_in">getpid</span>());  </span><br><span class="line">      </span><br><span class="line">            <span class="built_in">sleep</span>(<span class="number">1</span>);        </span><br><span class="line">      </span><br><span class="line">                &#125;  </span><br><span class="line">      </span><br><span class="line">            <span class="keyword">else</span>&#123;                     </span><br><span class="line">      </span><br><span class="line">                pr=<span class="built_in">waitpid</span>(pc,<span class="literal">NULL</span>,<span class="number">0</span>);  </span><br><span class="line">      </span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;I catched a child process with pid of %d\n&quot;</span>,pr);</span><br><span class="line">      </span><br><span class="line">                &#125;                 </span><br><span class="line">      </span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);  </span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; This is child process with pid of <span class="number">2390</span></span><br><span class="line">I catched a child process with pid of <span class="number">2390</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="exec"><a href="#exec" class="headerlink" title="exec()"></a>exec()</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span> </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">execl</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname,<span class="type">const</span> <span class="type">char</span> *arg0,... <span class="comment">/* (char *)0 */</span> )</span> </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">execv</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname,<span class="type">char</span> *<span class="type">const</span> argv[])</span> </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">execle</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname,<span class="type">const</span> <span class="type">char</span> *arg0,... <span class="comment">/* (char *)0, char *const envp[] */</span> )</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">execve</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname,<span class="type">char</span> *<span class="type">const</span> argv[], <span class="type">char</span> *<span class="type">const</span> envp[])</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">execlp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *ﬁlename,<span class="type">const</span> <span class="type">char</span> *arg0,... <span class="comment">/* (char *)0 */</span> )</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">execvp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *ﬁlename,<span class="type">char</span> *<span class="type">const</span> argv[])</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">fexecve</span><span class="params">(<span class="type">int</span> fd,<span class="type">char</span> *<span class="type">const</span> argv[], <span class="type">char</span> *<span class="type">const</span> envp[])</span></span>;</span><br><span class="line"></span><br><span class="line">成功不返回，失败返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>这七个函数统称exec函数，其调用不创建新进程，只是用一个新程序替换当前进程的正文段、数据段、堆、栈</li>
+<li>指定filename时，若带&#x2F; 则被看作pathname，否则按PATH环境变量寻找程序</li>
+<li>execl、execle、execlp说明最后一个参数后接一个空指针((char*)0),否则会出错</li>
+<li>exec后的字母l表示list，v表示vector(矢量)，即关系到参数的传入方法，带l的用列表传入，带v的用指针数组传入</li>
+<li>函数名末尾带e的与传递环境表有关，带e的可手动指定环境表，不带e的复制现有环境</li>
+</ul>
+<p><img src="/images/20191001=4.png"></p>
+<ul>
+<li>只有execve()是系统调用，其他6个都要调用该系统调用实现</li>
+</ul>
+<h3 id="解释器文件"><a href="#解释器文件" class="headerlink" title="解释器文件"></a>解释器文件</h3><p>解释器文件是文本文件，其形式是</p>
+<figure class="highlight d"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! pathname[optinal-argument]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对这种文件的识别是通过内核调用exec实现的</li>
+<li>内核使调用exec函数的进程实际执行的不是解释器文本，而是第一行pathname指定的文件</li>
+</ul>
+<h3 id="system"><a href="#system" class="headerlink" title="system()"></a>system()</h3><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;stdlib.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> system(<span class="keyword">const</span> <span class="type">char</span> *__command)</span><br><span class="line"></span><br><span class="line">返回值有多种情况</span><br></pre></td></tr></table></figure>
+<ul>
+<li>system()在其实现时调用了fork()、exec()、waitpid(),故有3种返回值<ol>
+<li>fork()失败或waitpid()除了EINTR之外的错误，则返回-1,并设置errno指示错误类型</li>
+<li>exec()失败(表示不能执行)，返回值为exit(127).   &#x2F;bin&#x2F;sh当在PATH系统变量中未找到给定命令且它不是内置的shell命令时，将返回值127。换句话说，系统不理解您的命令，因为它不知道在哪里找到您要调用的二进制文件</li>
+<li>除非fork、exec、waitpid都成功，否则返回值为waitpid的返回值</li>
+</ol>
+</li>
+</ul>
+<p><img src="/images/20191001=5.png"></p>
+]]></content>
+      <tags>
+        <tag>c</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>flatpak入门指南</title>
     <url>/2020/03/10/flatpak%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</url>
     <content><![CDATA[<hr>
@@ -1696,108 +1696,6 @@
       <tags>
         <tag>http</tag>
         <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux 命令杂记</title>
-    <url>/2020/04/01/linux-%E5%91%BD%E4%BB%A4%E6%9D%82%E8%AE%B0/</url>
-    <content><![CDATA[<hr>
-<span id="more"></span>
-
-<h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h1><p>根据某个字符串，查询该字符串前后文本信息命令：grep-A|B n”key”file</p>
-<p>其中：<br>    A：表示在字符串之后 after  context<br>    B：表示在字符串之前 before context<br>    n：要获取多少行文本 line number</p>
-<p>实例：grep -A 100 -B 100 -i ‘111’ catalina.out</p>
-<ul>
-<li>-i表示忽略大小写。</li>
-</ul>
-<p>当然，如果我们想获取异常日志的前10行和后10行，不用加-A和-B，使用如下命令就可以了：</p>
-<ul>
-<li>实例：grep -10 -i ‘111’ catalina.out</li>
-</ul>
-<h1 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h1><p>mke2fs -t ext4 &#x2F;dev&#x2F;name</p>
-<p>mkfs</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">mkfs           mkfs<span class="selector-class">.cramfs</span>    mkfs<span class="selector-class">.ext3</span>      mkfs<span class="selector-class">.hfs</span>       mkfs<span class="selector-class">.minix</span>     mkfs<span class="selector-class">.reiserfs</span></span><br><span class="line">mkfs<span class="selector-class">.bfs</span>       mkfs<span class="selector-class">.exfat</span>     mkfs<span class="selector-class">.ext4</span>      mkfs<span class="selector-class">.hfsplus</span>   mkfs<span class="selector-class">.msdos</span>     mkfs<span class="selector-class">.vfat</span>    </span><br><span class="line">mkfs<span class="selector-class">.btrfs</span>     mkfs<span class="selector-class">.ext2</span>      mkfs<span class="selector-class">.fat</span>       mkfs<span class="selector-class">.jfs</span>       mkfs<span class="selector-class">.ntfs</span>      mkfs<span class="selector-class">.xfs</span>  </span><br></pre></td></tr></table></figure>
-
-<h3 id="备份数据"><a href="#备份数据" class="headerlink" title="备份数据"></a>备份数据</h3><p>rsync </p>
-<blockquote>
-<p>  Transfer files either to or from a remote host (not between two remote hosts).<br>  Can transfer single files, or multiple files matching a pattern.</p>
-</blockquote>
-<ul>
-<li>可用来转移数据,传输文件</li>
-</ul>
-<p><code>rsync -av </code>原地址 目的地址</p>
-<ul>
-<li>a包含文件所有信息(This is equivalent to -rlptgoD),如原本权限,修改时间,子目录等等</li>
-<li>v为显示传输过程,P为更为详细的信息输出</li>
-</ul>
-<p>既可以拉取数据,也可以发送数据</p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">Pull: rsync <span class="comment">[OPTION...]</span> <span class="comment">[USER@]</span>HOST:SRC... <span class="comment">[DEST]</span></span><br><span class="line">Push: rsync <span class="comment">[OPTION...]</span> SRC... <span class="comment">[USER@]</span>HOST:DEST</span><br></pre></td></tr></table></figure>
-
-<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><p>查看分区信息</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span> -h</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>具体分区操作</p>
-<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">fdisk /dev/设备名</span><br><span class="line"></span><br><span class="line"><span class="symbol">:p</span>  查看设备分区情况</span><br><span class="line"><span class="symbol">:F</span>  查看设备未分区的块</span><br><span class="line"><span class="symbol">:d</span>  删除一个分区</span><br><span class="line"><span class="symbol">:n</span>  建立一个分区</span><br></pre></td></tr></table></figure>
-<ul>
-<li>创建完分区记得创建文件系统</li>
-</ul>
-<h3 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h3><p>resize2fs   &#x2F;dev&#x2F;mapper&#x2F;cl00-root  </p>
-<h3 id="swap"><a href="#swap" class="headerlink" title="swap"></a>swap</h3><p><a href="https://www.cnblogs.com/FengGeBlog/p/10239067.html">https://www.cnblogs.com/FengGeBlog/p/10239067.html</a></p>
-<h3 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h3><p>开机自动挂载需修改<code>/etc/fstab</code></p>
-<h3 id="uuid"><a href="#uuid" class="headerlink" title="uuid"></a>uuid</h3><p>blkid &#x2F;dev&#x2F;name</p>
-<h1 id="grub"><a href="#grub" class="headerlink" title="grub"></a>grub</h1><p>quit 为简单输出</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">GRUB_CMDLINE_LINUX_DEFAULT</span>=<span class="string">&quot;quiet splash&quot;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>为默认启动内核参数,一直有效(包括救援模式)</li>
-<li>splash 为显示linux发行版logo</li>
-</ul>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX<span class="operator">=</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>为救援模式的启动参数</li>
-</ul>
-<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/etc/</span><span class="keyword">default</span>/grub</span><br><span class="line">update-grub</span><br></pre></td></tr></table></figure>
-
-<p>或在开机出现logo前按ESC再按e可修改启动参数(本次启动有效)</p>
-<h1 id="brightness"><a href="#brightness" class="headerlink" title="brightness"></a>brightness</h1><figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">systemctl</span> <span class="built_in">list-units</span> | <span class="string">grep</span> <span class="string">backlight</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>发现一个启动失败,可能是发生了冲突</li>
-</ul>
-<p>禁用其一</p>
-<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">sudo systemctl mask systemd-backlight@backlight:acpi_video0.service </span><br><span class="line">Created symlink <span class="regexp">/etc/</span>systemd<span class="regexp">/system/</span>systemd-backlight@backlight:acpi_video0.service → <span class="regexp">/dev/</span></span><br><span class="line"><span class="keyword">null</span>.</span><br></pre></td></tr></table></figure>
-
-
-<p>重启另外一个</p>
-<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart systemd-backlight<span class="variable">@backlight</span><span class="symbol">:nvidia_0</span>.service </span><br></pre></td></tr></table></figure>
-<ul>
-<li>重启机器发现亮度已经可以正常恢复</li>
-</ul>
-<h1 id="启动时间"><a href="#启动时间" class="headerlink" title="启动时间"></a>启动时间</h1><figure class="highlight nsis"><table><tr><td class="code"><pre><span class="line"><span class="params">system</span>d-analyze  </span><br><span class="line"></span><br><span class="line"><span class="params">system</span>d-analyze blame</span><br><span class="line"></span><br><span class="line"><span class="params">system</span>d-analyze critical-chain</span><br></pre></td></tr></table></figure>
-<ul>
-<li>可以根据以上命令输出关闭一些不常用服务以加速开机 &#96;systemctl mask(disable)</li>
-<li>有些服务需要用但就是慢可以尝试手动修改 <code>服务名.service</code>文件,将其加上<code>After = graphical.target</code>,也就是在先等桌面加载玩再加载服务</li>
-</ul>
-<h1 id="zabbix"><a href="#zabbix" class="headerlink" title="zabbix"></a>zabbix</h1><h3 id="NAT转换"><a href="#NAT转换" class="headerlink" title="NAT转换"></a>NAT转换</h3><p>在虚拟机上部署zabbix时,虚拟机使用了NAT网桥,<code>telnet</code>能通,当server一直连不上</p>
-<ul>
-<li>最后在agent配置文件上server的地址加上网关地址<br><a href="https://sysadmin.xyz/main/2018/01/08/zabbix-nat-problem/">https://sysadmin.xyz/main/2018/01/08/zabbix-nat-problem/</a></li>
-</ul>
-<h3 id="snmp"><a href="#snmp" class="headerlink" title="snmp"></a>snmp</h3><p>安装使用</p>
-<ul>
-<li><a href="http://www.net-snmp.org/wiki/index.php/Tutorials">http://www.net-snmp.org/wiki/index.php/Tutorials</a></li>
-<li><a href="https://blog.csdn.net/bbwangj/article/details/80981098">https://blog.csdn.net/bbwangj/article/details/80981098</a></li>
-</ul>
-<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">telnet</span> <span class="number">192.168.1.1</span> <span class="number">161</span> Connection refused</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定用udp扫描端口161</span></span><br><span class="line"><span class="attribute">nmap</span> -sU <span class="number">192.168.1.1</span> -p161</span><br></pre></td></tr></table></figure>
-
-<h1 id="lol安装"><a href="#lol安装" class="headerlink" title="lol安装"></a>lol安装</h1><p><a href="https://www.reddit.com/r/leagueoflinux/comments/alfbep/league_on_linux_mint_19/">https://www.reddit.com/r/leagueoflinux/comments/alfbep/league_on_linux_mint_19/</a></p>
-<figure class="highlight brainfuck"><table><tr><td class="code"><pre><span class="line"><span class="comment">sudo apt install snapd</span></span><br><span class="line"></span><br><span class="line"><span class="comment">snap install leagueoflegends</span> <span class="literal">--</span><span class="comment">edge</span> <span class="literal">--</span><span class="comment">devmode</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>很简单粗暴,没有国服</p>
-</li>
-<li><p>Please consider using the Nouveau driver instead.<br><a href="https://askubuntu.com/questions/267936/how-do-i-get-rid-of-broken-nvidia-randr-detected-falling-back-to-randr-1-0">https://askubuntu.com/questions/267936/how-do-i-get-rid-of-broken-nvidia-randr-detected-falling-back-to-randr-1-0</a></p>
-</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>linxu</tag>
       </tags>
   </entry>
   <entry>
@@ -1974,6 +1872,108 @@
 ]]></content>
       <tags>
         <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux 命令杂记</title>
+    <url>/2020/04/01/linux-%E5%91%BD%E4%BB%A4%E6%9D%82%E8%AE%B0/</url>
+    <content><![CDATA[<hr>
+<span id="more"></span>
+
+<h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h1><p>根据某个字符串，查询该字符串前后文本信息命令：grep-A|B n”key”file</p>
+<p>其中：<br>    A：表示在字符串之后 after  context<br>    B：表示在字符串之前 before context<br>    n：要获取多少行文本 line number</p>
+<p>实例：grep -A 100 -B 100 -i ‘111’ catalina.out</p>
+<ul>
+<li>-i表示忽略大小写。</li>
+</ul>
+<p>当然，如果我们想获取异常日志的前10行和后10行，不用加-A和-B，使用如下命令就可以了：</p>
+<ul>
+<li>实例：grep -10 -i ‘111’ catalina.out</li>
+</ul>
+<h1 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h1><p>mke2fs -t ext4 &#x2F;dev&#x2F;name</p>
+<p>mkfs</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">mkfs           mkfs<span class="selector-class">.cramfs</span>    mkfs<span class="selector-class">.ext3</span>      mkfs<span class="selector-class">.hfs</span>       mkfs<span class="selector-class">.minix</span>     mkfs<span class="selector-class">.reiserfs</span></span><br><span class="line">mkfs<span class="selector-class">.bfs</span>       mkfs<span class="selector-class">.exfat</span>     mkfs<span class="selector-class">.ext4</span>      mkfs<span class="selector-class">.hfsplus</span>   mkfs<span class="selector-class">.msdos</span>     mkfs<span class="selector-class">.vfat</span>    </span><br><span class="line">mkfs<span class="selector-class">.btrfs</span>     mkfs<span class="selector-class">.ext2</span>      mkfs<span class="selector-class">.fat</span>       mkfs<span class="selector-class">.jfs</span>       mkfs<span class="selector-class">.ntfs</span>      mkfs<span class="selector-class">.xfs</span>  </span><br></pre></td></tr></table></figure>
+
+<h3 id="备份数据"><a href="#备份数据" class="headerlink" title="备份数据"></a>备份数据</h3><p>rsync </p>
+<blockquote>
+<p>  Transfer files either to or from a remote host (not between two remote hosts).<br>  Can transfer single files, or multiple files matching a pattern.</p>
+</blockquote>
+<ul>
+<li>可用来转移数据,传输文件</li>
+</ul>
+<p><code>rsync -av </code>原地址 目的地址</p>
+<ul>
+<li>a包含文件所有信息(This is equivalent to -rlptgoD),如原本权限,修改时间,子目录等等</li>
+<li>v为显示传输过程,P为更为详细的信息输出</li>
+</ul>
+<p>既可以拉取数据,也可以发送数据</p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">Pull: rsync <span class="comment">[OPTION...]</span> <span class="comment">[USER@]</span>HOST:SRC... <span class="comment">[DEST]</span></span><br><span class="line">Push: rsync <span class="comment">[OPTION...]</span> SRC... <span class="comment">[USER@]</span>HOST:DEST</span><br></pre></td></tr></table></figure>
+
+<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><p>查看分区信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span> -h</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>具体分区操作</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">fdisk /dev/设备名</span><br><span class="line"></span><br><span class="line"><span class="symbol">:p</span>  查看设备分区情况</span><br><span class="line"><span class="symbol">:F</span>  查看设备未分区的块</span><br><span class="line"><span class="symbol">:d</span>  删除一个分区</span><br><span class="line"><span class="symbol">:n</span>  建立一个分区</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建完分区记得创建文件系统</li>
+</ul>
+<h3 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h3><p>resize2fs   &#x2F;dev&#x2F;mapper&#x2F;cl00-root  </p>
+<h3 id="swap"><a href="#swap" class="headerlink" title="swap"></a>swap</h3><p><a href="https://www.cnblogs.com/FengGeBlog/p/10239067.html">https://www.cnblogs.com/FengGeBlog/p/10239067.html</a></p>
+<h3 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h3><p>开机自动挂载需修改<code>/etc/fstab</code></p>
+<h3 id="uuid"><a href="#uuid" class="headerlink" title="uuid"></a>uuid</h3><p>blkid &#x2F;dev&#x2F;name</p>
+<h1 id="grub"><a href="#grub" class="headerlink" title="grub"></a>grub</h1><p>quit 为简单输出</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">GRUB_CMDLINE_LINUX_DEFAULT</span>=<span class="string">&quot;quiet splash&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>为默认启动内核参数,一直有效(包括救援模式)</li>
+<li>splash 为显示linux发行版logo</li>
+</ul>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX<span class="operator">=</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>为救援模式的启动参数</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/etc/</span><span class="keyword">default</span>/grub</span><br><span class="line">update-grub</span><br></pre></td></tr></table></figure>
+
+<p>或在开机出现logo前按ESC再按e可修改启动参数(本次启动有效)</p>
+<h1 id="brightness"><a href="#brightness" class="headerlink" title="brightness"></a>brightness</h1><figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">systemctl</span> <span class="built_in">list-units</span> | <span class="string">grep</span> <span class="string">backlight</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>发现一个启动失败,可能是发生了冲突</li>
+</ul>
+<p>禁用其一</p>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">sudo systemctl mask systemd-backlight@backlight:acpi_video0.service </span><br><span class="line">Created symlink <span class="regexp">/etc/</span>systemd<span class="regexp">/system/</span>systemd-backlight@backlight:acpi_video0.service → <span class="regexp">/dev/</span></span><br><span class="line"><span class="keyword">null</span>.</span><br></pre></td></tr></table></figure>
+
+
+<p>重启另外一个</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart systemd-backlight<span class="variable">@backlight</span><span class="symbol">:nvidia_0</span>.service </span><br></pre></td></tr></table></figure>
+<ul>
+<li>重启机器发现亮度已经可以正常恢复</li>
+</ul>
+<h1 id="启动时间"><a href="#启动时间" class="headerlink" title="启动时间"></a>启动时间</h1><figure class="highlight nsis"><table><tr><td class="code"><pre><span class="line"><span class="params">system</span>d-analyze  </span><br><span class="line"></span><br><span class="line"><span class="params">system</span>d-analyze blame</span><br><span class="line"></span><br><span class="line"><span class="params">system</span>d-analyze critical-chain</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以根据以上命令输出关闭一些不常用服务以加速开机 &#96;systemctl mask(disable)</li>
+<li>有些服务需要用但就是慢可以尝试手动修改 <code>服务名.service</code>文件,将其加上<code>After = graphical.target</code>,也就是在先等桌面加载玩再加载服务</li>
+</ul>
+<h1 id="zabbix"><a href="#zabbix" class="headerlink" title="zabbix"></a>zabbix</h1><h3 id="NAT转换"><a href="#NAT转换" class="headerlink" title="NAT转换"></a>NAT转换</h3><p>在虚拟机上部署zabbix时,虚拟机使用了NAT网桥,<code>telnet</code>能通,当server一直连不上</p>
+<ul>
+<li>最后在agent配置文件上server的地址加上网关地址<br><a href="https://sysadmin.xyz/main/2018/01/08/zabbix-nat-problem/">https://sysadmin.xyz/main/2018/01/08/zabbix-nat-problem/</a></li>
+</ul>
+<h3 id="snmp"><a href="#snmp" class="headerlink" title="snmp"></a>snmp</h3><p>安装使用</p>
+<ul>
+<li><a href="http://www.net-snmp.org/wiki/index.php/Tutorials">http://www.net-snmp.org/wiki/index.php/Tutorials</a></li>
+<li><a href="https://blog.csdn.net/bbwangj/article/details/80981098">https://blog.csdn.net/bbwangj/article/details/80981098</a></li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">telnet</span> <span class="number">192.168.1.1</span> <span class="number">161</span> Connection refused</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定用udp扫描端口161</span></span><br><span class="line"><span class="attribute">nmap</span> -sU <span class="number">192.168.1.1</span> -p161</span><br></pre></td></tr></table></figure>
+
+<h1 id="lol安装"><a href="#lol安装" class="headerlink" title="lol安装"></a>lol安装</h1><p><a href="https://www.reddit.com/r/leagueoflinux/comments/alfbep/league_on_linux_mint_19/">https://www.reddit.com/r/leagueoflinux/comments/alfbep/league_on_linux_mint_19/</a></p>
+<figure class="highlight brainfuck"><table><tr><td class="code"><pre><span class="line"><span class="comment">sudo apt install snapd</span></span><br><span class="line"></span><br><span class="line"><span class="comment">snap install leagueoflegends</span> <span class="literal">--</span><span class="comment">edge</span> <span class="literal">--</span><span class="comment">devmode</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>很简单粗暴,没有国服</p>
+</li>
+<li><p>Please consider using the Nouveau driver instead.<br><a href="https://askubuntu.com/questions/267936/how-do-i-get-rid-of-broken-nvidia-randr-detected-falling-back-to-randr-1-0">https://askubuntu.com/questions/267936/how-do-i-get-rid-of-broken-nvidia-randr-detected-falling-back-to-randr-1-0</a></p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>linxu</tag>
       </tags>
   </entry>
   <entry>
@@ -2465,83 +2465,6 @@ soup.title<h1 id="The-Dormouse’s-story-提取title节点"><a href="#The-Dormou
       </tags>
   </entry>
   <entry>
-    <title>python-爬虫学习笔记(4)</title>
-    <url>/2019/08/26/python-%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-4/</url>
-    <content><![CDATA[<p>Mondb and selenium</p>
-<hr>
-<span id="more"></span>
-<h2 id="mongodb使用"><a href="#mongodb使用" class="headerlink" title="mongodb使用"></a>mongodb使用</h2><p>依赖库为pymongo</p>
-<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span><span class="type"></span>=pymongo.mongo_client(host=<span class="string">&#x27;127.0.0.1&#x27;</span>,port=<span class="number">27017</span>)</span><br><span class="line"></span><br><span class="line">db=<span class="keyword">new</span><span class="type"></span>[<span class="string">&#x27;test&#x27;</span>]</span><br><span class="line"><span class="meta"># == db=new.test</span></span><br><span class="line"></span><br><span class="line">coll=db.test</span><br><span class="line"><span class="meta"># == coll=db[&#x27;test&#x27;]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>默认为直接连接，无需账号密码</li>
-<li>mongo中有数据库集合的概念，集合(collection)类似于mysql的表</li>
-</ul>
-<h3 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h3><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">import pymongo</span><br><span class="line"></span><br><span class="line">dict_test=&#123;</span><br><span class="line">    <span class="string">&#x27;hello&#x27;</span>:<span class="string">&#x27;hi&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="attribute">new</span>=pymongo.MongoClient(host=&#x27;127.0.0.1&#x27;,port=27017)</span><br><span class="line"></span><br><span class="line"><span class="attribute">db</span>=new[<span class="string">&#x27;test&#x27;</span>]</span><br><span class="line"><span class="comment"># == db=new.test</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">coll</span>=db.test</span><br><span class="line"><span class="comment"># == coll=db[&#x27;test&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(coll.insert(dict_test))</span><br><span class="line"></span><br><span class="line">&gt; 5d6cd95073c60d291b004534</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>插入时可同时插入多个字典，传入时用列表如 <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">coll<span class="selector-class">.inert</span>(<span class="selector-attr">[dict1,dict2]</span>)</span><br></pre></td></tr></table></figure></li>
-<li>执行完inert()会自动输出一个id值用于标识</li>
-</ul>
-<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 传入字典查询</span></span><br><span class="line"><span class="built_in">print</span>(coll.find_one(&#123;<span class="string">&#x27;hello&#x27;</span>:<span class="string">&#x27;hi&#x27;</span>&#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据对象id查询</span></span><br><span class="line"><span class="keyword">from</span> bson.objectid import ObjectId</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(coll.find_one(&#123;<span class="string">&#x27;_id&#x27;</span>:ObjectId(<span class="string">&#x27;5d6cd95073c60d291b004534&#x27;</span>)&#125;))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>find()也可查询数据，不过返回的是一个生成器对象，用于查询多个数据<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="attribute">res</span>=coll.find(&#123;<span class="string">&#x27;*&#x27;</span>:<span class="string">&#x27;*&quot;&#125;)</span></span><br><span class="line"><span class="string">for result in res:</span></span><br><span class="line"><span class="string">   print(result)</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">test=coll<span class="selector-class">.find_one</span>(&#123;<span class="string">&#x27;hello&#x27;</span>:<span class="string">&#x27;hi&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">test<span class="selector-attr">[<span class="string">&#x27;hello&#x27;</span>]</span>=<span class="string">&#x27;bye&#x27;</span></span><br><span class="line"></span><br><span class="line">coll<span class="selector-class">.update</span>(dict_test,test)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(test)</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(coll.<span class="built_in">remove</span>(&#123;<span class="string">&#x27;hello&#x27;</span>:<span class="string">&#x27;hi&#x27;</span>&#125;))</span><br><span class="line"></span><br><span class="line">&gt; &#123;<span class="string">&#x27;n&#x27;</span>: 0, <span class="string">&#x27;ok&#x27;</span>: 1.0&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"># 排序</span><br><span class="line"><span class="built_in">sort</span>()</span><br><span class="line"></span><br><span class="line"># 计数</span><br><span class="line"><span class="built_in">count</span>()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="selenium"><a href="#selenium" class="headerlink" title="selenium"></a>selenium</h2><ul>
-<li><p>selenium 是一套完整的web应用程序测试系统，包含了测试的录制（selenium IDE）,编写及运行（Selenium Remote Control）和测试的并行处理（Selenium Grid）。Selenium的核心Selenium Core基于JsUnit，完全由JavaScript编写，因此可以用于任何支持JavaScript的浏览器上。</p>
-</li>
-<li><p>selenium可以模拟真实浏览器，自动化测试工具，支持多种浏览器，爬虫中主要用来解决JavaScript渲染问题。</p>
-</li>
-</ul>
-<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> selenium</span><br></pre></td></tr></table></figure>
-<ul>
-<li>下载相应浏览器驱动<a href="http://npm.taobao.org/mirrors/chromedriver/">chrome</a>并添加至环境path</li>
-</ul>
-<h3 id="声明对象"><a href="#声明对象" class="headerlink" title="声明对象"></a>声明对象</h3><figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">brower</span><span class="operator">=</span> selenium.webdriver.Chrome()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>此时会自动打开一个chrome窗口</li>
-</ul>
-<h3 id="打开网页"><a href="#打开网页" class="headerlink" title="打开网页"></a>打开网页</h3><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">brower.<span class="built_in">get</span>(<span class="string">&#x27;http://baidu.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(brower.page_source)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>属性page_source为输出渲染后的源代码</li>
-</ul>
-<h3 id="查找节点"><a href="#查找节点" class="headerlink" title="查找节点"></a>查找节点</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># eg</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&lt;input autocomplete=&quot;off&quot; name=&quot;k&quot; value=&quot;搜索小游戏&quot; onclick=&quot;document.charset=&#x27;gb2312&#x27;;chkSosmart()&quot; class=&quot;sh text clicked&quot; id=&quot;smart_input&quot; placeholder=&quot;完美漂移&quot;&gt;</span></span><br><span class="line"><span class="string">import selenium</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.keys <span class="keyword">import</span> Keys</span><br><span class="line"></span><br><span class="line">bro=selenium.webdriver.Chrome()</span><br><span class="line"></span><br><span class="line">bro.get(<span class="string">&#x27;http://4399.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># xpath</span></span><br><span class="line"><span class="built_in">input</span>=bro.find_element_by_xpath(<span class="string">&#x27;//*[@id=&quot;smart_input&quot;]&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># class_name</span></span><br><span class="line"><span class="built_in">input</span>=bro.find_element_by_class_name(<span class="string">&#x27;sh text clicked&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># name </span></span><br><span class="line"><span class="built_in">input</span>=bro.find_element_by_name(<span class="string">&#x27;k&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">input</span>.send_keys(<span class="string">&#x27;双人&#x27;</span>)</span><br><span class="line"><span class="built_in">input</span>.send_keys(Keys.ENTER)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>其中xpath可以从chrome开发者工具在Elements手动找到该节点再右键复制为Xpath</li>
-<li>据实践还是直接复制xpath最方便,代码一长节点名字什么的一下子重复了都不知道</li>
-<li>find_elements()为寻找所有匹配节点</li>
-</ul>
-<h3 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h3><figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">input=bro.find<span class="constructor">_element_by_xpath(&#x27;<span class="operator">/</span><span class="operator">/</span><span class="operator">*</span>[@<span class="params">id</span>=<span class="string">&quot;smart_input&quot;</span>]&#x27;)</span></span><br><span class="line">input.send<span class="constructor">_keys(&#x27;双人&#x27;)</span></span><br><span class="line"></span><br><span class="line"># 获取按钮节点</span><br><span class="line">botton=bro.find<span class="constructor">_element_by_xpath(&#x27;<span class="operator">/</span><span class="operator">/</span><span class="operator">*</span>[@<span class="params">id</span>=<span class="string">&quot;skinbody&quot;</span>]<span class="operator">/</span><span class="params">div</span>[2]<span class="operator">/</span><span class="params">div</span><span class="operator">/</span><span class="params">div</span><span class="operator">/</span><span class="params">div</span>[1]<span class="operator">/</span><span class="params">form</span><span class="operator">/</span><span class="params">div</span>[2]<span class="operator">/</span><span class="params">input</span>&#x27;)</span></span><br><span class="line">botton.click<span class="literal">()</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>input.send_keys(Keys.ENTER) &#x3D;&#x3D; botton.click()</li>
-<li>botton.clear()为清空文字</li>
-</ul>
-<h3 id="获取信息"><a href="#获取信息" class="headerlink" title="获取信息"></a>获取信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取属性</span></span><br><span class="line"><span class="built_in">input</span>.get_attribute</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取文本值</span></span><br><span class="line"><span class="built_in">input</span>.text</span><br><span class="line"></span><br><span class="line"><span class="comment"># id,location,tag_name,siza</span></span><br><span class="line"><span class="built_in">input</span>.<span class="built_in">id</span></span><br><span class="line">……</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="延时等待"><a href="#延时等待" class="headerlink" title="延时等待"></a>延时等待</h3><h4 id="隐式"><a href="#隐式" class="headerlink" title="隐式"></a>隐式</h4><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium import webdriver</span><br><span class="line"></span><br><span class="line">ff = webdriver.Chrome()</span><br><span class="line">ff.implicitly_wait(<span class="number">10</span>) <span class="comment"># seconds</span></span><br><span class="line">ff.<span class="keyword">get</span>(<span class="string">&quot;http://4399.com&quot;</span>)</span><br><span class="line">Element = ff.find_element_by_id(<span class="string">&quot;myDynamicElement&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>隐式等待是指在尝试查找一个或多个元素（如果它们不是立即可用）时，WebDriver轮询DOM一段时间。默认设置为0。设置后，将为WebDriver对象实例的生命周期设置隐式等待。</li>
-</ul>
-<h4 id="显式"><a href="#显式" class="headerlink" title="显式"></a>显式</h4><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">from selenium<span class="selector-class">.webdriver</span><span class="selector-class">.common</span><span class="selector-class">.by</span> import By</span><br><span class="line">from selenium<span class="selector-class">.webdriver</span><span class="selector-class">.support</span><span class="selector-class">.ui</span> import WebDriverWait</span><br><span class="line">from selenium<span class="selector-class">.webdriver</span><span class="selector-class">.support</span> import expected_conditions as EC </span><br><span class="line"></span><br><span class="line">ff = webdriver<span class="selector-class">.Chrome</span>()</span><br><span class="line">ff<span class="selector-class">.get</span>(<span class="string">&quot;http://4399.com&quot;</span>)</span><br><span class="line">try:</span><br><span class="line">    element = <span class="built_in">WebDriverWait</span>(ff, <span class="number">10</span>)<span class="selector-class">.until</span>(EC<span class="selector-class">.presence_of_element_located</span>((By<span class="selector-class">.ID</span>, <span class="string">&quot;myDynamicElement&quot;</span>)))</span><br><span class="line">finally:</span><br><span class="line">    ff<span class="selector-class">.quit</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>显式等待是自己定义的代码，用于在继续执行代码之前等待某个条件发生</li>
-<li>这会尝试在10秒内找到并返回元素。如果在此之后没有找到任何内容，则抛出<code>timesoutException</code>。默认情况下，每500毫秒WebDriverWait调用ExpectedCondition一次，直到成功返回。ExpectedCondition函数类型的成功返回值是布尔值true或非null对象。</li>
-</ul>
-<hr>
-]]></content>
-      <tags>
-        <tag>python</tag>
-        <tag>爬虫</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>redis学习笔记</title>
     <url>/2020/02/22/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<hr>
@@ -2659,6 +2582,83 @@ soup.title<h1 id="The-Dormouse’s-story-提取title节点"><a href="#The-Dormou
       <tags>
         <tag>redis</tag>
         <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python-爬虫学习笔记(4)</title>
+    <url>/2019/08/26/python-%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-4/</url>
+    <content><![CDATA[<p>Mondb and selenium</p>
+<hr>
+<span id="more"></span>
+<h2 id="mongodb使用"><a href="#mongodb使用" class="headerlink" title="mongodb使用"></a>mongodb使用</h2><p>依赖库为pymongo</p>
+<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span><span class="type"></span>=pymongo.mongo_client(host=<span class="string">&#x27;127.0.0.1&#x27;</span>,port=<span class="number">27017</span>)</span><br><span class="line"></span><br><span class="line">db=<span class="keyword">new</span><span class="type"></span>[<span class="string">&#x27;test&#x27;</span>]</span><br><span class="line"><span class="meta"># == db=new.test</span></span><br><span class="line"></span><br><span class="line">coll=db.test</span><br><span class="line"><span class="meta"># == coll=db[&#x27;test&#x27;]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>默认为直接连接，无需账号密码</li>
+<li>mongo中有数据库集合的概念，集合(collection)类似于mysql的表</li>
+</ul>
+<h3 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h3><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">import pymongo</span><br><span class="line"></span><br><span class="line">dict_test=&#123;</span><br><span class="line">    <span class="string">&#x27;hello&#x27;</span>:<span class="string">&#x27;hi&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="attribute">new</span>=pymongo.MongoClient(host=&#x27;127.0.0.1&#x27;,port=27017)</span><br><span class="line"></span><br><span class="line"><span class="attribute">db</span>=new[<span class="string">&#x27;test&#x27;</span>]</span><br><span class="line"><span class="comment"># == db=new.test</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">coll</span>=db.test</span><br><span class="line"><span class="comment"># == coll=db[&#x27;test&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(coll.insert(dict_test))</span><br><span class="line"></span><br><span class="line">&gt; 5d6cd95073c60d291b004534</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>插入时可同时插入多个字典，传入时用列表如 <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">coll<span class="selector-class">.inert</span>(<span class="selector-attr">[dict1,dict2]</span>)</span><br></pre></td></tr></table></figure></li>
+<li>执行完inert()会自动输出一个id值用于标识</li>
+</ul>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 传入字典查询</span></span><br><span class="line"><span class="built_in">print</span>(coll.find_one(&#123;<span class="string">&#x27;hello&#x27;</span>:<span class="string">&#x27;hi&#x27;</span>&#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据对象id查询</span></span><br><span class="line"><span class="keyword">from</span> bson.objectid import ObjectId</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(coll.find_one(&#123;<span class="string">&#x27;_id&#x27;</span>:ObjectId(<span class="string">&#x27;5d6cd95073c60d291b004534&#x27;</span>)&#125;))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>find()也可查询数据，不过返回的是一个生成器对象，用于查询多个数据<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="attribute">res</span>=coll.find(&#123;<span class="string">&#x27;*&#x27;</span>:<span class="string">&#x27;*&quot;&#125;)</span></span><br><span class="line"><span class="string">for result in res:</span></span><br><span class="line"><span class="string">   print(result)</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">test=coll<span class="selector-class">.find_one</span>(&#123;<span class="string">&#x27;hello&#x27;</span>:<span class="string">&#x27;hi&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">test<span class="selector-attr">[<span class="string">&#x27;hello&#x27;</span>]</span>=<span class="string">&#x27;bye&#x27;</span></span><br><span class="line"></span><br><span class="line">coll<span class="selector-class">.update</span>(dict_test,test)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(test)</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(coll.<span class="built_in">remove</span>(&#123;<span class="string">&#x27;hello&#x27;</span>:<span class="string">&#x27;hi&#x27;</span>&#125;))</span><br><span class="line"></span><br><span class="line">&gt; &#123;<span class="string">&#x27;n&#x27;</span>: 0, <span class="string">&#x27;ok&#x27;</span>: 1.0&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"># 排序</span><br><span class="line"><span class="built_in">sort</span>()</span><br><span class="line"></span><br><span class="line"># 计数</span><br><span class="line"><span class="built_in">count</span>()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="selenium"><a href="#selenium" class="headerlink" title="selenium"></a>selenium</h2><ul>
+<li><p>selenium 是一套完整的web应用程序测试系统，包含了测试的录制（selenium IDE）,编写及运行（Selenium Remote Control）和测试的并行处理（Selenium Grid）。Selenium的核心Selenium Core基于JsUnit，完全由JavaScript编写，因此可以用于任何支持JavaScript的浏览器上。</p>
+</li>
+<li><p>selenium可以模拟真实浏览器，自动化测试工具，支持多种浏览器，爬虫中主要用来解决JavaScript渲染问题。</p>
+</li>
+</ul>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> selenium</span><br></pre></td></tr></table></figure>
+<ul>
+<li>下载相应浏览器驱动<a href="http://npm.taobao.org/mirrors/chromedriver/">chrome</a>并添加至环境path</li>
+</ul>
+<h3 id="声明对象"><a href="#声明对象" class="headerlink" title="声明对象"></a>声明对象</h3><figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">brower</span><span class="operator">=</span> selenium.webdriver.Chrome()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>此时会自动打开一个chrome窗口</li>
+</ul>
+<h3 id="打开网页"><a href="#打开网页" class="headerlink" title="打开网页"></a>打开网页</h3><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">brower.<span class="built_in">get</span>(<span class="string">&#x27;http://baidu.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(brower.page_source)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>属性page_source为输出渲染后的源代码</li>
+</ul>
+<h3 id="查找节点"><a href="#查找节点" class="headerlink" title="查找节点"></a>查找节点</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># eg</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&lt;input autocomplete=&quot;off&quot; name=&quot;k&quot; value=&quot;搜索小游戏&quot; onclick=&quot;document.charset=&#x27;gb2312&#x27;;chkSosmart()&quot; class=&quot;sh text clicked&quot; id=&quot;smart_input&quot; placeholder=&quot;完美漂移&quot;&gt;</span></span><br><span class="line"><span class="string">import selenium</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.keys <span class="keyword">import</span> Keys</span><br><span class="line"></span><br><span class="line">bro=selenium.webdriver.Chrome()</span><br><span class="line"></span><br><span class="line">bro.get(<span class="string">&#x27;http://4399.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># xpath</span></span><br><span class="line"><span class="built_in">input</span>=bro.find_element_by_xpath(<span class="string">&#x27;//*[@id=&quot;smart_input&quot;]&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># class_name</span></span><br><span class="line"><span class="built_in">input</span>=bro.find_element_by_class_name(<span class="string">&#x27;sh text clicked&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># name </span></span><br><span class="line"><span class="built_in">input</span>=bro.find_element_by_name(<span class="string">&#x27;k&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">input</span>.send_keys(<span class="string">&#x27;双人&#x27;</span>)</span><br><span class="line"><span class="built_in">input</span>.send_keys(Keys.ENTER)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>其中xpath可以从chrome开发者工具在Elements手动找到该节点再右键复制为Xpath</li>
+<li>据实践还是直接复制xpath最方便,代码一长节点名字什么的一下子重复了都不知道</li>
+<li>find_elements()为寻找所有匹配节点</li>
+</ul>
+<h3 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h3><figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">input=bro.find<span class="constructor">_element_by_xpath(&#x27;<span class="operator">/</span><span class="operator">/</span><span class="operator">*</span>[@<span class="params">id</span>=<span class="string">&quot;smart_input&quot;</span>]&#x27;)</span></span><br><span class="line">input.send<span class="constructor">_keys(&#x27;双人&#x27;)</span></span><br><span class="line"></span><br><span class="line"># 获取按钮节点</span><br><span class="line">botton=bro.find<span class="constructor">_element_by_xpath(&#x27;<span class="operator">/</span><span class="operator">/</span><span class="operator">*</span>[@<span class="params">id</span>=<span class="string">&quot;skinbody&quot;</span>]<span class="operator">/</span><span class="params">div</span>[2]<span class="operator">/</span><span class="params">div</span><span class="operator">/</span><span class="params">div</span><span class="operator">/</span><span class="params">div</span>[1]<span class="operator">/</span><span class="params">form</span><span class="operator">/</span><span class="params">div</span>[2]<span class="operator">/</span><span class="params">input</span>&#x27;)</span></span><br><span class="line">botton.click<span class="literal">()</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>input.send_keys(Keys.ENTER) &#x3D;&#x3D; botton.click()</li>
+<li>botton.clear()为清空文字</li>
+</ul>
+<h3 id="获取信息"><a href="#获取信息" class="headerlink" title="获取信息"></a>获取信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取属性</span></span><br><span class="line"><span class="built_in">input</span>.get_attribute</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取文本值</span></span><br><span class="line"><span class="built_in">input</span>.text</span><br><span class="line"></span><br><span class="line"><span class="comment"># id,location,tag_name,siza</span></span><br><span class="line"><span class="built_in">input</span>.<span class="built_in">id</span></span><br><span class="line">……</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="延时等待"><a href="#延时等待" class="headerlink" title="延时等待"></a>延时等待</h3><h4 id="隐式"><a href="#隐式" class="headerlink" title="隐式"></a>隐式</h4><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium import webdriver</span><br><span class="line"></span><br><span class="line">ff = webdriver.Chrome()</span><br><span class="line">ff.implicitly_wait(<span class="number">10</span>) <span class="comment"># seconds</span></span><br><span class="line">ff.<span class="keyword">get</span>(<span class="string">&quot;http://4399.com&quot;</span>)</span><br><span class="line">Element = ff.find_element_by_id(<span class="string">&quot;myDynamicElement&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>隐式等待是指在尝试查找一个或多个元素（如果它们不是立即可用）时，WebDriver轮询DOM一段时间。默认设置为0。设置后，将为WebDriver对象实例的生命周期设置隐式等待。</li>
+</ul>
+<h4 id="显式"><a href="#显式" class="headerlink" title="显式"></a>显式</h4><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">from selenium<span class="selector-class">.webdriver</span><span class="selector-class">.common</span><span class="selector-class">.by</span> import By</span><br><span class="line">from selenium<span class="selector-class">.webdriver</span><span class="selector-class">.support</span><span class="selector-class">.ui</span> import WebDriverWait</span><br><span class="line">from selenium<span class="selector-class">.webdriver</span><span class="selector-class">.support</span> import expected_conditions as EC </span><br><span class="line"></span><br><span class="line">ff = webdriver<span class="selector-class">.Chrome</span>()</span><br><span class="line">ff<span class="selector-class">.get</span>(<span class="string">&quot;http://4399.com&quot;</span>)</span><br><span class="line">try:</span><br><span class="line">    element = <span class="built_in">WebDriverWait</span>(ff, <span class="number">10</span>)<span class="selector-class">.until</span>(EC<span class="selector-class">.presence_of_element_located</span>((By<span class="selector-class">.ID</span>, <span class="string">&quot;myDynamicElement&quot;</span>)))</span><br><span class="line">finally:</span><br><span class="line">    ff<span class="selector-class">.quit</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>显式等待是自己定义的代码，用于在继续执行代码之前等待某个条件发生</li>
+<li>这会尝试在10秒内找到并返回元素。如果在此之后没有找到任何内容，则抛出<code>timesoutException</code>。默认情况下，每500毫秒WebDriverWait调用ExpectedCondition一次，直到成功返回。ExpectedCondition函数类型的成功返回值是布尔值true或非null对象。</li>
+</ul>
+<hr>
+]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>
@@ -2824,6 +2824,91 @@ soup.title<h1 id="The-Dormouse’s-story-提取title节点"><a href="#The-Dormou
       </tags>
   </entry>
   <entry>
+    <title>zabbix折腾记-安装篇</title>
+    <url>/2020/03/26/zabbix%E6%8A%98%E8%85%BE%E8%AE%B0/</url>
+    <content><![CDATA[<hr>
+<span id="more"></span>
+
+<h1 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h1><p>要想服务跑起来看得见,就得安装自身服务端,MySQL,前端</p>
+<h3 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h3><p><a href="https://www.zabbix.com/documentation/current/manual/installation/install">添加用户组</a></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">addgroup <span class="attr">--system</span> <span class="attr">--quiet</span> zabbix</span><br><span class="line">adduser <span class="attr">--quiet</span> <span class="attr">--system</span> <span class="attr">--disabled-login</span> <span class="attr">--ingroup</span> zabbix <span class="attr">--home</span> /<span class="selector-tag">var</span>/lib/zabbix <span class="attr">--no-create-home</span> zabbix</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.zabbix.com/cn/download_sources#tab:40LTS">下载地址</a></p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看编译的一些功能选项</span></span><br><span class="line"><span class="string">./configure</span> <span class="params">--help</span></span><br><span class="line"></span><br><span class="line"><span class="string">./configure</span> <span class="params">--prefix=/usr/local/zabbix</span> <span class="params">--enable-server</span> <span class="params">--enable-agent</span> <span class="params">--enable-java</span> </span><br><span class="line"><span class="params">--with-mysql</span> <span class="params">--with-libxml2</span> <span class="params">--with-unixodbc</span> <span class="params">--with-net-snmp</span> <span class="params">--with-ssh2</span>  <span class="params">--with-libcurl</span> <span class="params">--with-iconv</span></span><br><span class="line"></span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h5 id="依赖问题"><a href="#依赖问题" class="headerlink" title="依赖问题"></a>依赖问题</h5><ul>
+<li>MySQL library not found <code>sudo apt install libmysqlclient-dev</code></li>
+<li>unixODBC <code>sudo apt install unixodbc-dev </code></li>
+<li>configure error: Invalid Net-SNMP directory - unable to find net-snmp-config <code>sudo apt install libsnmp-dev  </code></li>
+<li>error: SSH2 library not found  <code>sudo apt install libssh2-1-dev</code></li>
+<li>Unable to find “javac” executable in path <code>sudo apt install openjdk-11-jdk </code></li>
+</ul>
+<p>经过大量搜索貌似找到了解决依赖的一个好办法</p>
+<ul>
+<li><code>apt search &#39;*软件名*&#39;</code></li>
+<li>一般安装那个带<code>-dev</code>的就OK了</li>
+</ul>
+<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><p>不知道为什么自带软件源安装的mysql、httpd、nginx都用不了，可能是因为用着ubuntu的源，而issue里写的是mint没直接写上基于ubuntu了 ┑(￣Д ￣)┍</p>
+<p>这里还是直接用了docker</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -id -name mysql -p3306:3306 -e  <span class="attribute">MYSQL_ROOT_PASSWORD</span>=111111 mysql</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不加MYSQL_ROOT_PASSWORD&#x3D;111111 的话容器都不会开启</li>
+</ul>
+<p><a href="https://www.zabbix.com/documentation/current/manual/appendix/install/db_scripts">创建数据库</a></p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">shell&gt; mysql -uroot -p&lt;<span class="keyword">password</span>&gt;</span><br><span class="line">mysql&gt; <span class="keyword">create</span> <span class="keyword">database</span> zabbix <span class="type">character</span> <span class="keyword">set</span> utf8 <span class="keyword">collate</span> utf8_bin;</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;zabbix&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;&lt;password&gt;&#x27;</span>;</span><br><span class="line">mysql&gt; <span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">&#x27;zabbix&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;#需要加上这条授权参考下面第一个错误</span><br><span class="line"></span><br><span class="line">shell&gt; cd <span class="keyword">database</span>/mysql</span><br><span class="line">shell&gt; mysql -uzabbix -p&lt;<span class="keyword">password</span>&gt; zabbix &lt; <span class="keyword">schema</span>.<span class="keyword">sql</span></span><br><span class="line"># stop here <span class="keyword">if</span> you are creating <span class="keyword">database</span> <span class="keyword">for</span> Zabbix proxy</span><br><span class="line">shell&gt; mysql -uzabbix -p&lt;<span class="keyword">password</span>&gt; zabbix &lt; images.<span class="keyword">sql</span></span><br><span class="line">shell&gt; mysql -uzabbix -p&lt;<span class="keyword">password</span>&gt; zabbix &lt; data.<span class="keyword">sql</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a href="https://www.cnblogs.com/B1ackWall/p/11643136.html">ERROR 1410 (42000): You are not allowed to create a user with GRANT</a></p>
+</li>
+<li><p><a href="https://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw">MySQL ERROR 1045 (28000): Access denied for user ‘bill‘@’localhost’ (using password: YES)</a></p>
+</li>
+<li><p>[Error connecting to database: The server requested authentication method unknow]<br>(<a href="https://learnku.com/articles/10736/some-craters-in-mysql-8011">https://learnku.com/articles/10736/some-craters-in-mysql-8011</a>)</p>
+</li>
+</ul>
+<h2 id="php"><a href="#php" class="headerlink" title="php"></a>php</h2><p>前端拿php写的,故需要安装php</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">sudo</span> apt install php7.<span class="number">2</span>-fpm </span><br></pre></td></tr></table></figure>
+
+<p>需要修改默认配置文件以满足zabbix需求</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">sudo</span> vi /etc/php/<span class="number">7</span>.<span class="number">2</span>/fpm/php.ini </span><br><span class="line"></span><br><span class="line"><span class="attribute">max_execution_time</span> = <span class="number">300</span> ##<span class="number">368</span>行（执行时间）</span><br><span class="line"><span class="attribute">max_input_time</span> = <span class="number">300</span> ##<span class="number">378</span>行（接收数据等待时间）</span><br><span class="line"><span class="attribute">memory_limit</span> = <span class="number">128</span>M ##<span class="number">389</span>行（每个脚本占用内存）</span><br><span class="line"><span class="attribute">post_max_size</span> = <span class="number">16</span>M ##<span class="number">656</span>行（POST数据大小）</span><br><span class="line"><span class="attribute">upload_max_filesize</span> = <span class="number">2</span>M ##<span class="number">799</span>行（下载文件大小）</span><br><span class="line"><span class="attribute">always_populate_raw_post_data</span> = -<span class="number">1</span> ##<span class="number">800</span>行</span><br><span class="line"><span class="attribute">date</span>.timezone = Asia/Shanghai ##<span class="number">877</span>行（时区</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不改的话,后面也不会成功</li>
+</ul>
+<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><p><a href="http://nginx.org/en/download.html">下载</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<ul>
+<li><del>配置不太熟还需仔细研究</del></li>
+</ul>
+<p>遇到的一个错误</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">error</span>] 16119#0: <span class="number">*75</span> FastCGI sent <span class="keyword">in</span> stderr: <span class="string">&quot;Primary script unknown&quot;</span> </span><br><span class="line"><span class="keyword">while</span> reading response header <span class="keyword">from</span> upstream, client: 127.0.0.1, server: localhost, request:</span><br><span class="line"> <span class="string">&quot;GET / HTTP/1.1&quot;</span>, upstream: <span class="string">&quot;fastcgi://unix:/run/php/php7.2-fpm.sock:&quot;</span>, host: <span class="string">&quot;127.0.0.1&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>参考<a href="https://serverfault.com/questions/517190/nginx-1-fastcgi-sent-in-stderr-primary-script-unknown">这里</a> . 犯了两个错误 :</li>
+</ul>
+<ol>
+<li><code>/etc/php/7.2/fpm/pool.d/www.conf</code>   里设置的用户名和用户组与ngnix运行的不一致</li>
+<li>复制php前端文件时用的是root</li>
+</ol>
+<p>附上简单丑陋的配置</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">     listen       <span class="number">80</span>;</span><br><span class="line">     server_name  localhost;</span><br><span class="line">     index index.php;</span><br><span class="line">     root <span class="regexp">/var/</span>www<span class="regexp">/php/</span>;</span><br><span class="line"></span><br><span class="line">     location ~* \.php$ &#123;</span><br><span class="line">         include fastcgi_params;</span><br><span class="line">         fastcgi_index  index.php;</span><br><span class="line">                     include      fastcgi_params;</span><br><span class="line">         set <span class="variable">$path_info</span> <span class="string">&quot;&quot;</span>; </span><br><span class="line">         set <span class="variable">$real_script_name</span> <span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">         <span class="keyword">if</span> (<span class="variable">$fastcgi_script_name</span> ~ <span class="string">&quot;^(.+?\.php)(/.+)$&quot;</span>) &#123;</span><br><span class="line">                 set <span class="variable">$real_script_name</span> <span class="variable">$1</span>; </span><br><span class="line">                 set <span class="variable">$path_info</span> <span class="variable">$2</span>; </span><br><span class="line">         &#125;</span><br><span class="line">         fastcgi_param SCRIPT_FILENAME <span class="regexp">/var/</span>www<span class="regexp">/php/</span><span class="variable">$real_script_name</span>;</span><br><span class="line">         fastcgi_param SCRIPT_NAME <span class="variable">$real_script_name</span>;</span><br><span class="line">         fastcgi_param PATH_INFO <span class="variable">$path_info</span>;</span><br><span class="line"></span><br><span class="line">         <span class="regexp">//</span>这里默认是<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">9000</span>;</span><br><span class="line">         <span class="regexp">//</span>需要到<span class="regexp">/etc/</span>php<span class="regexp">/7.2/</span>fpm<span class="regexp">/pool.d/</span>www.conf查看监听的地址</span><br><span class="line">         fastcgi_pass unix:<span class="regexp">/run/</span>php/php7.<span class="number">2</span>-fpm.sock;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看error日志可以快速定位问题</li>
+</ul>
+<h1 id="docker-install"><a href="#docker-install" class="headerlink" title="docker install"></a>docker install</h1><p><a href="https://www.zabbix.com/documentation/current/manual/installation/containers">源自这里</a></p>
+<figure class="highlight livescript"><table><tr><td class="code"><pre><span class="line"><span class="comment"># docker run --name zabbix-appliance -t \</span></span><br><span class="line">      -p <span class="number">10051</span>:<span class="number">10051</span> <span class="string">\</span></span><br><span class="line">      -p <span class="number">80</span>:<span class="number">80</span> <span class="string">\</span></span><br><span class="line">      --restart <span class="keyword">unless</span>-stopped <span class="string">\</span></span><br><span class="line">      -d zabbix/zabbix-appliance:latest</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>开箱可用,十分方便</li>
+</ul>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>都安装好之后,需要检查&#x2F;etc&#x2F;zabbix&#x2F;zabbix_server.conf里的数据库账号名密码地址是否正确</p>
+<p>需要检查&#x2F;etc&#x2F;zabbix&#x2F;zabbix_agent.conf里server名字地址是否正确</p>
+<p>真香<img src="/images/20200326=0.png"></p>
+<p>太香了<img src="/images/20200326=1.png"></p>
+]]></content>
+      <tags>
+        <tag>工具</tag>
+        <tag>zabbix</tag>
+        <tag>监控</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vagrant学习</title>
     <url>/2020/05/06/vagrant%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<hr>
@@ -2948,88 +3033,20 @@ soup.title<h1 id="The-Dormouse’s-story-提取title节点"><a href="#The-Dormou
       </tags>
   </entry>
   <entry>
-    <title>zabbix折腾记-安装篇</title>
-    <url>/2020/03/26/zabbix%E6%8A%98%E8%85%BE%E8%AE%B0/</url>
-    <content><![CDATA[<hr>
-<span id="more"></span>
+    <title>一篇短篇</title>
+    <url>/2019/09/08/%E4%B8%80%E7%AF%87%E7%9F%AD%E7%AF%87/</url>
+    <content><![CDATA[<blockquote>
+<p>某天，你无端想起一个人，她曾让你对明天有所期许，但是却完全没有出现在你的明天里。  ——《再见金华站》</p>
+</blockquote>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=532413954&auto=0&height=66">「我还是成为了那个我不想成为的烂人」</iframe>
 
-<h1 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h1><p>要想服务跑起来看得见,就得安装自身服务端,MySQL,前端</p>
-<h3 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h3><p><a href="https://www.zabbix.com/documentation/current/manual/installation/install">添加用户组</a></p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">addgroup <span class="attr">--system</span> <span class="attr">--quiet</span> zabbix</span><br><span class="line">adduser <span class="attr">--quiet</span> <span class="attr">--system</span> <span class="attr">--disabled-login</span> <span class="attr">--ingroup</span> zabbix <span class="attr">--home</span> /<span class="selector-tag">var</span>/lib/zabbix <span class="attr">--no-create-home</span> zabbix</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.zabbix.com/cn/download_sources#tab:40LTS">下载地址</a></p>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看编译的一些功能选项</span></span><br><span class="line"><span class="string">./configure</span> <span class="params">--help</span></span><br><span class="line"></span><br><span class="line"><span class="string">./configure</span> <span class="params">--prefix=/usr/local/zabbix</span> <span class="params">--enable-server</span> <span class="params">--enable-agent</span> <span class="params">--enable-java</span> </span><br><span class="line"><span class="params">--with-mysql</span> <span class="params">--with-libxml2</span> <span class="params">--with-unixodbc</span> <span class="params">--with-net-snmp</span> <span class="params">--with-ssh2</span>  <span class="params">--with-libcurl</span> <span class="params">--with-iconv</span></span><br><span class="line"></span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<h5 id="依赖问题"><a href="#依赖问题" class="headerlink" title="依赖问题"></a>依赖问题</h5><ul>
-<li>MySQL library not found <code>sudo apt install libmysqlclient-dev</code></li>
-<li>unixODBC <code>sudo apt install unixodbc-dev </code></li>
-<li>configure error: Invalid Net-SNMP directory - unable to find net-snmp-config <code>sudo apt install libsnmp-dev  </code></li>
-<li>error: SSH2 library not found  <code>sudo apt install libssh2-1-dev</code></li>
-<li>Unable to find “javac” executable in path <code>sudo apt install openjdk-11-jdk </code></li>
-</ul>
-<p>经过大量搜索貌似找到了解决依赖的一个好办法</p>
-<ul>
-<li><code>apt search &#39;*软件名*&#39;</code></li>
-<li>一般安装那个带<code>-dev</code>的就OK了</li>
-</ul>
-<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><p>不知道为什么自带软件源安装的mysql、httpd、nginx都用不了，可能是因为用着ubuntu的源，而issue里写的是mint没直接写上基于ubuntu了 ┑(￣Д ￣)┍</p>
-<p>这里还是直接用了docker</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -id -name mysql -p3306:3306 -e  <span class="attribute">MYSQL_ROOT_PASSWORD</span>=111111 mysql</span><br></pre></td></tr></table></figure>
-<ul>
-<li>不加MYSQL_ROOT_PASSWORD&#x3D;111111 的话容器都不会开启</li>
-</ul>
-<p><a href="https://www.zabbix.com/documentation/current/manual/appendix/install/db_scripts">创建数据库</a></p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">shell&gt; mysql -uroot -p&lt;<span class="keyword">password</span>&gt;</span><br><span class="line">mysql&gt; <span class="keyword">create</span> <span class="keyword">database</span> zabbix <span class="type">character</span> <span class="keyword">set</span> utf8 <span class="keyword">collate</span> utf8_bin;</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;zabbix&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;&lt;password&gt;&#x27;</span>;</span><br><span class="line">mysql&gt; <span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">&#x27;zabbix&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;#需要加上这条授权参考下面第一个错误</span><br><span class="line"></span><br><span class="line">shell&gt; cd <span class="keyword">database</span>/mysql</span><br><span class="line">shell&gt; mysql -uzabbix -p&lt;<span class="keyword">password</span>&gt; zabbix &lt; <span class="keyword">schema</span>.<span class="keyword">sql</span></span><br><span class="line"># stop here <span class="keyword">if</span> you are creating <span class="keyword">database</span> <span class="keyword">for</span> Zabbix proxy</span><br><span class="line">shell&gt; mysql -uzabbix -p&lt;<span class="keyword">password</span>&gt; zabbix &lt; images.<span class="keyword">sql</span></span><br><span class="line">shell&gt; mysql -uzabbix -p&lt;<span class="keyword">password</span>&gt; zabbix &lt; data.<span class="keyword">sql</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><a href="https://www.cnblogs.com/B1ackWall/p/11643136.html">ERROR 1410 (42000): You are not allowed to create a user with GRANT</a></p>
-</li>
-<li><p><a href="https://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw">MySQL ERROR 1045 (28000): Access denied for user ‘bill‘@’localhost’ (using password: YES)</a></p>
-</li>
-<li><p>[Error connecting to database: The server requested authentication method unknow]<br>(<a href="https://learnku.com/articles/10736/some-craters-in-mysql-8011">https://learnku.com/articles/10736/some-craters-in-mysql-8011</a>)</p>
-</li>
-</ul>
-<h2 id="php"><a href="#php" class="headerlink" title="php"></a>php</h2><p>前端拿php写的,故需要安装php</p>
-<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">sudo</span> apt install php7.<span class="number">2</span>-fpm </span><br></pre></td></tr></table></figure>
-
-<p>需要修改默认配置文件以满足zabbix需求</p>
-<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">sudo</span> vi /etc/php/<span class="number">7</span>.<span class="number">2</span>/fpm/php.ini </span><br><span class="line"></span><br><span class="line"><span class="attribute">max_execution_time</span> = <span class="number">300</span> ##<span class="number">368</span>行（执行时间）</span><br><span class="line"><span class="attribute">max_input_time</span> = <span class="number">300</span> ##<span class="number">378</span>行（接收数据等待时间）</span><br><span class="line"><span class="attribute">memory_limit</span> = <span class="number">128</span>M ##<span class="number">389</span>行（每个脚本占用内存）</span><br><span class="line"><span class="attribute">post_max_size</span> = <span class="number">16</span>M ##<span class="number">656</span>行（POST数据大小）</span><br><span class="line"><span class="attribute">upload_max_filesize</span> = <span class="number">2</span>M ##<span class="number">799</span>行（下载文件大小）</span><br><span class="line"><span class="attribute">always_populate_raw_post_data</span> = -<span class="number">1</span> ##<span class="number">800</span>行</span><br><span class="line"><span class="attribute">date</span>.timezone = Asia/Shanghai ##<span class="number">877</span>行（时区</span><br></pre></td></tr></table></figure>
-<ul>
-<li>不改的话,后面也不会成功</li>
-</ul>
-<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><p><a href="http://nginx.org/en/download.html">下载</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<ul>
-<li><del>配置不太熟还需仔细研究</del></li>
-</ul>
-<p>遇到的一个错误</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">error</span>] 16119#0: <span class="number">*75</span> FastCGI sent <span class="keyword">in</span> stderr: <span class="string">&quot;Primary script unknown&quot;</span> </span><br><span class="line"><span class="keyword">while</span> reading response header <span class="keyword">from</span> upstream, client: 127.0.0.1, server: localhost, request:</span><br><span class="line"> <span class="string">&quot;GET / HTTP/1.1&quot;</span>, upstream: <span class="string">&quot;fastcgi://unix:/run/php/php7.2-fpm.sock:&quot;</span>, host: <span class="string">&quot;127.0.0.1&quot;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>参考<a href="https://serverfault.com/questions/517190/nginx-1-fastcgi-sent-in-stderr-primary-script-unknown">这里</a> . 犯了两个错误 :</li>
-</ul>
-<ol>
-<li><code>/etc/php/7.2/fpm/pool.d/www.conf</code>   里设置的用户名和用户组与ngnix运行的不一致</li>
-<li>复制php前端文件时用的是root</li>
-</ol>
-<p>附上简单丑陋的配置</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">     listen       <span class="number">80</span>;</span><br><span class="line">     server_name  localhost;</span><br><span class="line">     index index.php;</span><br><span class="line">     root <span class="regexp">/var/</span>www<span class="regexp">/php/</span>;</span><br><span class="line"></span><br><span class="line">     location ~* \.php$ &#123;</span><br><span class="line">         include fastcgi_params;</span><br><span class="line">         fastcgi_index  index.php;</span><br><span class="line">                     include      fastcgi_params;</span><br><span class="line">         set <span class="variable">$path_info</span> <span class="string">&quot;&quot;</span>; </span><br><span class="line">         set <span class="variable">$real_script_name</span> <span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">         <span class="keyword">if</span> (<span class="variable">$fastcgi_script_name</span> ~ <span class="string">&quot;^(.+?\.php)(/.+)$&quot;</span>) &#123;</span><br><span class="line">                 set <span class="variable">$real_script_name</span> <span class="variable">$1</span>; </span><br><span class="line">                 set <span class="variable">$path_info</span> <span class="variable">$2</span>; </span><br><span class="line">         &#125;</span><br><span class="line">         fastcgi_param SCRIPT_FILENAME <span class="regexp">/var/</span>www<span class="regexp">/php/</span><span class="variable">$real_script_name</span>;</span><br><span class="line">         fastcgi_param SCRIPT_NAME <span class="variable">$real_script_name</span>;</span><br><span class="line">         fastcgi_param PATH_INFO <span class="variable">$path_info</span>;</span><br><span class="line"></span><br><span class="line">         <span class="regexp">//</span>这里默认是<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">9000</span>;</span><br><span class="line">         <span class="regexp">//</span>需要到<span class="regexp">/etc/</span>php<span class="regexp">/7.2/</span>fpm<span class="regexp">/pool.d/</span>www.conf查看监听的地址</span><br><span class="line">         fastcgi_pass unix:<span class="regexp">/run/</span>php/php7.<span class="number">2</span>-fpm.sock;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看error日志可以快速定位问题</li>
-</ul>
-<h1 id="docker-install"><a href="#docker-install" class="headerlink" title="docker install"></a>docker install</h1><p><a href="https://www.zabbix.com/documentation/current/manual/installation/containers">源自这里</a></p>
-<figure class="highlight livescript"><table><tr><td class="code"><pre><span class="line"><span class="comment"># docker run --name zabbix-appliance -t \</span></span><br><span class="line">      -p <span class="number">10051</span>:<span class="number">10051</span> <span class="string">\</span></span><br><span class="line">      -p <span class="number">80</span>:<span class="number">80</span> <span class="string">\</span></span><br><span class="line">      --restart <span class="keyword">unless</span>-stopped <span class="string">\</span></span><br><span class="line">      -d zabbix/zabbix-appliance:latest</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>开箱可用,十分方便</li>
-</ul>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>都安装好之后,需要检查&#x2F;etc&#x2F;zabbix&#x2F;zabbix_server.conf里的数据库账号名密码地址是否正确</p>
-<p>需要检查&#x2F;etc&#x2F;zabbix&#x2F;zabbix_agent.conf里server名字地址是否正确</p>
-<p>真香<img src="/images/20200326=0.png"></p>
-<p>太香了<img src="/images/20200326=1.png"></p>
+<blockquote>
+<p>楼下一个男人病得要死，那间隔壁的一家唱着留声机，对面是弄孩子。楼上有两人狂笑；还有打牌声。河中的船上有女人哭着她死去的母亲。人类的悲欢并不相通，我只觉得他们吵闹。   ——鲁迅《而已集·小杂感》</p>
+</blockquote>
+<p><del>「我还是成为了那个我不想成为的烂人」</del></p>
 ]]></content>
       <tags>
-        <tag>工具</tag>
-        <tag>zabbix</tag>
-        <tag>监控</tag>
+        <tag>乱七八糟</tag>
       </tags>
   </entry>
   <entry>
@@ -3179,23 +3196,6 @@ soup.title<h1 id="The-Dormouse’s-story-提取title节点"><a href="#The-Dormou
 ]]></content>
       <tags>
         <tag>正则</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一篇短篇</title>
-    <url>/2019/09/08/%E4%B8%80%E7%AF%87%E7%9F%AD%E7%AF%87/</url>
-    <content><![CDATA[<blockquote>
-<p>某天，你无端想起一个人，她曾让你对明天有所期许，但是却完全没有出现在你的明天里。  ——《再见金华站》</p>
-</blockquote>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=532413954&auto=0&height=66">「我还是成为了那个我不想成为的烂人」</iframe>
-
-<blockquote>
-<p>楼下一个男人病得要死，那间隔壁的一家唱着留声机，对面是弄孩子。楼上有两人狂笑；还有打牌声。河中的船上有女人哭着她死去的母亲。人类的悲欢并不相通，我只觉得他们吵闹。   ——鲁迅《而已集·小杂感》</p>
-</blockquote>
-<p><del>「我还是成为了那个我不想成为的烂人」</del></p>
-]]></content>
-      <tags>
-        <tag>乱七八糟</tag>
       </tags>
   </entry>
   <entry>
@@ -3382,59 +3382,6 @@ soup.title<h1 id="The-Dormouse’s-story-提取title节点"><a href="#The-Dormou
       </tags>
   </entry>
   <entry>
-    <title>关于nginx的一些URL的匹配规则</title>
-    <url>/2020/08/12/%E5%85%B3%E4%BA%8Enginx%E7%9A%84%E4%B8%80%E4%BA%9B%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/</url>
-    <content><![CDATA[<span id="more"></span>
-
-<h3 id="location-匹配规则"><a href="#location-匹配规则" class="headerlink" title="location 匹配规则"></a>location 匹配规则</h3><ol>
-<li>首先匹配 &#x3D; (精确匹配)</li>
-<li>其次匹配 ^~(正则匹配)</li>
-<li>最后是交给 &#x2F; 匹配所有<br>当有匹配成功时候，停止匹配，按当前匹配规则处理请求。</li>
-</ol>
-<ul>
-<li>~ 是区分大小写的, ~* 是不区分大小写的</li>
-<li>例如需要匹配某个后缀,可以这样 <figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">location</span> <span class="title">~* \.(png</span>|js|html)$ &#123;</span><br><span class="line">    root /data/ ; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>而location后加不加 <code>/</code> , 也是有区别的 举个例子</p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">location</span> <span class="title">/test</span>/&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">location</span> <span class="title">/test</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>当访问 &#x2F;test&#x2F;123.html,都能匹配到</li>
-<li>当访问 &#x2F;testtest.html,匹配到后面那个</li>
-</ul>
-<p>这里的 “<code>/</code>“强调的是路径</p>
-<h3 id="proxy-pass-匹配规则"><a href="#proxy-pass-匹配规则" class="headerlink" title="proxy_pass 匹配规则"></a>proxy_pass 匹配规则</h3><p>当我们访问 &#x2F;test&#x2F;1.html</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">location <span class="regexp">/test/</span> &#123;</span><br><span class="line">    proxy_pass http:<span class="regexp">//</span>localhost/ ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>此时实际访问的是 localhost&#x2F;test&#x2F;1.html</li>
-</ul>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">location <span class="regexp">/test/</span> &#123;</span><br><span class="line">    proxy_pass http:<span class="regexp">//</span>localhost ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>此时访问的是 localhost&#x2F;1.html</li>
-</ul>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">location <span class="regexp">/test/</span> &#123;</span><br><span class="line">    proxy_pass http:<span class="regexp">//</span>localhost<span class="regexp">/dir/</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>此时实际访问的是 localhost&#x2F;dir&#x2F;1.html</li>
-</ul>
-<p>虽然看上去多一个少一个”<code>/</code>“差别不大,但实际上各自意思大不一样,可不能想写那个就写哪个😿️</p>
-<!-- location /test/ {
-    proxy_pass http://localhost/dir ;
-}
-
-此时实际访问的是 localhost/testdir/1.html -->
-
-
-
-
-
-
-
-
-]]></content>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>关于c语言中一些疑难点的复习</title>
     <url>/2020/03/07/%E5%85%B3%E4%BA%8Ec%E8%AF%AD%E8%A8%80%E4%B8%AD%E4%B8%80%E4%BA%9B%E7%96%91%E9%9A%BE%E7%82%B9%E7%9A%84%E5%A4%8D%E4%B9%A0/</url>
     <content><![CDATA[<hr>
@@ -3553,6 +3500,59 @@ soup.title<h1 id="The-Dormouse’s-story-提取title节点"><a href="#The-Dormou
       <tags>
         <tag>工具</tag>
         <tag>代理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于nginx的一些URL的匹配规则</title>
+    <url>/2020/08/12/%E5%85%B3%E4%BA%8Enginx%E7%9A%84%E4%B8%80%E4%BA%9B%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/</url>
+    <content><![CDATA[<span id="more"></span>
+
+<h3 id="location-匹配规则"><a href="#location-匹配规则" class="headerlink" title="location 匹配规则"></a>location 匹配规则</h3><ol>
+<li>首先匹配 &#x3D; (精确匹配)</li>
+<li>其次匹配 ^~(正则匹配)</li>
+<li>最后是交给 &#x2F; 匹配所有<br>当有匹配成功时候，停止匹配，按当前匹配规则处理请求。</li>
+</ol>
+<ul>
+<li>~ 是区分大小写的, ~* 是不区分大小写的</li>
+<li>例如需要匹配某个后缀,可以这样 <figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">location</span> <span class="title">~* \.(png</span>|js|html)$ &#123;</span><br><span class="line">    root /data/ ; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>而location后加不加 <code>/</code> , 也是有区别的 举个例子</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">location</span> <span class="title">/test</span>/&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">location</span> <span class="title">/test</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当访问 &#x2F;test&#x2F;123.html,都能匹配到</li>
+<li>当访问 &#x2F;testtest.html,匹配到后面那个</li>
+</ul>
+<p>这里的 “<code>/</code>“强调的是路径</p>
+<h3 id="proxy-pass-匹配规则"><a href="#proxy-pass-匹配规则" class="headerlink" title="proxy_pass 匹配规则"></a>proxy_pass 匹配规则</h3><p>当我们访问 &#x2F;test&#x2F;1.html</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">location <span class="regexp">/test/</span> &#123;</span><br><span class="line">    proxy_pass http:<span class="regexp">//</span>localhost/ ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>此时实际访问的是 localhost&#x2F;test&#x2F;1.html</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">location <span class="regexp">/test/</span> &#123;</span><br><span class="line">    proxy_pass http:<span class="regexp">//</span>localhost ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>此时访问的是 localhost&#x2F;1.html</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">location <span class="regexp">/test/</span> &#123;</span><br><span class="line">    proxy_pass http:<span class="regexp">//</span>localhost<span class="regexp">/dir/</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>此时实际访问的是 localhost&#x2F;dir&#x2F;1.html</li>
+</ul>
+<p>虽然看上去多一个少一个”<code>/</code>“差别不大,但实际上各自意思大不一样,可不能想写那个就写哪个😿️</p>
+<!-- location /test/ {
+    proxy_pass http://localhost/dir ;
+}
+
+此时实际访问的是 localhost/testdir/1.html -->
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -3721,21 +3721,6 @@ soup.title<h1 id="The-Dormouse’s-story-提取title节点"><a href="#The-Dormou
       </tags>
   </entry>
   <entry>
-    <title>周年事记</title>
-    <url>/2020/04/25/%E5%91%A8%E5%B9%B4%E4%BA%8B%E8%AE%B0/</url>
-    <content><![CDATA[<hr>
-<span id="more"></span>
-
-<blockquote>
-<p>本来觉得摆脱标签活出自己就已经是尽力了,可渐渐却在追求自我的路上不断给自己加上标签,真像一头猪啊</p>
-</blockquote>
-<p>始终忘不了之前看过的一部电影,镜头先是一个喧闹的酒吧,人们在快活地跳着舞,随着是一个黑白的、无声音的、人们在地上诡异地扭动的上帝视角长镜头。那几分钟，仿佛是一个自我的觉醒</p>
-<blockquote>
-<p>一个无限遥远的目标不是目标,而是一个欺骗<br>  一个无限遥远的理由也不是理由,而是一个借口</p>
-</blockquote>
-]]></content>
-  </entry>
-  <entry>
     <title>动手写一个自己的ping程序</title>
     <url>/2020/02/10/%E5%8A%A8%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84ping%E7%A8%8B%E5%BA%8F/</url>
     <content><![CDATA[<hr>
@@ -3788,10 +3773,25 @@ soup.title<h1 id="The-Dormouse’s-story-提取title节点"><a href="#The-Dormou
 
 ]]></content>
       <tags>
-        <tag>linux</tag>
         <tag>c</tag>
+        <tag>linux</tag>
         <tag>计算机网络</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>周年事记</title>
+    <url>/2020/04/25/%E5%91%A8%E5%B9%B4%E4%BA%8B%E8%AE%B0/</url>
+    <content><![CDATA[<hr>
+<span id="more"></span>
+
+<blockquote>
+<p>本来觉得摆脱标签活出自己就已经是尽力了,可渐渐却在追求自我的路上不断给自己加上标签,真像一头猪啊</p>
+</blockquote>
+<p>始终忘不了之前看过的一部电影,镜头先是一个喧闹的酒吧,人们在快活地跳着舞,随着是一个黑白的、无声音的、人们在地上诡异地扭动的上帝视角长镜头。那几分钟，仿佛是一个自我的觉醒</p>
+<blockquote>
+<p>一个无限遥远的目标不是目标,而是一个欺骗<br>  一个无限遥远的理由也不是理由,而是一个借口</p>
+</blockquote>
+]]></content>
   </entry>
   <entry>
     <title>多进程shell的使用</title>
@@ -3953,6 +3953,45 @@ soup.title<h1 id="The-Dormouse’s-story-提取title节点"><a href="#The-Dormou
       </tags>
   </entry>
   <entry>
+    <title>我的第一个xshell自动化脚本</title>
+    <url>/2019/12/01/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAxshell%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/</url>
+    <content><![CDATA[<hr>
+<span id="more"></span>
+
+<p>在平时使用xshell的时候，有时需要大量进行一些重复的工作，如telnet至一个主机，然后又telnet到另一个主机，不同主机登录配置又不太一样，时间一长又难免会忘记，故萌生出写一些自动化脚本来帮我登陆进行操作</p>
+<p><img src="/images/20191201=0.png"><br>xshell支持运行脚本(vb、python、js)</p>
+<p><img src="/images/20191201=1.png"><br><img src="/images/20191201=2.png"><br>为官方帮助文档所提供的api</p>
+<table>
+<thead>
+<tr>
+<th align="center">常用功能</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Clear()</td>
+<td align="center">清屏</td>
+</tr>
+<tr>
+<td align="center">Send(LPCTSTR lpszStrToSend)</td>
+<td align="center">向屏幕(终端)发送字符</td>
+</tr>
+<tr>
+<td align="center">WaitForString(LPCTSTR lpszString)</td>
+<td align="center">等待屏幕出现指定字符(就像是if条件语句)</td>
+</tr>
+</tbody></table>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">def <span class="constructor">Main()</span>:</span><br><span class="line"></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">ssh</span> <span class="params">cc</span>@127.0.0.1\<span class="params">r</span>&#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">WaitForString(&#x27;Password:&#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">your</span> <span class="params">password</span>&#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;\<span class="params">r</span>&#x27;)</span></span><br><span class="line"></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">telnet</span> <span class="operator">*</span>.<span class="operator">*</span>.<span class="operator">*</span>.<span class="operator">*</span> &#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;\<span class="params">r</span>&#x27;)</span></span><br><span class="line">	xsh.Session.<span class="constructor">Sleep(10)</span></span><br><span class="line"></span><br><span class="line">   	xsh.Screen.<span class="constructor">WaitForString(&#x27;Primary-1EF6E9 <span class="params">login</span>:&#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">admin</span>\<span class="params">r</span>&#x27;)</span></span><br><span class="line">	xsh.Session.<span class="constructor">Sleep(10)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">WaitForString(&#x27;Password:&#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">your</span> <span class="params">password</span>&#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;\<span class="params">r</span>&#x27;)</span></span><br><span class="line"></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">show</span> <span class="params">adoption</span> <span class="params">offline</span>\<span class="params">r</span>&#x27;)</span></span><br><span class="line">   </span><br><span class="line">   	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">r</span>\<span class="params">r</span>&#x27;)</span></span><br></pre></td></tr></table></figure>
+
+
+<p>虽然最初设想是全自动配合sed实现格式化输出内容，但没能找到重定向屏幕内容的方法，所以只能先告一段落</p>
+]]></content>
+      <tags>
+        <tag>工具</tag>
+        <tag>xshell</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>简单打造自己的中转文件服务器</title>
     <url>/2020/08/13/%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E7%A7%81%E6%9C%89%E7%BD%91%E7%9B%98/</url>
     <content><![CDATA[<p>最近突然有一些文件中转的需求,目标机器上可用的基本上只有个浏览器和一个简易SHELL可用, <del>没错说的就是chromeos</del></p>
@@ -4036,45 +4075,6 @@ soup.title<h1 id="The-Dormouse’s-story-提取title节点"><a href="#The-Dormou
         <tag>nginx</tag>
         <tag>vscode</tag>
         <tag>https</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我的第一个xshell自动化脚本</title>
-    <url>/2019/12/01/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAxshell%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/</url>
-    <content><![CDATA[<hr>
-<span id="more"></span>
-
-<p>在平时使用xshell的时候，有时需要大量进行一些重复的工作，如telnet至一个主机，然后又telnet到另一个主机，不同主机登录配置又不太一样，时间一长又难免会忘记，故萌生出写一些自动化脚本来帮我登陆进行操作</p>
-<p><img src="/images/20191201=0.png"><br>xshell支持运行脚本(vb、python、js)</p>
-<p><img src="/images/20191201=1.png"><br><img src="/images/20191201=2.png"><br>为官方帮助文档所提供的api</p>
-<table>
-<thead>
-<tr>
-<th align="center">常用功能</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Clear()</td>
-<td align="center">清屏</td>
-</tr>
-<tr>
-<td align="center">Send(LPCTSTR lpszStrToSend)</td>
-<td align="center">向屏幕(终端)发送字符</td>
-</tr>
-<tr>
-<td align="center">WaitForString(LPCTSTR lpszString)</td>
-<td align="center">等待屏幕出现指定字符(就像是if条件语句)</td>
-</tr>
-</tbody></table>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">def <span class="constructor">Main()</span>:</span><br><span class="line"></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">ssh</span> <span class="params">cc</span>@127.0.0.1\<span class="params">r</span>&#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">WaitForString(&#x27;Password:&#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">your</span> <span class="params">password</span>&#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;\<span class="params">r</span>&#x27;)</span></span><br><span class="line"></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">telnet</span> <span class="operator">*</span>.<span class="operator">*</span>.<span class="operator">*</span>.<span class="operator">*</span> &#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;\<span class="params">r</span>&#x27;)</span></span><br><span class="line">	xsh.Session.<span class="constructor">Sleep(10)</span></span><br><span class="line"></span><br><span class="line">   	xsh.Screen.<span class="constructor">WaitForString(&#x27;Primary-1EF6E9 <span class="params">login</span>:&#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">admin</span>\<span class="params">r</span>&#x27;)</span></span><br><span class="line">	xsh.Session.<span class="constructor">Sleep(10)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">WaitForString(&#x27;Password:&#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">your</span> <span class="params">password</span>&#x27;)</span></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;\<span class="params">r</span>&#x27;)</span></span><br><span class="line"></span><br><span class="line">	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">show</span> <span class="params">adoption</span> <span class="params">offline</span>\<span class="params">r</span>&#x27;)</span></span><br><span class="line">   </span><br><span class="line">   	xsh.Screen.<span class="constructor">Send(&#x27;<span class="params">r</span>\<span class="params">r</span>&#x27;)</span></span><br></pre></td></tr></table></figure>
-
-
-<p>虽然最初设想是全自动配合sed实现格式化输出内容，但没能找到重定向屏幕内容的方法，所以只能先告一段落</p>
-]]></content>
-      <tags>
-        <tag>工具</tag>
-        <tag>xshell</tag>
       </tags>
   </entry>
   <entry>
