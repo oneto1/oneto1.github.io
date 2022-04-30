@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.notyet.ml","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="UNIX下信号与进程关系学习">
+<meta property="og:url" content="https://blog.notyet.ml/2019/10/06/UNIX%E4%B8%8B%E4%BF%A1%E5%8F%B7%E4%B8%8E%E8%BF%9B%E7%A8%8B%E5%85%B3%E7%B3%BB%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="oneto1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191007=0.png">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191007=1.png">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191007=2.png">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191007=3.png">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191007=4.png">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191007=5.png">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191007=6.png">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191007=7.png">
+<meta property="article:published_time" content="2019-10-06T06:58:30.000Z">
+<meta property="article:modified_time" content="2022-04-30T06:22:18.065Z">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="c">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.notyet.ml/images/20191007=0.png">
+
+
+<link rel="canonical" href="https://blog.notyet.ml/2019/10/06/UNIX%E4%B8%8B%E4%BF%A1%E5%8F%B7%E4%B8%8E%E8%BF%9B%E7%A8%8B%E5%85%B3%E7%B3%BB%E5%AD%A6%E4%B9%A0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.notyet.ml/2019/10/06/UNIX%E4%B8%8B%E4%BF%A1%E5%8F%B7%E4%B8%8E%E8%BF%9B%E7%A8%8B%E5%85%B3%E7%B3%BB%E5%AD%A6%E4%B9%A0/","path":"2019/10/06/UNIX下信号与进程关系学习/","title":"UNIX下信号与进程关系学习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>UNIX下信号与进程关系学习 | oneto1</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">oneto1</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-杂物堆"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>杂物堆</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%85%B3%E7%B3%BB"><span class="nav-number">1.</span> <span class="nav-text">进程关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E7%99%BB%E5%BD%95"><span class="nav-number">1.0.1.</span> <span class="nav-text">终端登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%BB%84"><span class="nav-number">1.0.2.</span> <span class="nav-text">进程组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%9A%E8%AF%9D"><span class="nav-number">1.0.3.</span> <span class="nav-text">会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E7%BB%88%E7%AB%AF"><span class="nav-number">1.0.4.</span> <span class="nav-text">控制终端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E4%B8%9A%E6%8E%A7%E5%88%B6"><span class="nav-number">1.0.5.</span> <span class="nav-text">作业控制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text">信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.0.1.</span> <span class="nav-text">关于信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#signal"><span class="nav-number">2.0.2.</span> <span class="nav-text">signal()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E4%B8%AD%E6%96%AD"><span class="nav-number">2.0.3.</span> <span class="nav-text">系统调用的中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E4%BF%A1%E5%8F%B7%E6%9C%AF%E8%AF%AD%E5%8F%8A%E8%AF%AD%E4%B9%89"><span class="nav-number">2.0.4.</span> <span class="nav-text">可靠信号术语及语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kill-x2F-raise"><span class="nav-number">2.0.5.</span> <span class="nav-text">kill()&#x2F;raise()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alarm-%E3%80%81pause"><span class="nav-number">2.0.6.</span> <span class="nav-text">alarm()、pause()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#abort"><span class="nav-number">2.0.7.</span> <span class="nav-text">abort()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sigqueue%EF%BC%88%EF%BC%89"><span class="nav-number">2.0.8.</span> <span class="nav-text">sigqueue（）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sigaction"><span class="nav-number">2.0.9.</span> <span class="nav-text">sigaction()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E9%9B%86"><span class="nav-number">2.0.10.</span> <span class="nav-text">信号集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E4%B8%8B%E7%9A%84%E4%BF%A1%E5%8F%B7%E5%BA%94%E7%94%A8%E5%B8%B8%E8%A7%81%E4%B8%89%E6%AD%A5%E6%B3%95"><span class="nav-number">2.0.11.</span> <span class="nav-text">linux下的信号应用常见三步法</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description">你说是梦所以才痛 睡醒了再说</div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.notyet.ml/2019/10/06/UNIX%E4%B8%8B%E4%BF%A1%E5%8F%B7%E4%B8%8E%E8%BF%9B%E7%A8%8B%E5%85%B3%E7%B3%BB%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oneto1">
+      <meta itemprop="description" content="你说是梦所以才痛 睡醒了再说">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="UNIX下信号与进程关系学习 | oneto1">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UNIX下信号与进程关系学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-10-06 14:58:30" itemprop="dateCreated datePublished" datetime="2019-10-06T14:58:30+08:00">2019-10-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 14:22:18" itemprop="dateModified" datetime="2022-04-30T14:22:18+08:00">2022-04-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<span id="more"></span>
+<h1 id="进程关系"><a href="#进程关系" class="headerlink" title="进程关系"></a>进程关系</h1><h3 id="终端登录"><a href="#终端登录" class="headerlink" title="终端登录"></a>终端登录</h3><p>在早期的UNIX系统中，是采用硬链接(哑终端)即本地连接或远程调制解调器登录的。</p>
+<p>而如今，终端又有了基于字符的终端、图形终端、仿真基于字符终端的图形终端</p>
+<p><img src="/images/20191007=0.png"><br><img src="/images/20191007=1.png"></p>
+<p>为了使同一个软件既能处理终端登录，又能处理网络登录，系统使用了一种称为<strong>伪终端</strong>的软件驱动程序，它仿真串行终端的运行行为，并将终端操作映射为网络操作</p>
+<p><img src="/images/20191007=2.png"></p>
+<ul>
+<li>inetd为一个因特网服务守护进程，它等待大多数网络连接</li>
+</ul>
+<p><img src="/images/20191007=3.png"></p>
+<h3 id="进程组"><a href="#进程组" class="headerlink" title="进程组"></a>进程组</h3><p>进程组是一个或多个进程的集合。通常，它们是同一个作业里结合起来的，同一进程组中的的进程接受来自同一终端的各种信号</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="variable">__pid_t</span> getpgrp()</span><br><span class="line"></span><br><span class="line">返回进程的进程组id</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>每一个进程组都有一个组长进程，组长进程id等于进程组id</li>
+<li>进程组的是否终止与其组长进程的终止无关，只要有一个进程存在即进程组存在</li>
+<li>从进程组创建开始到最后一个进程结束的时间区间被称为其生命周期</li>
+</ul>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">int setpgid(<span class="variable">__pid_t</span> <span class="variable">__pid</span>, <span class="variable">__pid_t</span> <span class="variable">__pgid</span>)</span><br><span class="line"></span><br><span class="line">成功返回<span class="number">0</span>，失败返回-<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>将pid进程的进程组id设为pgid</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">pid &#x3D; pgid</th>
+<th align="center">则由pid指定的进程称为进程组组长</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">pid &#x3D; 0</td>
+<td align="center">则使用调用者id</td>
+</tr>
+<tr>
+<td align="center">pgid &#x3D; 0</td>
+<td align="center">则由pid指定id作为进程组id</td>
+</tr>
+</tbody></table>
+<h3 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h3><p>会话是一个或多个进程组的集合，通常是由shell是管道将其编为一组</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">__pid_t setsid(<span class="type">void</span>)</span><br><span class="line"></span><br><span class="line">成功返回进程组<span class="type">id</span>，失败返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>若调用该函数的进程是一个进程组组长，则报错</p>
+</li>
+<li><p>若不是进程组组长，则会创建一个新会话</p>
+<ol>
+<li>该进程成为为该会话的会话首进程，此时是唯一的一个进程</li>
+<li>该进程成为新进程组组长，新进程组id等于调用该函数进程id</li>
+<li>该进程没有控制终端，若之前有会被切断</li>
+</ol>
+</li>
+</ul>
+<h3 id="控制终端"><a href="#控制终端" class="headerlink" title="控制终端"></a>控制终端</h3><ul>
+<li>一个会话可以有一个控制终端。通常是终端设备或伪终端设备</li>
+<li>建立和控制终端连接的会话首进程被称为控制进程</li>
+<li>会话中的进程组可被分为前台和后台进程组</li>
+<li>终端输入和产生的信号被送至前台进程组</li>
+<li>终端接口检测到调制解调或网络断开，则将挂断信号发往控制进程(会话首进程))</li>
+</ul>
+<p><img src="/images/20191007=4.png"></p>
+<h3 id="作业控制"><a href="#作业控制" class="headerlink" title="作业控制"></a>作业控制</h3><p>作业(进程组)控制它允许在一个终端启动多个作业，它控制那些哪些作业可以访问终端以及那些作<br>业可以在后台运行</p>
+<p>作业控制需要以下支持:</p>
+<ol>
+<li>shell</li>
+<li>终端驱动</li>
+<li>内核</li>
+</ol>
+<p><img src="/images/20191007=5.png"></p>
+<p>(SIGINT,SIGQUIT,SIGTST)分别对应字符c-c、c-&#x2F;、c-d，具体由终端驱动程序决定</p>
+<p>shell任务调度命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bg</span></span><br><span class="line">将一个在后台暂停的命令，变成继续执行</span><br><span class="line"></span><br><span class="line"><span class="built_in">fg</span></span><br><span class="line">将后台中的命令调至前台继续运行</span><br><span class="line"></span><br><span class="line"><span class="built_in">jobs</span></span><br><span class="line">查看当前有多少在后台运行的命令</span><br><span class="line"></span><br><span class="line">ctrl + z</span><br><span class="line">可以将一个正在前台执行的命令放到后台，并且暂停</span><br><span class="line"></span><br><span class="line"><span class="built_in">nohup</span> 命令</span><br><span class="line"></span><br><span class="line">用途：不挂断地运行命令。</span><br><span class="line"></span><br><span class="line">语法：<span class="built_in">nohup</span> Command [ Arg … ] [　&amp; ]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h1><p>信号是软件中断</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%96%B7">中断</a>是用以提高计算机工作效率、增强计算机功能的一项重要技术。最初引入硬件中断，只是出于性能上的考量。如果计算机系统没有中断，则处理器与外部设备通信时，它必须在向该设备发出指令后进行忙等待（Busy waiting），反复轮询该设备是否完成了动作并返回结果。这就造成了大量处理器周期被浪费。引入中断以后，当处理器发出设备请求后就可以立即返回以处理其他任务，而当设备完成动作后，发送中断信号给处理器，后者就可以再回过头获取处理结果。这样，在设备进行处理的周期内，处理器可以执行其他一些有意义的工作，而只付出一些很小的切换所引发的时间代价。后来被用于CPU外部与内部紧急事件的处理、机器故障的处理、时间控制等多个方面，并产生通过软件方式进入中断处理（软中断）的概念。</p>
+</blockquote>
+<p>对于一个完整的信号生命周期(从信号发送到相应的处理函数执行完毕)来说，可以分为三个阶段：</p>
+<ol>
+<li><p>信号诞生</p>
+</li>
+<li><p>信号在进程中注册</p>
+</li>
+<li><p>信号的执行和注销</p>
+</li>
+</ol>
+<h3 id="关于信号"><a href="#关于信号" class="headerlink" title="关于信号"></a>关于信号</h3><p>每一个信号都有名字，以SIG开头，在&lt;**signal.h**&gt;中，信号被定义为正整数常量(信号编号)</p>
+<p>信息编号为0的被称为空信号</p>
+<p>主要有以下几种来源：</p>
+<ol>
+<li><p>程序错误：除零，非法内存访问…</p>
+</li>
+<li><p>外部信号：终端Ctrl-C产生SGINT信号，定时器到期产生SIGALRM…</p>
+</li>
+<li><p>显式请求：kill函数允许进程发送任何信号给其他进程或进程组。</p>
+</li>
+</ol>
+<p>一般情况下一个进程接受到信号后，会有如下的行为：</p>
+<ol>
+<li><p>忽略信号：大部分信号可被忽略，除SIGSTOP和SIGKILL信号外（这是超级用户杀掉或停掉任意进程的手段）。</p>
+</li>
+<li><p>捕获信号：注册信号处理函数，它对产生的特定信号做处理。</p>
+</li>
+<li><p>让信号默认动作起作用：unix内核定义的默认动作，有5种情况：<br>  a) 流产abort：终止进程并产生core文件。</p>
+</li>
+</ol>
+<p>  b) 终止stop：终止进程但不生成core文件。</p>
+<p>  c) 忽略：忽略信号。</p>
+<p>  d) 挂起suspend：挂起进程。</p>
+<p>  e) 继续continue：若进程是挂起的，则resume进程，否则忽略此信号。</p>
+<ul>
+<li>目前Linux支持64种信号。信号分为非实时信号(不可靠信号)和实时信号（可靠信号）两种类型，对应于 Linux 的信号值为 1-31 和 34-64。信号是异步的，一个进程不必通过任何操作来等待信号的到达，事实上，进程也不知道信号到底什么时候到达</li>
+</ul>
+<h3 id="signal"><a href="#signal" class="headerlink" title="signal()"></a>signal()</h3><figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;signal.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="variable">__sighandler_t</span> signal(int <span class="variable">__sig</span>, <span class="variable">__sighandler_t</span> <span class="variable">__handler</span>)</span><br><span class="line"></span><br><span class="line">成功返回之前的信号处理配置，失败返回SIG_ERR</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数为信号编号，第二个参数为信号处理函数指针</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*<span class="type">__sighandler_t</span>)</span> <span class="params">(<span class="type">int</span>)</span></span>;  </span><br><span class="line"><span class="comment">/* 为一个参数为int名字为__sighandler_t的指针函数 且返回值为void */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	SIG_ERR	 ((__sighandler_t) -1)	<span class="comment">/* Error return.  */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	SIG_DFL	 ((__sighandler_t)  0)	<span class="comment">/* Default action.  */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	SIG_IGN	 ((__sighandler_t)  1)	<span class="comment">/* Ignore signal.  */</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>当一个程序启动时，所有的信号状态都是默认或忽略</p>
+</li>
+<li><p>当一个进程调用fork(),子进程默认继承父进程处理方式</p>
+</li>
+</ul>
+<h3 id="系统调用的中断"><a href="#系统调用的中断" class="headerlink" title="系统调用的中断"></a>系统调用的中断</h3><p>捕捉到信号的时候，中断的是系统调用而不是函数(因为函数调用的是系统调用)</p>
+<p>系统调用分成两类：低速系统调用和其他系统调用。低速系统调用是可能会使进程永远阻塞的一类系统调用：</p>
+<ol>
+<li>在读某些类型的文件（管道，终端设备以及网络设备）时，如果数据并不存在则可能会使调用者永远阻塞。</li>
+<li>在写这些类型的文件时，如果不能立即接受这些数据，则会使调用者永远阻塞。</li>
+<li>打开某些类型的文件，在某些条件发生之前也可能会使调用者阻塞（例如，打开终端设备，它要等待直到所连接的调制解调器应答了电话）</li>
+<li>pause函数和wait函数</li>
+<li>某些ioctl函数</li>
+<li>某些进程间通信函数。</li>
+</ol>
+<p>与被中断的系统调用相关的问题是必须显式地处理出错返回。典型的代码如下：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">again:</span><br><span class="line">if((n=read(fd,buf,BUFFSIZE))&lt;<span class="number">0</span>)&#123;</span><br><span class="line">	<span class="built_in">if</span>(errno == EINTR)</span><br><span class="line">		goto again;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="可靠信号术语及语义"><a href="#可靠信号术语及语义" class="headerlink" title="可靠信号术语及语义"></a>可靠信号术语及语义</h3><p>当一个信号产生时，内核会在进程表中以某种方式设置一个标志，当对信号采取了这种动作时，我们说向进程递送了一个信号。</p>
+<p>在信号产生（generation）和递送（delivery）之间的时间间隔，称信号是未决的（pending）。</p>
+<p>进程可以选用信号递送阻塞。如果为进程产生了一个选择为阻塞的信号，而且对该信号的动作是系统默认动作或捕捉该信号，则为该进程将此信号保持为未决状态，直到该进程（a）对此信号解除了阻塞，或者（b）将对此信号的动作更改为忽略。内核在递送一个原来被阻塞（现在解除了阻塞）的信号给进程时（而不是在产生该信号时），才决定对它的处理方式。于是进程在信号递送给它之前仍可改变对该信号的动作。进程调用sigpending函数来判定哪些信号是设置为阻塞并处于未决状态的。</p>
+<p>在进程结束对某个信号的堵塞前，系统递送这种信号多次，可称这些信号进行了排队</p>
+<p>每个进程都有一个信号屏蔽字（signal mask），它规定了当前要阻塞递送到该进程的信号集。对于每种可能的信号，该屏蔽字中都有一位与之对应。对于某种信号，若其对应位已设置，则它当前是被阻塞的。进程可以调用sigprocmask来检测和更改其当前信号屏蔽字。</p>
+<h3 id="kill-x2F-raise"><a href="#kill-x2F-raise" class="headerlink" title="kill()&#x2F;raise()"></a>kill()&#x2F;raise()</h3><p>kill将信号发给进程或进程组，raise可将信号发给自己</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;signal.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> kill(pit_t pit,<span class="built_in">int</span> __sig)</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> raise(<span class="built_in">int</span> __sig)</span><br><span class="line"></span><br><span class="line">成功返回<span class="number">0</span>，失败返回<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">pid</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">pid &gt; 0</td>
+<td align="center">将信号发给pid进程</td>
+</tr>
+<tr>
+<td align="center">pid &#x3D;&#x3D;0</td>
+<td align="center">将信号发给同一个进程组的进程(前提是该进程有权限发送信号给进程组)</td>
+</tr>
+<tr>
+<td align="center">pid &lt;0</td>
+<td align="center">将信号发给pid的绝对值的进程和所有有权限发送的进程</td>
+</tr>
+<tr>
+<td align="center">pid &#x3D;&#x3D;-1</td>
+<td align="center">将信号发给所有有权限发送的进程</td>
+</tr>
+</tbody></table>
+<p><img src="/images/20191007=6.png"></p>
+<p>权限的基本判别方法为:</p>
+<ul>
+<li>发送者有效id或实际id等于接受者有效id或实际id</li>
+</ul>
+<h3 id="alarm-、pause"><a href="#alarm-、pause" class="headerlink" title="alarm()、pause()"></a>alarm()、pause()</h3><p>alarm()可设置一个定时器，当定时器超时时会产生一个SIGALRM信号，但不捕捉或忽略它时，默认结束该进程</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> alarm(<span class="type">unsigned</span> <span class="type">int</span> __seconds)</span><br><span class="line"></span><br><span class="line">返回<span class="number">0</span>或以前设置的时间</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当信号产生时，由于进程调度的延迟，进程并不能及时得到控制及处理信号</li>
+<li>每个进程只能有一个闹钟时间。若之前有一个时间，则返回之前时间的余值，且用新值代替旧值</li>
+<li>若之前注册了一个时间且没有超时，而调用时seconds为0，则取消以前的闹钟时间，余值作为返回值</li>
+</ul>
+<p>使调用进程挂起直至捕捉到一个信号</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;unistd.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> pause(<span class="type">void</span>)</span><br><span class="line"></span><br><span class="line">返回值为<span class="number">-1</span>，errno为EINTR</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当执行完信号处理函数才返回</li>
+</ul>
+<h3 id="abort"><a href="#abort" class="headerlink" title="abort()"></a>abort()</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">abort</span><span class="params">(<span class="type">void</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">无返回值</span><br></pre></td></tr></table></figure>
+<ul>
+<li>向进程发送SIGABORT信号，默认情况下进程会异常退出，当然可定义自己的信号处理函数。即使SIGABORT被进程设置为阻塞信号，调用abort()后，SIGABORT仍然能被进程接收。</li>
+</ul>
+<h3 id="sigqueue（）"><a href="#sigqueue（）" class="headerlink" title="sigqueue（）"></a>sigqueue（）</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> sigqueue(pid_t pid, <span class="type">int</span> sig, <span class="keyword">const</span> <span class="keyword">union</span> sigval val)</span><br><span class="line"></span><br><span class="line">调用成功返回 <span class="number">0</span>；否则，返回 <span class="number">-1</span>。</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>sigqueue()是比较新的发送信号系统调用，主要是针对实时信号提出的（当然也支持前32种），支持信号带有参数，与函数sigaction()配合使用。</p>
+</li>
+<li><p>sigqueue的第一个参数是指定接收信号的进程ID，第二个参数确定即将发送的信号，第三个参数是一个联合数据结构union sigval，指定了信号传递的参数，即通常所说的4字节值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">union</span> <span class="title class_">sigval</span> &#123;</span><br><span class="line"></span><br><span class="line">               <span class="type">int</span>  sival_int;</span><br><span class="line"></span><br><span class="line">               <span class="type">void</span> *sival_ptr;</span><br><span class="line"></span><br><span class="line">&#125;<span class="type">sigval_t</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sigqueue()比kill()传递了更多的附加信息，但sigqueue()只能向一个进程发送信号，而不能发送信号给一个进程组。如果signo&#x3D;0，将会执行错误检查，但实际上不发送任何信号，0值信号可用于检查pid的有效性以及当前进程是否有权限向目标进程发送信号。</p>
+</li>
+<li><p>在调用sigqueue时，sigval_t指定的信息会拷贝到对应sig 注册的3参数信号处理函数的siginfo_t结构中，这样信号处理函数就可以处理这些信息了。由于sigqueue系统调用支持发送带参数信号，所以比kill()系统调用的功能要灵活和强大得多。</p>
+</li>
+</ul>
+<h3 id="sigaction"><a href="#sigaction" class="headerlink" title="sigaction()"></a>sigaction()</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/return_cc/article/details/78845346">完善版signal()</a></p>
+<p>新可靠信号<br><img src="/images/20191007=7.png"></p>
+<h3 id="信号集"><a href="#信号集" class="headerlink" title="信号集"></a>信号集</h3><p>信号集被定义为一种数据类型，</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">unsigned</span> <span class="type">long</span> sig[_NSIG_WORDS]；</span><br><span class="line"></span><br><span class="line">&#125; <span class="type">sigset_t</span></span><br></pre></td></tr></table></figure>
+<p>信号集用来描述信号的集合，每个信号占用一位。Linux所支持的所有信号可以全部或部分的出现在信号集中</p>
+<h3 id="linux下的信号应用常见三步法"><a href="#linux下的信号应用常见三步法" class="headerlink" title="linux下的信号应用常见三步法"></a>linux下的信号应用常见三步法</h3><ol>
+<li><p>安装信号（推荐使用sigaction()） [signal()]</p>
+</li>
+<li><p>实现三参数信号处理函数，handler(int signal,struct siginfo *info, void *)；</p>
+</li>
+<li><p>发送信号，推荐使用sigqueue()   [kill()\raise()]</p>
+</li>
+</ol>
+<p>实际上，对有些信号来说，只要安装信号就足够了（信号处理方式采用缺省或忽略）。其他可能要做的无非是与信号集相关的几种操作。</p>
+<hr>
+<p><a target="_blank" rel="noopener" href="http://m.elecfans.com/article/579913.html">参考资料</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/return_cc/article/details/78845346">完善版signal</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/c/" rel="tag"># c</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/10/01/UNIX%E4%B8%8B%E8%BF%9B%E7%A8%8B%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%AD%A6%E4%B9%A0/" rel="prev" title="UNIX下进程环境与控制学习">
+                  <i class="fa fa-chevron-left"></i> UNIX下进程环境与控制学习
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/10/08/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95%E5%AD%A6%E4%B9%A0/" rel="next" title="面向对象方法学习">
+                  面向对象方法学习 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

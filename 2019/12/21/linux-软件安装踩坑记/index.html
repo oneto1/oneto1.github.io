@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.notyet.ml","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="linux 软件安装踩坑记">
+<meta property="og:url" content="https://blog.notyet.ml/2019/12/21/linux-%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91%E8%AE%B0/index.html">
+<meta property="og:site_name" content="oneto1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191221=0.png">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191221=1.png">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191221=2.png">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191221=3.png">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191221=4.png">
+<meta property="article:published_time" content="2019-12-21T07:09:37.000Z">
+<meta property="article:modified_time" content="2022-04-30T06:22:18.067Z">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.notyet.ml/images/20191221=0.png">
+
+
+<link rel="canonical" href="https://blog.notyet.ml/2019/12/21/linux-%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.notyet.ml/2019/12/21/linux-%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91%E8%AE%B0/","path":"2019/12/21/linux-软件安装踩坑记/","title":"linux 软件安装踩坑记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>linux 软件安装踩坑记 | oneto1</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">oneto1</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-杂物堆"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>杂物堆</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E5%B8%B8%E5%AE%89%E8%A3%85%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">正常安装篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%A2%E6%BA%90"><span class="nav-number">1.0.1.</span> <span class="nav-text">换源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%BE%93%E5%85%A5%E6%B3%95"><span class="nav-number">1.0.2.</span> <span class="nav-text">安装输入法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85google%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-number">1.0.3.</span> <span class="nav-text">安装google浏览器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E4%BF%A1%EF%BC%8CTIM"><span class="nav-number">1.0.4.</span> <span class="nav-text">微信，TIM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oh-my-zsh"><span class="nav-number">1.0.5.</span> <span class="nav-text">oh my zsh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vscodium"><span class="nav-number">1.0.6.</span> <span class="nav-text">vscodium</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VMware-Workstation"><span class="nav-number">1.0.7.</span> <span class="nav-text">VMware-Workstation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#steam"><span class="nav-number">1.0.8.</span> <span class="nav-text">steam</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B8%A9%E5%9D%91%E7%AF%87"><span class="nav-number">2.</span> <span class="nav-text">踩坑篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-%E7%AF%87"><span class="nav-number">2.0.1.</span> <span class="nav-text">vim 篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#codeblocks"><span class="nav-number">2.0.2.</span> <span class="nav-text">codeblocks</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.</span> <span class="nav-text">其他</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description">你说是梦所以才痛 睡醒了再说</div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.notyet.ml/2019/12/21/linux-%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oneto1">
+      <meta itemprop="description" content="你说是梦所以才痛 睡醒了再说">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="linux 软件安装踩坑记 | oneto1">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux 软件安装踩坑记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-12-21 15:09:37" itemprop="dateCreated datePublished" datetime="2019-12-21T15:09:37+08:00">2019-12-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 14:22:18" itemprop="dateModified" datetime="2022-04-30T14:22:18+08:00">2022-04-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<span id="more"></span>
+
+
+<p>终于在一个双眼朦胧头脑发胀的下午，将w10给格了，于是乎转入linux怀抱</p>
+<p>考虑到Ubuntu有着良好的社区支持，于是乎选择了基于Ubuntu的Mint</p>
+<p><a target="_blank" rel="noopener" href="https://www.linuxmint.com/">linuxmint</a></p>
+<p><img src="/images/20191221=0.png"></p>
+<p>经过简单设置其实感觉还不错，就是感受到对高分屏的深深恶意<del>字贼小</del><br>好在支持快捷键对应用进行缩放</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctrl + <span class="built_in">shift</span> + + ( - )</span><br></pre></td></tr></table></figure>
+
+<h1 id="正常安装篇"><a href="#正常安装篇" class="headerlink" title="正常安装篇"></a>正常安装篇</h1><h3 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h3><p>安装系统后，当然第一时间就是去换个本地源了</p>
+<p><img src="/images/20191221=1.png"><br><img src="/images/20191221=2.png"><br>对于系统自带软件更新软件，好就好在可以不用自己去找源了，也可以方便找个速度快的</p>
+<p>加上deepin的源，方便安装微信等</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https:<span class="regexp">//</span>deepin-wine.i-m.dev/setup.sh | sudo sh</span><br></pre></td></tr></table></figure>
+
+<p>最后</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo apt update</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="安装输入法"><a href="#安装输入法" class="headerlink" title="安装输入法"></a>安装输入法</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo apt <span class="keyword">install</span> fcitx fcitx-googlepinyin</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>没有问题的话此时可用<code>ctrl + space </code>切换输入法了</p>
+<h3 id="安装google浏览器"><a href="#安装google浏览器" class="headerlink" title="安装google浏览器"></a>安装google浏览器</h3><p>已经习惯了登录账号同步插件书签等，故选择了google家的</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install google-chrome-<span class="keyword">stable</span> </span><br><span class="line"></span><br><span class="line">google-chrome-<span class="keyword">stable</span> <span class="comment">--proxy-server=127.0.0.1:1234</span></span><br></pre></td></tr></table></figure>
+
+<p>将上边的ip和端口替换成自己的就好</p>
+<p>或</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install proxychains</span><br><span class="line"></span><br><span class="line">sudo echo <span class="string">&quot;http 127.0.0.1 1234&quot;</span> &gt;&gt; <span class="regexp">/etc/</span>proxychains.conf</span><br><span class="line"></span><br><span class="line">proxychains google-chrome-stable</span><br></pre></td></tr></table></figure>
+
+<h3 id="微信，TIM"><a href="#微信，TIM" class="headerlink" title="微信，TIM"></a>微信，TIM</h3><p>由于已经加上deepin的源，就可以直接安装了</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install deepin-winxin deepin<span class="selector-class">.com</span><span class="selector-class">.wechat</span> deepin<span class="selector-class">.com</span><span class="selector-class">.qq</span><span class="selector-class">.office</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="oh-my-zsh"><a href="#oh-my-zsh" class="headerlink" title="oh my zsh"></a>oh my zsh</h3><p>zsh的tab选择和<code>ctrl + r </code>搜索真香</p>
+<blockquote>
+<p>Oh My Zsh is an open source, community-driven framework for managing your zsh configuration. <a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh">oh my zsh </a></p>
+</blockquote>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -<span class="keyword">y</span> git zsh</span><br><span class="line"></span><br><span class="line"><span class="keyword">sh</span> -<span class="keyword">c</span> <span class="comment">&quot;$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh</span></span><br><span class="line">/ohmyzsh/master/tools/install.<span class="keyword">sh</span>)<span class="comment">&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>安装好之后再去修改<code>~/.zshrc</code><br><a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/wiki">wiki</a></p>
+<h3 id="vscodium"><a href="#vscodium" class="headerlink" title="vscodium"></a>vscodium</h3><p><a target="_blank" rel="noopener" href="https://github.com/VSCodium/vscodium/releases">项目地址</a></p>
+<p>好就好在几乎不用配置</p>
+<h3 id="VMware-Workstation"><a href="#VMware-Workstation" class="headerlink" title="VMware-Workstation"></a>VMware-Workstation</h3><p>这个直接去官网下载就好了<a target="_blank" rel="noopener" href="https://www.vmware.com/cn/products/workstation-pro/workstation-pro-evaluation.html">this</a></p>
+<ul>
+<li>*.bundle文件在linux下是可执行文件格式之一啊</li>
+<li>elf也是一种啊</li>
+</ul>
+<h3 id="steam"><a href="#steam" class="headerlink" title="steam"></a>steam</h3><p>这也是选类Ubuntu的好处之一，软件多啊</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt <span class="keyword">install</span> steam </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>试了几个游戏,虽然在菜单时帧数比windows下高些,但打起来莫名卡顿,爱不起来啊</li>
+</ul>
+<h1 id="踩坑篇"><a href="#踩坑篇" class="headerlink" title="踩坑篇"></a>踩坑篇</h1><h3 id="vim-篇"><a href="#vim-篇" class="headerlink" title="vim 篇"></a>vim 篇</h3><p>最开始发现在编辑模式下按方向键会出现奇怪的转义现象</p>
+<p>好在比较简单</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot; set nocp&quot;</span> &gt;&gt; ~/.vimrc</span><br></pre></td></tr></table></figure>
+
+<p>然后呵听说vim可以安装插件，于是想折腾的心就又来了</p>
+<p>左选右选决定先装个插件管理器Vundle</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/VundleVim/Vundle.vim/blob/master/README_ZH_CN.md">README</a></p>
+</blockquote>
+<p>可能还是想要个自动补全的插件,于是有看上了<a target="_blank" rel="noopener" href="https://github.com/ycm-core/YouCompleteMe">YouCompleteMe</a></p>
+<p>在插件管理器中安装失败,于是手动安装参考</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/ycm-core/YouCompleteMe">https://github.com/ycm-core/YouCompleteMe</a></li>
+<li>(<a target="_blank" rel="noopener" href="https://www.cnblogs.com/YMaster/p/11209813.html">https://www.cnblogs.com/YMaster/p/11209813.html</a>)</li>
+</ul>
+<p>最开始没有挂代理,各种红叉,ERROR真的是令人怀疑人生</p>
+<p>最后遇到一个路径错误<a target="_blank" rel="noopener" href="https://github.com/ycm-core/YouCompleteMe/issues/2249">issue</a></p>
+<p><img src="/images/20191221=3.png"></p>
+<p>装上了发现还是没有ide香,虽然装ide时就是在装插件失败多次的时候装的，也是个大坑</p>
+<h3 id="codeblocks"><a href="#codeblocks" class="headerlink" title="codeblocks"></a>codeblocks</h3><p><a target="_blank" rel="noopener" href="http://www.codeblocks.org/downloads">links</a></p>
+<p>最开始下载完成时，包管理器告诉我<code>我的仓库有啊,直接来安装吧</code></p>
+<p>解开压缩包一看,全是<code> .deb</code>包,人一懒就想者一键安装吧</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt <span class="keyword">install</span> codeblocks</span><br></pre></td></tr></table></figure>
+
+<p>新建工程、console、helloword,最后发现压根编译不起来,一直error[-1],搜遍引擎翻遍设置<br>也不知道为什么</p>
+<p>好吧我还是手动安装吧</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mkdir</span> codeblocks</span><br><span class="line"><span class="attribute">tar</span> -xJvf   codeblocks_17.<span class="number">12</span>-<span class="number">1</span>_amd64_stable.tar.xz -C codeblocks/</span><br><span class="line"></span><br><span class="line"><span class="comment"># tar 的J参数时是指定xz来解压 等同于 xd-d file</span></span><br><span class="line"><span class="comment"># -C 为解压到指定文件夹 ，必须存在才能成功</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">cd</span> codeblocks/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -<span class="selector-tag">i</span> lib*</span><br><span class="line">sudo dpkg -<span class="selector-tag">i</span> wxsmith*</span><br><span class="line">sudo dpkg -<span class="selector-tag">i</span> codeblocks*</span><br></pre></td></tr></table></figure>
+
+<p>会出现下列错误</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dpkg: 依赖关系问题使得 codeblocks-contrib 的配置工作不能继续：</span><br><span class="line">codeblocks-contrib 依赖于 libboost-system1.62.0；然而：</span><br><span class="line">未安装软件包 libboost-system1.62.0。</span><br><span class="line">codeblocks-contrib 依赖于 libgamin0；然而：</span><br><span class="line">未安装软件包 libgamin0。</span><br><span class="line">codeblocks-contrib 依赖于 libhunspell<span class="string">-1</span>.4<span class="string">-0</span>；然而：</span><br><span class="line">未安装软件包 libhunspell<span class="string">-1</span>.4<span class="string">-0</span>。</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[<a target="_blank" rel="noopener" href="https://askubuntu.com/questions/599802/cant-install-codeblocks-plugin-wxsmith]">https://askubuntu.com/questions/599802/cant-install-codeblocks-plugin-wxsmith]</a></p>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt <span class="built_in">remove</span> codeblocks-contrib</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>会提示需要安装xterm</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt <span class="keyword">install</span> xterm</span><br><span class="line"></span><br><span class="line">sudo dpkg -i codeblocks*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这次不再报错</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/20191221=4.png"></p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li><code>PrtSc</code> – 获取整个屏幕的截图并保存到 Pictures 目录。</li>
+<li><code>Shift + PrtSc</code> – 获取屏幕的某个区域截图并保存到 Pictures 目录。</li>
+<li>开机自动挂载硬盘<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前挂载情况</span></span><br><span class="line"><span class="built_in">df</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看硬盘信息</span></span><br><span class="line">sudo fdisk -l</span><br><span class="line"></span><br><span class="line"><span class="comment">#Device          Start        End    Sectors   Size Type</span></span><br><span class="line"><span class="comment">#/dev/sdb1      409664 1046793400 1046383737   499G Microsoft basic data</span></span><br><span class="line"><span class="comment">#/dev/sdb2  1140332496 1549930447  409597952 195.3G Microsoft basic data</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改开机挂载参数</span></span><br><span class="line">sudo <span class="built_in">echo</span> <span class="string">&quot;/dev/sdb1 /media/cc/ssd ntfs defaults 0 0&quot;</span> &gt;&gt; /etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># 简单参数说明</span></span><br><span class="line"><span class="comment"># 设备位置(uuid等 )             将挂载的位置　　　文件系统　    配置文件      参数      参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 具体参见</span></span><br><span class="line">man fstab</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/12/03/sed%E7%9A%84%E5%BA%94%E7%94%A8/" rel="prev" title="sed的应用">
+                  <i class="fa fa-chevron-left"></i> sed的应用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/12/31/%E6%96%B0%E5%B9%B4%E5%BF%AB%E5%88%B0%E4%BA%86%E5%95%8A/" rel="next" title="新年快到了啊">
+                  新年快到了啊 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

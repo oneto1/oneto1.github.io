@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.notyet.ml","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="zabbix折腾记-安装篇">
+<meta property="og:url" content="https://blog.notyet.ml/2020/03/26/zabbix%E6%8A%98%E8%85%BE%E8%AE%B0/index.html">
+<meta property="og:site_name" content="oneto1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.notyet.ml/images/20200326=0.png">
+<meta property="og:image" content="https://blog.notyet.ml/images/20200326=1.png">
+<meta property="article:published_time" content="2020-03-26T12:51:08.000Z">
+<meta property="article:modified_time" content="2022-04-30T06:22:18.062Z">
+<meta property="article:tag" content="工具">
+<meta property="article:tag" content="zabbix">
+<meta property="article:tag" content="监控">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.notyet.ml/images/20200326=0.png">
+
+
+<link rel="canonical" href="https://blog.notyet.ml/2020/03/26/zabbix%E6%8A%98%E8%85%BE%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.notyet.ml/2020/03/26/zabbix%E6%8A%98%E8%85%BE%E8%AE%B0/","path":"2020/03/26/zabbix折腾记/","title":"zabbix折腾记-安装篇"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>zabbix折腾记-安装篇 | oneto1</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">oneto1</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-杂物堆"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>杂物堆</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">源码安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AE%89%E8%A3%85"><span class="nav-number">1.0.1.</span> <span class="nav-text">服务端安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql"><span class="nav-number">1.0.2.</span> <span class="nav-text">mysql</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php"><span class="nav-number">1.1.</span> <span class="nav-text">php</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx"><span class="nav-number">1.2.</span> <span class="nav-text">nginx</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker-install"><span class="nav-number">2.</span> <span class="nav-text">docker install</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">3.</span> <span class="nav-text">最后</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description">你说是梦所以才痛 睡醒了再说</div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.notyet.ml/2020/03/26/zabbix%E6%8A%98%E8%85%BE%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oneto1">
+      <meta itemprop="description" content="你说是梦所以才痛 睡醒了再说">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="zabbix折腾记-安装篇 | oneto1">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          zabbix折腾记-安装篇
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-03-26 20:51:08" itemprop="dateCreated datePublished" datetime="2020-03-26T20:51:08+08:00">2020-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 14:22:18" itemprop="dateModified" datetime="2022-04-30T14:22:18+08:00">2022-04-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<span id="more"></span>
+
+<h1 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h1><p>要想服务跑起来看得见,就得安装自身服务端,MySQL,前端</p>
+<h3 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h3><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/manual/installation/install">添加用户组</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">addgroup <span class="attr">--system</span> <span class="attr">--quiet</span> zabbix</span><br><span class="line">adduser <span class="attr">--quiet</span> <span class="attr">--system</span> <span class="attr">--disabled-login</span> <span class="attr">--ingroup</span> zabbix <span class="attr">--home</span> /<span class="selector-tag">var</span>/lib/zabbix <span class="attr">--no-create-home</span> zabbix</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.zabbix.com/cn/download_sources#tab:40LTS">下载地址</a></p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看编译的一些功能选项</span></span><br><span class="line"><span class="string">./configure</span> <span class="params">--help</span></span><br><span class="line"></span><br><span class="line"><span class="string">./configure</span> <span class="params">--prefix=/usr/local/zabbix</span> <span class="params">--enable-server</span> <span class="params">--enable-agent</span> <span class="params">--enable-java</span> </span><br><span class="line"><span class="params">--with-mysql</span> <span class="params">--with-libxml2</span> <span class="params">--with-unixodbc</span> <span class="params">--with-net-snmp</span> <span class="params">--with-ssh2</span>  <span class="params">--with-libcurl</span> <span class="params">--with-iconv</span></span><br><span class="line"></span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h5 id="依赖问题"><a href="#依赖问题" class="headerlink" title="依赖问题"></a>依赖问题</h5><ul>
+<li>MySQL library not found <code>sudo apt install libmysqlclient-dev</code></li>
+<li>unixODBC <code>sudo apt install unixodbc-dev </code></li>
+<li>configure error: Invalid Net-SNMP directory - unable to find net-snmp-config <code>sudo apt install libsnmp-dev  </code></li>
+<li>error: SSH2 library not found  <code>sudo apt install libssh2-1-dev</code></li>
+<li>Unable to find “javac” executable in path <code>sudo apt install openjdk-11-jdk </code></li>
+</ul>
+<p>经过大量搜索貌似找到了解决依赖的一个好办法</p>
+<ul>
+<li><code>apt search &#39;*软件名*&#39;</code></li>
+<li>一般安装那个带<code>-dev</code>的就OK了</li>
+</ul>
+<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><p>不知道为什么自带软件源安装的mysql、httpd、nginx都用不了，可能是因为用着ubuntu的源，而issue里写的是mint没直接写上基于ubuntu了 ┑(￣Д ￣)┍</p>
+<p>这里还是直接用了docker</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -id -name mysql -p3306:3306 -e  <span class="attribute">MYSQL_ROOT_PASSWORD</span>=111111 mysql</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不加MYSQL_ROOT_PASSWORD&#x3D;111111 的话容器都不会开启</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/manual/appendix/install/db_scripts">创建数据库</a></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">shell&gt; mysql -uroot -p&lt;<span class="keyword">password</span>&gt;</span><br><span class="line">mysql&gt; <span class="keyword">create</span> <span class="keyword">database</span> zabbix <span class="type">character</span> <span class="keyword">set</span> utf8 <span class="keyword">collate</span> utf8_bin;</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;zabbix&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;&lt;password&gt;&#x27;</span>;</span><br><span class="line">mysql&gt; <span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">&#x27;zabbix&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;#需要加上这条授权参考下面第一个错误</span><br><span class="line"></span><br><span class="line">shell&gt; cd <span class="keyword">database</span>/mysql</span><br><span class="line">shell&gt; mysql -uzabbix -p&lt;<span class="keyword">password</span>&gt; zabbix &lt; <span class="keyword">schema</span>.<span class="keyword">sql</span></span><br><span class="line"># stop here <span class="keyword">if</span> you are creating <span class="keyword">database</span> <span class="keyword">for</span> Zabbix proxy</span><br><span class="line">shell&gt; mysql -uzabbix -p&lt;<span class="keyword">password</span>&gt; zabbix &lt; images.<span class="keyword">sql</span></span><br><span class="line">shell&gt; mysql -uzabbix -p&lt;<span class="keyword">password</span>&gt; zabbix &lt; data.<span class="keyword">sql</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/B1ackWall/p/11643136.html">ERROR 1410 (42000): You are not allowed to create a user with GRANT</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw">MySQL ERROR 1045 (28000): Access denied for user ‘bill‘@’localhost’ (using password: YES)</a></p>
+</li>
+<li><p>[Error connecting to database: The server requested authentication method unknow]<br>(<a target="_blank" rel="noopener" href="https://learnku.com/articles/10736/some-craters-in-mysql-8011">https://learnku.com/articles/10736/some-craters-in-mysql-8011</a>)</p>
+</li>
+</ul>
+<h2 id="php"><a href="#php" class="headerlink" title="php"></a>php</h2><p>前端拿php写的,故需要安装php</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo</span> apt install php7.<span class="number">2</span>-fpm </span><br></pre></td></tr></table></figure>
+
+<p>需要修改默认配置文件以满足zabbix需求</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo</span> vi /etc/php/<span class="number">7</span>.<span class="number">2</span>/fpm/php.ini </span><br><span class="line"></span><br><span class="line"><span class="attribute">max_execution_time</span> = <span class="number">300</span> ##<span class="number">368</span>行（执行时间）</span><br><span class="line"><span class="attribute">max_input_time</span> = <span class="number">300</span> ##<span class="number">378</span>行（接收数据等待时间）</span><br><span class="line"><span class="attribute">memory_limit</span> = <span class="number">128</span>M ##<span class="number">389</span>行（每个脚本占用内存）</span><br><span class="line"><span class="attribute">post_max_size</span> = <span class="number">16</span>M ##<span class="number">656</span>行（POST数据大小）</span><br><span class="line"><span class="attribute">upload_max_filesize</span> = <span class="number">2</span>M ##<span class="number">799</span>行（下载文件大小）</span><br><span class="line"><span class="attribute">always_populate_raw_post_data</span> = -<span class="number">1</span> ##<span class="number">800</span>行</span><br><span class="line"><span class="attribute">date</span>.timezone = Asia/Shanghai ##<span class="number">877</span>行（时区</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不改的话,后面也不会成功</li>
+</ul>
+<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><p><a target="_blank" rel="noopener" href="http://nginx.org/en/download.html">下载</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<ul>
+<li><del>配置不太熟还需仔细研究</del></li>
+</ul>
+<p>遇到的一个错误</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">error</span>] 16119#0: <span class="number">*75</span> FastCGI sent <span class="keyword">in</span> stderr: <span class="string">&quot;Primary script unknown&quot;</span> </span><br><span class="line"><span class="keyword">while</span> reading response header <span class="keyword">from</span> upstream, client: 127.0.0.1, server: localhost, request:</span><br><span class="line"> <span class="string">&quot;GET / HTTP/1.1&quot;</span>, upstream: <span class="string">&quot;fastcgi://unix:/run/php/php7.2-fpm.sock:&quot;</span>, host: <span class="string">&quot;127.0.0.1&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>参考<a target="_blank" rel="noopener" href="https://serverfault.com/questions/517190/nginx-1-fastcgi-sent-in-stderr-primary-script-unknown">这里</a> . 犯了两个错误 :</li>
+</ul>
+<ol>
+<li><code>/etc/php/7.2/fpm/pool.d/www.conf</code>   里设置的用户名和用户组与ngnix运行的不一致</li>
+<li>复制php前端文件时用的是root</li>
+</ol>
+<p>附上简单丑陋的配置</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">     listen       <span class="number">80</span>;</span><br><span class="line">     server_name  localhost;</span><br><span class="line">     index index.php;</span><br><span class="line">     root <span class="regexp">/var/</span>www<span class="regexp">/php/</span>;</span><br><span class="line"></span><br><span class="line">     location ~* \.php$ &#123;</span><br><span class="line">         include fastcgi_params;</span><br><span class="line">         fastcgi_index  index.php;</span><br><span class="line">                     include      fastcgi_params;</span><br><span class="line">         set <span class="variable">$path_info</span> <span class="string">&quot;&quot;</span>; </span><br><span class="line">         set <span class="variable">$real_script_name</span> <span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">         <span class="keyword">if</span> (<span class="variable">$fastcgi_script_name</span> ~ <span class="string">&quot;^(.+?\.php)(/.+)$&quot;</span>) &#123;</span><br><span class="line">                 set <span class="variable">$real_script_name</span> <span class="variable">$1</span>; </span><br><span class="line">                 set <span class="variable">$path_info</span> <span class="variable">$2</span>; </span><br><span class="line">         &#125;</span><br><span class="line">         fastcgi_param SCRIPT_FILENAME <span class="regexp">/var/</span>www<span class="regexp">/php/</span><span class="variable">$real_script_name</span>;</span><br><span class="line">         fastcgi_param SCRIPT_NAME <span class="variable">$real_script_name</span>;</span><br><span class="line">         fastcgi_param PATH_INFO <span class="variable">$path_info</span>;</span><br><span class="line"></span><br><span class="line">         <span class="regexp">//</span>这里默认是<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">9000</span>;</span><br><span class="line">         <span class="regexp">//</span>需要到<span class="regexp">/etc/</span>php<span class="regexp">/7.2/</span>fpm<span class="regexp">/pool.d/</span>www.conf查看监听的地址</span><br><span class="line">         fastcgi_pass unix:<span class="regexp">/run/</span>php/php7.<span class="number">2</span>-fpm.sock;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看error日志可以快速定位问题</li>
+</ul>
+<h1 id="docker-install"><a href="#docker-install" class="headerlink" title="docker install"></a>docker install</h1><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/current/manual/installation/containers">源自这里</a></p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker run --name zabbix-appliance -t \</span></span><br><span class="line">      -p <span class="number">10051</span>:<span class="number">10051</span> <span class="string">\</span></span><br><span class="line">      -p <span class="number">80</span>:<span class="number">80</span> <span class="string">\</span></span><br><span class="line">      --restart <span class="keyword">unless</span>-stopped <span class="string">\</span></span><br><span class="line">      -d zabbix/zabbix-appliance:latest</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>开箱可用,十分方便</li>
+</ul>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>都安装好之后,需要检查&#x2F;etc&#x2F;zabbix&#x2F;zabbix_server.conf里的数据库账号名密码地址是否正确</p>
+<p>需要检查&#x2F;etc&#x2F;zabbix&#x2F;zabbix_agent.conf里server名字地址是否正确</p>
+<p>真香<img src="/images/20200326=0.png"></p>
+<p>太香了<img src="/images/20200326=1.png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"># 工具</a>
+              <a href="/tags/zabbix/" rel="tag"># zabbix</a>
+              <a href="/tags/%E7%9B%91%E6%8E%A7/" rel="tag"># 监控</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/03/10/flatpak%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" rel="prev" title="flatpak入门指南">
+                  <i class="fa fa-chevron-left"></i> flatpak入门指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/04/01/linux-%E5%91%BD%E4%BB%A4%E6%9D%82%E8%AE%B0/" rel="next" title="linux 命令杂记">
+                  linux 命令杂记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

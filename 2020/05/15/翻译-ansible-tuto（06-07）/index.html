@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.notyet.ml","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="翻译: ansible-tuto（06-07）">
+<meta property="og:url" content="https://blog.notyet.ml/2020/05/15/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8806-07%EF%BC%89/index.html">
+<meta property="og:site_name" content="oneto1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-15T12:30:46.000Z">
+<meta property="article:modified_time" content="2022-04-30T06:22:18.077Z">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="ansible">
+<meta property="article:tag" content="翻译">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.notyet.ml/2020/05/15/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8806-07%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.notyet.ml/2020/05/15/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8806-07%EF%BC%89/","path":"2020/05/15/翻译-ansible-tuto（06-07）/","title":"翻译: ansible-tuto（06-07）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>翻译: ansible-tuto（06-07） | oneto1</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">oneto1</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-杂物堆"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>杂物堆</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#step-06-%E5%BD%93%E9%85%8D%E7%BD%AE%E6%AD%A3%E7%A1%AE%E6%97%B6%E9%87%8D%E6%96%B0%E5%90%AF%E5%8A%A8"><span class="nav-number">1.</span> <span class="nav-text">step-06 当配置正确时重新启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%93%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%E7%9A%84%E6%97%B6%E5%80%99%E5%81%9C%E6%AD%A2%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.0.1.</span> <span class="nav-text">当出现问题的时候停止工作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#step-07-%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">2.</span> <span class="nav-text">step-07 使用条件语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%93%E5%87%BA%E9%94%99%E6%97%B6%E5%9B%9E%E6%BB%9A"><span class="nav-number">2.0.1.</span> <span class="nav-text">当出错时回滚</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description">你说是梦所以才痛 睡醒了再说</div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.notyet.ml/2020/05/15/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8806-07%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oneto1">
+      <meta itemprop="description" content="你说是梦所以才痛 睡醒了再说">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="翻译: ansible-tuto（06-07） | oneto1">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          翻译: ansible-tuto（06-07）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-15 20:30:46" itemprop="dateCreated datePublished" datetime="2020-05-15T20:30:46+08:00">2020-05-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 14:22:18" itemprop="dateModified" datetime="2022-04-30T14:22:18+08:00">2022-04-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<span id="more"></span>
+
+<h1 id="step-06-当配置正确时重新启动"><a href="#step-06-当配置正确时重新启动" class="headerlink" title="step-06 当配置正确时重新启动"></a>step-06 当配置正确时重新启动</h1><p>我们已经安装了 apache，配置了虚拟主机，并重新启动了服务器。 但是，如果我们只是希望在配置正确的情况下重新启动服务器，那又会怎样呢？ 让我们开始吧</p>
+<h3 id="当出现问题的时候停止工作"><a href="#当出现问题的时候停止工作" class="headerlink" title="当出现问题的时候停止工作"></a>当出现问题的时候停止工作</h3><p>ansible 有一个俏皮的特性: 如果出现问题，它将停止所有的工作。 如果配置文件无效的话，我们将利用这个特性来停止我们的 playbook。</p>
+<p>让我们修改一下我们的 <code>awesome-app</code> 虚拟主机配置文件:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:<span class="number">80</span>&gt;</span><br><span class="line">  RocumentDoot <span class="regexp">/var/</span>www/awesome-app</span><br><span class="line"></span><br><span class="line">  <span class="keyword">Options</span> -Indexes</span><br><span class="line"></span><br><span class="line">  ErrorLog <span class="regexp">/var/</span>log<span class="regexp">/apache2/</span>error.log</span><br><span class="line">  TransferLog <span class="regexp">/var/</span>log<span class="regexp">/apache2/</span>access.log</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如前所述，当任务失败时，处理过程停止。 因此，在重新启动服务器之前，我们将确保配置有效。 我们还可以在删除缺省的虚拟主机之前添加虚拟主机，这样随后的重新启动(可能直接在服务器上完成)就不会破坏 apache。</p>
+<p>请注意，我们一开始就应该这样做。 因为我们已经运行了我们的剧本，默认的虚拟主机已经被停用了。 当然，其他无关的主机也可以使用这个剧本，让我们保护他们。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">web</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Installs</span> <span class="string">apache</span> <span class="string">web</span> <span class="string">server</span></span><br><span class="line">      <span class="attr">apt:</span></span><br><span class="line">        <span class="attr">pkg:</span> <span class="string">apache2</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">        <span class="attr">update_cache:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Push</span> <span class="string">future</span> <span class="string">default</span> <span class="string">virtual</span> <span class="string">host</span> <span class="string">configuration</span></span><br><span class="line">      <span class="attr">copy:</span></span><br><span class="line">        <span class="attr">src:</span> <span class="string">files/awesome-app</span></span><br><span class="line">        <span class="attr">dest:</span> <span class="string">/etc/apache2/sites-available/</span></span><br><span class="line">        <span class="attr">mode:</span> <span class="number">0640</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Activates</span> <span class="string">our</span> <span class="string">virtualhost</span></span><br><span class="line">      <span class="attr">command:</span> <span class="string">a2ensite</span> <span class="string">awesome-app</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Check</span> <span class="string">that</span> <span class="string">our</span> <span class="string">config</span> <span class="string">is</span> <span class="string">valid</span></span><br><span class="line">      <span class="attr">command:</span> <span class="string">apache2ctl</span> <span class="string">configtest</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deactivates</span> <span class="string">the</span> <span class="string">default</span> <span class="string">virtualhost</span></span><br><span class="line">      <span class="attr">command:</span> <span class="string">a2dissite</span> <span class="string">default</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deactivates</span> <span class="string">the</span> <span class="string">default</span> <span class="string">ssl</span> <span class="string">virtualhost</span></span><br><span class="line">      <span class="attr">command:</span> <span class="string">a2dissite</span> <span class="string">default-ssl</span></span><br><span class="line">      <span class="attr">notify:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">restart</span> <span class="string">apache</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">handlers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">restart</span> <span class="string">apache</span></span><br><span class="line">      <span class="attr">service:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">apache2</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">restarted</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来开始吧：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">PLAY [web] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">GATHERING FACTS <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">ok: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Installs apache web server] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">ok: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Push future default virtual host configuration] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Activates our virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Check that our config is valid] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">failed: [host1] =&gt; &#123;&quot;changed&quot;: true, &quot;cmd&quot;: [&quot;apache2ctl&quot;, &quot;configtest&quot;], &quot;delta&quot;: &quot;0:00:00.045046&quot;, &quot;end&quot;: &quot;2013-03-08 16:09:32.002063&quot;, &quot;rc&quot;: 1, &quot;start&quot;: &quot;2013-03-08 16:09:31.957017&quot;&#125;</span><br><span class="line">stderr: Syntax error on line 2 of /etc/apache2/sites-enabled/awesome-app:</span><br><span class="line">Invalid command &#x27;RocumentDoot&#x27;, perhaps misspelled or defined by a module not included in the server configuration</span><br><span class="line">stdout: Action &#x27;configtest&#x27; failed.</span><br><span class="line">The Apache error log may have more information.</span><br><span class="line"></span><br><span class="line">FATAL: all hosts have already failed -- aborting</span><br><span class="line"></span><br><span class="line">PLAY RECAP <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">host1              : ok=4    changed=2    unreachable=0    failed=1</span></span><br></pre></td></tr></table></figure>
+<p>正如您可以看到的，因为 apache2ctl 在失败时返回退出代码为1，ansible 发现了这一点并停止了处理。 太好了！</p>
+<p>嗯，实际上不是很好… 我们的虚拟主机已经添加了。 任何后续的 apache 重新启动都会抱怨我们的配置，然后退出。 因此，我们需要一种方法来发现故障并返回。</p>
+<h1 id="step-07-使用条件语句"><a href="#step-07-使用条件语句" class="headerlink" title="step-07 使用条件语句"></a>step-07 使用条件语句</h1><p>我们已经安装了 apache，设置了虚拟主机，并重新启动了服务器。 但是，我们希望在出现问题时，能够将其恢复到稳定状态。</p>
+<h3 id="当出错时回滚"><a href="#当出错时回滚" class="headerlink" title="当出错时回滚"></a>当出错时回滚</h3><p>提醒一句: 这里没有魔法。 之前配置错误不是 <code>ansible</code> 的错误。 它不是一个备份系统，它不能回滚所有的东西。 你的工作就是确保你的剧本是配置正确的。 ansible 不知道如何恢复一个<code>2ensite awesome-app</code>。</p>
+<p>但是，如果我们关注配置错误时于怎么回滚，那么就可以利用它进行回滚</p>
+<p>如前所述，当任务失败时，处理就会停止… 除非我们接受失败(我们应该接受)。 这就是我们要做的: 如果出现故障，继续处理，但是只恢复我们已经完成的操作。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">web</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Installs</span> <span class="string">apache</span> <span class="string">web</span> <span class="string">server</span></span><br><span class="line">      <span class="attr">apt:</span></span><br><span class="line">        <span class="attr">pkg:</span> <span class="string">apache2</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">        <span class="attr">update_cache:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Push</span> <span class="string">future</span> <span class="string">default</span> <span class="string">virtual</span> <span class="string">host</span> <span class="string">configuration</span></span><br><span class="line">      <span class="attr">copy:</span></span><br><span class="line">        <span class="attr">src:</span> <span class="string">files/awesome-app</span></span><br><span class="line">        <span class="attr">dest:</span> <span class="string">/etc/apache2/sites-available/</span></span><br><span class="line">        <span class="attr">mode:</span> <span class="number">0640</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Activates</span> <span class="string">our</span> <span class="string">virtualhost</span></span><br><span class="line">      <span class="attr">command:</span> <span class="string">a2ensite</span> <span class="string">awesome-app</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Check</span> <span class="string">that</span> <span class="string">our</span> <span class="string">config</span> <span class="string">is</span> <span class="string">valid</span></span><br><span class="line">      <span class="attr">command:</span> <span class="string">apache2ctl</span> <span class="string">configtest</span></span><br><span class="line">      <span class="attr">register:</span> <span class="string">result</span></span><br><span class="line">      <span class="attr">ignore_errors:</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Rolling</span> <span class="string">back</span> <span class="bullet">-</span> <span class="string">Restoring</span> <span class="string">old</span> <span class="string">default</span> <span class="string">virtualhost</span></span><br><span class="line">      <span class="attr">command:</span> <span class="string">a2ensite</span> <span class="string">default</span></span><br><span class="line">      <span class="attr">when:</span> <span class="string">result</span> <span class="string">is</span> <span class="string">failed</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Rolling</span> <span class="string">back</span> <span class="bullet">-</span> <span class="string">Removing</span> <span class="string">our</span> <span class="string">virtualhost</span></span><br><span class="line">      <span class="attr">command:</span> <span class="string">a2dissite</span> <span class="string">awesome-app</span></span><br><span class="line">      <span class="attr">when:</span> <span class="string">result</span> <span class="string">is</span> <span class="string">failed</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Rolling</span> <span class="string">back</span> <span class="bullet">-</span> <span class="string">Ending</span> <span class="string">playbook</span></span><br><span class="line">      <span class="attr">fail:</span></span><br><span class="line">        <span class="attr">msg:</span> <span class="string">&quot;Configuration file is not valid. Please check that before re-running the playbook.&quot;</span></span><br><span class="line">      <span class="attr">when:</span> <span class="string">result</span> <span class="string">is</span> <span class="string">failed</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deactivates</span> <span class="string">the</span> <span class="string">default</span> <span class="string">virtualhost</span></span><br><span class="line">      <span class="attr">command:</span> <span class="string">a2dissite</span> <span class="string">default</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deactivates</span> <span class="string">the</span> <span class="string">default</span> <span class="string">ssl</span> <span class="string">virtualhost</span></span><br><span class="line">      <span class="attr">command:</span> <span class="string">a2dissite</span> <span class="string">default-ssl</span></span><br><span class="line">      <span class="attr">notify:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">restart</span> <span class="string">apache</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">handlers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">restart</span> <span class="string">apache</span></span><br><span class="line">      <span class="attr">service:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">apache2</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">restarted</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>register</code> 关键字记录 <code>apache2ctl configtest</code> 命令(exit status、 stdout、 stderr、 …)的输出，以及 <code>when: result is failed</code> 检查注册变量(<code>result</code>)是否失败。</p>
+<p>接下来开始吧：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">$ ansible-playbook -i step-07/hosts -l host1 step-07/apache.yml</span><br><span class="line"></span><br><span class="line">PLAY [web] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">GATHERING FACTS <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">ok: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Installs apache web server] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">ok: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Push future default virtual host configuration] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">ok: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Activates our virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Check that our config is valid] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">failed: [host1] =&gt; &#123;&quot;changed&quot;: true, &quot;cmd&quot;: [&quot;apache2ctl&quot;, &quot;configtest&quot;], &quot;delta&quot;: &quot;0:00:00.051874&quot;, &quot;end&quot;: &quot;2013-03-10 10:50:17.714105&quot;, &quot;rc&quot;: 1, &quot;start&quot;: &quot;2013-03-10 10:50:17.662231&quot;&#125;</span><br><span class="line">stderr: Syntax error on line 2 of /etc/apache2/sites-enabled/awesome-app:</span><br><span class="line">Invalid command &#x27;RocumentDoot&#x27;, perhaps misspelled or defined by a module not included in the server configuration</span><br><span class="line">stdout: Action &#x27;configtest&#x27; failed.</span><br><span class="line">The Apache error log may have more information.</span><br><span class="line">...ignoring</span><br><span class="line"></span><br><span class="line">TASK: [Rolling back - Restoring old default virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Rolling back - Removing our virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Rolling back - Ending playbook] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">failed: [host1] =&gt; &#123;&quot;failed&quot;: true&#125;</span></span><br><span class="line"><span class="emphasis">msg: Configuration file is not valid. Please check that before re-running the playbook.</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">FATAL: all hosts have already failed -- aborting</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">PLAY RECAP <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">host1              : ok=7    changed=4    unreachable=0    failed=1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>看起来正常工作。让我们尝试重新启动 apache，看看它是否真的工作:</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ansible -i step-<span class="number">07</span>/hosts -m service -a &#x27;name=apache2 <span class="keyword">state</span>=restarted&#x27; host1</span><br><span class="line"></span><br><span class="line"><span class="keyword">state</span>=restarted&#x27; host1</span><br><span class="line">host1 | success &gt;&gt; &#123;</span><br><span class="line">    <span class="string">&quot;changed&quot;</span>: true,</span><br><span class="line">    <span class="string">&quot;name&quot;</span>: <span class="string">&quot;apache2&quot;</span>,</span><br><span class="line">    <span class="string">&quot;state&quot;</span>: <span class="string">&quot;started&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>好了，现在我们的 apache 安全了，不会出现配置错误。</p>
+<p>虽然这看起来需要做很多工作，但其实不然。 请记住，您几乎可以在任何地方使用变量，因此很容易将其作为 apache 的通用模板，并在任何地方使用它来部署虚拟主机。 创建一次剧本，就可在任何地方使用。 我们将在步骤9中完成这项工作，但是现在，让我们在步骤08中使用 git 部署我们的 web 站点。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/ansible/" rel="tag"># ansible</a>
+              <a href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag"># 翻译</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/13/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8804-05%EF%BC%89/" rel="prev" title="翻译: ansible-tuto（04-05）">
+                  <i class="fa fa-chevron-left"></i> 翻译: ansible-tuto（04-05）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/05/16/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8808-09%EF%BC%89/" rel="next" title="翻译: ansible-tuto（08-09）">
+                  翻译: ansible-tuto（08-09） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

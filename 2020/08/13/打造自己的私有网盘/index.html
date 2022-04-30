@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.notyet.ml","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最近突然有一些文件中转的需求,目标机器上可用的基本上只有个浏览器和一个简易SHELL可用, 没错说的就是chromeos 本着数据自主可用和资源合理利用的原则,于是就有了这篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单打造自己的中转文件服务器">
+<meta property="og:url" content="https://blog.notyet.ml/2020/08/13/%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E7%A7%81%E6%9C%89%E7%BD%91%E7%9B%98/index.html">
+<meta property="og:site_name" content="oneto1">
+<meta property="og:description" content="最近突然有一些文件中转的需求,目标机器上可用的基本上只有个浏览器和一个简易SHELL可用, 没错说的就是chromeos 本着数据自主可用和资源合理利用的原则,于是就有了这篇">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.notyet.ml/images/20200820=0.png">
+<meta property="article:published_time" content="2020-08-13T14:44:27.000Z">
+<meta property="article:modified_time" content="2022-04-30T06:22:18.074Z">
+<meta property="article:tag" content="工具">
+<meta property="article:tag" content="nginx">
+<meta property="article:tag" content="vscode">
+<meta property="article:tag" content="https">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.notyet.ml/images/20200820=0.png">
+
+
+<link rel="canonical" href="https://blog.notyet.ml/2020/08/13/%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E7%A7%81%E6%9C%89%E7%BD%91%E7%9B%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.notyet.ml/2020/08/13/%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E7%A7%81%E6%9C%89%E7%BD%91%E7%9B%98/","path":"2020/08/13/打造自己的私有网盘/","title":"简单打造自己的中转文件服务器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>简单打造自己的中转文件服务器 | oneto1</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">oneto1</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-杂物堆"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>杂物堆</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx%E6%96%B9%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text">nginx方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code-server-%E6%96%B9%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">code-server 方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nextcloud-%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">nextcloud 方案</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description">你说是梦所以才痛 睡醒了再说</div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.notyet.ml/2020/08/13/%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E7%A7%81%E6%9C%89%E7%BD%91%E7%9B%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oneto1">
+      <meta itemprop="description" content="你说是梦所以才痛 睡醒了再说">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="简单打造自己的中转文件服务器 | oneto1">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          简单打造自己的中转文件服务器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-13 22:44:27" itemprop="dateCreated datePublished" datetime="2020-08-13T22:44:27+08:00">2020-08-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 14:22:18" itemprop="dateModified" datetime="2022-04-30T14:22:18+08:00">2022-04-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>最近突然有一些文件中转的需求,目标机器上可用的基本上只有个浏览器和一个简易SHELL可用, <del>没错说的就是chromeos</del></p>
+<p>本着数据自主可用和资源合理利用的原则,于是就有了这篇</p>
+<span id="more"></span>
+
+<h2 id="nginx方案"><a href="#nginx方案" class="headerlink" title="nginx方案"></a>nginx方案</h2><p>简单思路就是开启目录功能和加上基本的认证,最后加上https</p>
+<h4 id="创建所需密码认证文件"><a href="#创建所需密码认证文件" class="headerlink" title="创建所需密码认证文件"></a>创建所需密码认证文件</h4><p><a target="_blank" rel="noopener" href="http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html">ngx_http_auth_basic_module</a></p>
+<p>这里使用’openssl passwd&#96;手动来拼接,就不用专用的命令行工具了</p>
+<p>请确保自己有权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> username=1234</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> -n <span class="string">&quot;<span class="variable">$&#123;username&#125;</span>:&quot;</span> &gt;&gt; /etc/nginx/.passwd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按提示输入密码</span></span><br><span class="line">openssl passwd  &gt;&gt; /etc/nginx/.passwd</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这样我们拥有了一个密钥文件</li>
+</ul>
+<p>再来配置  nginx.conf</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    basic_auth <span class="string">&quot;/&quot;</span> ;</span><br><span class="line">    basic_auth_user_file <span class="regexp">/etc/</span>nginx/.passwd ;</span><br><span class="line"></span><br><span class="line">    root <span class="regexp">/usr/</span>local<span class="regexp">/nginx/</span>html ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>来测试一下</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">curl</span> -u <span class="number">1234</span> <span class="number">127.0.0.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 手动输入密码</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>不是 401 错误即成功</li>
+</ul>
+<h4 id="开启-autoindex"><a href="#开启-autoindex" class="headerlink" title="开启 autoindex"></a>开启 autoindex</h4><p>上面只是加上了认证,但在浏览器上看还是不方便</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">basic_auth</span> <span class="string">&quot;/&quot;</span> ;</span><br><span class="line">    <span class="attribute">basic_auth_user_file</span> /etc/nginx/.passwd ;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">root</span> /usr/local/nginx/html ;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">autoindex</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">autoindex_exact_size</span> <span class="literal">on</span>;  <span class="comment">#显示大小  </span></span><br><span class="line">    <span class="attribute">autoindex_localtime</span> <span class="literal">on</span>;    <span class="comment">#显示时间</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>这样一来,文件多起来也不用怕</li>
+</ul>
+<h4 id="开启https支持"><a href="#开启https支持" class="headerlink" title="开启https支持"></a>开启https支持</h4><p>这里用 <a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh">acme.sh</a> 来创建所需证书</p>
+<p>安装</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl  https://<span class="built_in">get</span>.acme.<span class="keyword">sh</span> | <span class="keyword">sh</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>由于是国内主机又没有备案,走默认的认证方式总不成功</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme<span class="selector-class">.sh</span> <span class="attr">--issue</span>  -d mydomain<span class="selector-class">.com</span> <span class="attr">--nginx</span></span><br></pre></td></tr></table></figure>
+
+
+<p>最后是采用dns验证,才成功的</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">acme<span class="selector-class">.sh</span> <span class="attr">--issue</span> -d  mydomain<span class="selector-class">.com</span> <span class="attr">--dns</span>\</span><br><span class="line"><span class="attr">--yes-I-know-dns-manual-mode-enough-go-ahead-please</span></span><br><span class="line"></span><br><span class="line">acme<span class="selector-class">.sh</span> <span class="attr">--issue</span> -d mydomain<span class="selector-class">.com</span> <span class="attr">--dns</span>\</span><br><span class="line"><span class="attr">--yes-I-know-dns-manual-mode-enough-go-ahead-please</span> <span class="attr">--renew</span> </span><br></pre></td></tr></table></figure>
+<ul>
+<li>先执行第一个命令,按照提示添加一个域名dns的 txt 记录,再执行第二个命令</li>
+<li>这个需要每三个月执行一次,不然就过期了</li>
+</ul>
+<p>修改 nginx 配置</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">server</span> &#123;</span><br><span class="line">    <span class="keyword">listen</span> <span class="number">12345</span> ssl http2 ;</span><br><span class="line">    </span><br><span class="line">    ssl_certificate /<span class="type">path</span>;</span><br><span class="line">    ssl_sertificate_key /<span class="type">path</span>.key;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>重启就大功告成了</li>
+</ul>
+<p>这个方案只能下载不能上传,不过也能用了</p>
+<h2 id="code-server-方案"><a href="#code-server-方案" class="headerlink" title="code-server 方案"></a>code-server 方案</h2><p><a target="_blank" rel="noopener" href="https://github.com/cdr/code-server">https://github.com/cdr/code-server</a></p>
+<ul>
+<li>在浏览器中使用vscode</li>
+</ul>
+<p>发现是可以在(进入到网页版code的)资源管理器通过拖拉文件来实现文件上传下载,还挺方便的</p>
+<p>默认登录进去是有对机器完整访问权限的,为省事就用 docker 好了</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">docker</span> pull  codercom/<span class="meta">code</span>-server:latest</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="symbol">docker</span> run -<span class="keyword">it</span> -p <span class="number">8080</span>:<span class="number">8080</span> \</span><br><span class="line">-v <span class="string">&quot;/data/vscode:/home/coder&quot;</span> \</span><br><span class="line"><span class="symbol">codercom</span>/<span class="meta">code</span>-server:latest</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>查看登录密码</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it code-server cat <span class="regexp">/home/</span>coder<span class="regexp">/.config/</span>code-server/config.yaml </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>此时再去浏览器登录就好了</li>
+</ul>
+<p>还额外收获一个网页版vscode,也不错了</p>
+<h2 id="nextcloud-方案"><a href="#nextcloud-方案" class="headerlink" title="nextcloud 方案"></a>nextcloud 方案</h2><blockquote>
+<p>A safe home for all your data. Access &amp; share your files, calendars, contacts, mail &amp; more from any device, on your terms.</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://nextcloud.com/">nextcloud</a></p>
+<p>也使用docker 来安装吧</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker pull nextcloud</span><br><span class="line"></span><br><span class="line">docker run -d <span class="string">\</span></span><br><span class="line">-v nextcloud:/<span class="keyword">var</span>/www/html <span class="string">\</span></span><br><span class="line">-p <span class="number">12345</span>:<span class="number">80</span> <span class="string">\</span></span><br><span class="line">nextcloud</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>数据都在 <code>/var/www/html</code></li>
+<li>nextcloud 默认是将数据持久存储在匿名卷中的,我们可以指定一个名字方便记忆</li>
+</ul>
+<p>然后就可以打开浏览器或下载相应客户端输入地址访问了,不同平台下也有相应的客户端也用</p>
+<p><img src="/images/20200820=0.png"></p>
+<p>全功能网盘就是不一样,果然专业的事还是要给专业的人做</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"># 工具</a>
+              <a href="/tags/nginx/" rel="tag"># nginx</a>
+              <a href="/tags/vscode/" rel="tag"># vscode</a>
+              <a href="/tags/https/" rel="tag"># https</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/12/%E5%85%B3%E4%BA%8Enginx%E7%9A%84%E4%B8%80%E4%BA%9B%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/" rel="prev" title="关于nginx的一些URL的匹配规则">
+                  <i class="fa fa-chevron-left"></i> 关于nginx的一些URL的匹配规则
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/20/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%BD%91%E9%A1%B5%E5%8A%A0%E8%BD%BD%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/" rel="next" title="记一次网页加载速度优化">
+                  记一次网页加载速度优化 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

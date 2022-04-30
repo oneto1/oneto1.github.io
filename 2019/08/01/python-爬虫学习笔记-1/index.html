@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.notyet.ml","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="python 爬虫学习笔记(1)">
+<meta property="og:url" content="https://blog.notyet.ml/2019/08/01/python-%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/index.html">
+<meta property="og:site_name" content="oneto1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-01T02:39:19.000Z">
+<meta property="article:modified_time" content="2022-04-30T06:22:18.082Z">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.notyet.ml/2019/08/01/python-%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.notyet.ml/2019/08/01/python-%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/","path":"2019/08/01/python-爬虫学习笔记-1/","title":"python 爬虫学习笔记(1)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python 爬虫学习笔记(1) | oneto1</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">oneto1</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-杂物堆"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>杂物堆</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#urllib%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">urllib的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request"><span class="nav-number">1.0.1.</span> <span class="nav-text">request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">1.0.2.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">1.0.3.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#requests%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">requests使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="nav-number">1.1.2.</span> <span class="nav-text">高级用法</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description">你说是梦所以才痛 睡醒了再说</div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.notyet.ml/2019/08/01/python-%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oneto1">
+      <meta itemprop="description" content="你说是梦所以才痛 睡醒了再说">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="python 爬虫学习笔记(1) | oneto1">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python 爬虫学习笔记(1)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-01 10:39:19" itemprop="dateCreated datePublished" datetime="2019-08-01T10:39:19+08:00">2019-08-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 14:22:18" itemprop="dateModified" datetime="2022-04-30T14:22:18+08:00">2022-04-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<span id="more"></span>
+
+<p>看到的一个较简明的关于类属性方法的说明</p>
+<p>比如我们定义所有的猫为一类那么我们就有了代码</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 猫</span>&#123;</span><br><span class="line">      颜色</span><br><span class="line">      品种</span><br><span class="line">      ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，我们想获得一只猫来养那么需要一句代码： </p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">猫 小白 = <span class="keyword">new</span> <span class="type"></span>猫（）；</span><br></pre></td></tr></table></figure>
+<p>我们养的猫肯定有颜色和花纹之分，比如雪白：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">小白.颜色 <span class="operator">=</span> 白；</span><br></pre></td></tr></table></figure>
+<p>刚养的猫一般都怕生且爱叫唤：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">小白.叫（）；</span><br></pre></td></tr></table></figure>
+<p><strong>上面的 猫就是类 小白是猫这个类的实例也叫对象 小白的颜色就是属性 而叫（）就是猫的方法</strong></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/1802107627262558507.html">link</a></p>
+</blockquote>
+<hr>
+<h1 id="urllib的使用"><a href="#urllib的使用" class="headerlink" title="urllib的使用"></a>urllib的使用</h1><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><p>提供了最基本的http请求方法，利用它可以模拟浏览器的一个请求发起过程</p>
+<h5 id="1-urlopen"><a href="#1-urlopen" class="headerlink" title="1.urlopen()"></a>1.urlopen()</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">urlopen</span><span class="params">(url, data=None, timeout)</span></span></span><br></pre></td></tr></table></figure>
+<h6 id="url"><a href="#url" class="headerlink" title="url"></a>url</h6><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line"></span><br><span class="line"><span class="keyword">a</span>=urllib.request.urlopen(<span class="string">&quot;http://www.python.org&quot;</span>)</span><br><span class="line">print(type(<span class="keyword">a</span>)) <span class="comment">#输出类型</span></span><br><span class="line">print(<span class="keyword">a</span>.<span class="built_in">read</span>().decode(<span class="string">&quot;utf-8&quot;</span>))   <span class="comment">#其网页源代码</span></span><br><span class="line">print(<span class="keyword">a</span>.status) <span class="comment"># 返回结果的代码</span></span><br><span class="line">print(<span class="keyword">a</span>.getheaders) <span class="comment">#返回请求头部</span></span><br><span class="line">print(<span class="keyword">a</span>.getheader(<span class="string">&#x27;Date&#x27;</span>)) <span class="comment">#返回请求的时间</span></span><br><span class="line">print(<span class="keyword">a</span>.__dir__()) <span class="comment">#通过 __dir__ 查看当前实例的所有的方法和属性。</span></span><br></pre></td></tr></table></figure>
+<h6 id="data"><a href="#data" class="headerlink" title="data"></a>data</h6><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import urllib<span class="selector-class">.request</span></span><br><span class="line">import urllib<span class="selector-class">.parse</span></span><br><span class="line"></span><br><span class="line">data=<span class="built_in">bytes</span>(urllib<span class="selector-class">.parse</span><span class="selector-class">.urlencode</span>(&#123;<span class="string">&quot;hi&quot;</span>:<span class="string">&quot;hi&quot;</span>&#125;),encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">a=urllib<span class="selector-class">.request</span><span class="selector-class">.urlopen</span>(<span class="string">&quot;http://www.httpbin.org/post&quot;</span>,data=data)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(a.read()</span></span>)</span><br></pre></td></tr></table></figure>
+<h6 id="timeout"><a href="#timeout" class="headerlink" title="timeout"></a>timeout</h6><p>用于设置超时时间，超过则抛出异常</p>
+<h5 id="2-Ruquest"><a href="#2-Ruquest" class="headerlink" title="2.Ruquest"></a>2.Ruquest</h5><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Request(<span class="keyword">self</span>, url, data=None, headers=<span class="comment">&#123;&#125;</span>,</span><br><span class="line">origin_req_host=None, unverifiable=<span class="keyword">False</span>,<span class="keyword">method</span>=<span class="title function_">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>从定义可见Ruquest又比openurl强大，使用方法同上,<strong>传data时必须将str转化为bytes</strong></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import urllib<span class="selector-class">.request</span>,urllib<span class="selector-class">.parse</span></span><br><span class="line"></span><br><span class="line">data_str=&#123;</span><br><span class="line">    <span class="string">&#x27;123&#x27;</span>:<span class="string">&#x27;123&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">data=<span class="built_in">bytes</span>(urllib<span class="selector-class">.parse</span><span class="selector-class">.encode</span>(data_str),encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">url= <span class="string">&quot;http://www.httpbin.org/post&quot;</span></span><br><span class="line">headers= &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20120101 Firefox/33.0&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Host&#x27;</span>: <span class="string">&#x27;httpbin.org&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">method= <span class="string">&#x27;POST&#x27;</span></span><br><span class="line">b=urllib<span class="selector-class">.request</span><span class="selector-class">.Request</span>(url=url,data=data,headers=headers,method=method)</span><br><span class="line">response=urllib<span class="selector-class">.request</span><span class="selector-class">.urlopen</span>(b)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(response.read()</span></span><span class="selector-class">.decode</span>(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>代理的使用</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from urllib<span class="selector-class">.request</span> import ProxyHandler,build_opener</span><br><span class="line"></span><br><span class="line">proxy_handler= <span class="built_in">ProxyHandler</span>(&#123;</span><br><span class="line">    <span class="string">&#x27;http&#x27;</span>: <span class="string">&#x27;127.0.0.1:1080&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;https&#x27;</span>: <span class="string">&#x27;127.0.0.1:1080&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line">opener= <span class="built_in">build_opener</span>(proxy_handler)</span><br><span class="line">respense= opener<span class="selector-class">.open</span>(<span class="string">&#x27;http://httpbin.org&#x27;</span>)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(respense.read()</span></span><span class="selector-class">.decode</span>(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cookie获取及使用</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#保存</span></span><br><span class="line">import http.cookiejar,urllib.request</span><br><span class="line"></span><br><span class="line"><span class="attribute">filename</span>=<span class="string">&#x27;cookie.txt&#x27;</span></span><br><span class="line"><span class="attribute">cookie</span>=http.cookiejar.MozillaCookieJar(filename)         ##</span><br><span class="line"><span class="attribute">handle</span>=urllib.request.HTTPCookieProcessor(cookie)</span><br><span class="line"><span class="attribute">opener</span>=urllib.request.build_opener(handle)</span><br><span class="line"><span class="attribute">response</span>=opener.open(&#x27;http://a.jd.com&#x27;)</span><br><span class="line">cookie.save(<span class="attribute">ignore_discard</span>=<span class="literal">True</span>,ignore_expires=True)       ## </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用</span></span><br><span class="line">import http.cookiejar,urllib.request</span><br><span class="line"></span><br><span class="line"><span class="attribute">cookie</span>=http.cookiejar.MozillaCookieJar()</span><br><span class="line">cookie.load(<span class="string">&#x27;cookie.txt&#x27;</span>)                       ##</span><br><span class="line"><span class="attribute">handle</span>=urllib.request.HTTPCookieProcessor(cookie)</span><br><span class="line"><span class="attribute">opener</span>=urllib.request.build_opener(handle)</span><br><span class="line"><span class="attribute">response</span>=opener.open(&#x27;http://a.jd.com&#x27;)</span><br><span class="line"><span class="built_in">print</span>(response.read())</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p>错误处理可使程序报错时不退出程序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> error,request</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>: </span><br><span class="line">    a=request.urlopen(<span class="string">&#x27;http://4399.com/qaz.htm&#x27;</span>)</span><br><span class="line"><span class="keyword">except</span> error.URLError <span class="keyword">as</span> b:</span><br><span class="line">    <span class="built_in">print</span>(b.reason)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Not Found</span></span><br></pre></td></tr></table></figure>
+
+<p>HTTPerror是URLerror的子类</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from urllib import error,request</span><br><span class="line"></span><br><span class="line">try: </span><br><span class="line">    a=request<span class="selector-class">.urlopen</span>(<span class="string">&#x27;http://4399.com/qaz.htm&#x27;</span>)</span><br><span class="line">except error<span class="selector-class">.HTTPError</span> as <span class="selector-tag">b</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="selector-tag">b</span><span class="selector-class">.reason</span>,<span class="selector-tag">b</span><span class="selector-class">.url</span>,<span class="selector-tag">b</span>.code)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Not</span> Found http://www.<span class="number">4399</span>.com/qaz.htm <span class="number">404</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><h5 id="urlparse"><a href="#urlparse" class="headerlink" title="urlparse()"></a>urlparse()</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">urlparse(url, <span class="attribute">scheme</span>=<span class="string">&#x27;&#x27;</span>, <span class="attribute">allow_fragments</span>=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import urllib<span class="selector-class">.parse</span></span><br><span class="line"></span><br><span class="line">a=urllib<span class="selector-class">.parse</span><span class="selector-class">.urlparse</span>(<span class="string">&#x27;http://4399.com/index.html;user?id=1#comment&#x27;</span>)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(a)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ParseResult(<span class="attribute">scheme</span>=<span class="string">&#x27;http&#x27;</span>, <span class="attribute">netloc</span>=<span class="string">&#x27;4399.com&#x27;</span>, <span class="attribute">path</span>=<span class="string">&#x27;/index.html&#x27;</span></span><br><span class="line">, <span class="attribute">params</span>=<span class="string">&#x27;user&#x27;</span>, <span class="attribute">query</span>=<span class="string">&#x27;id=1&#x27;</span>, <span class="attribute">fragment</span>=<span class="string">&#x27;comment&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="urlunparse"><a href="#urlunparse" class="headerlink" title="urlunparse()"></a>urlunparse()</h5><p>与urlparse()对立的方法，传入参数必须为6个</p>
+<h5 id="urlencode"><a href="#urlencode" class="headerlink" title="urlencode()"></a>urlencode()</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import urllib<span class="selector-class">.parse</span></span><br><span class="line"></span><br><span class="line">p=&#123;</span><br><span class="line">    <span class="string">&#x27;aa&#x27;</span>:<span class="string">&#x27;aa&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;bb&#x27;</span>:<span class="string">&#x27;bb&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(<span class="string">&#x27;http://4399.com?&#x27;</span>+urllib.parse.urlencode(p)</span></span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>//<span class="number">4399.</span><span class="keyword">com</span>?aa=aa&amp;bb=bb</span><br></pre></td></tr></table></figure>
+<p>可以用字典来生成get的参数</p>
+<h5 id="parse-qs"><a href="#parse-qs" class="headerlink" title="parse_qs()"></a>parse_qs()</h5><p>与urlencode()相反，将参数转化为字典</p>
+<h5 id="quote"><a href="#quote" class="headerlink" title="quote()"></a>quote()</h5><p>将内容转化为url编码</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import urllib<span class="selector-class">.parse</span></span><br><span class="line"></span><br><span class="line">a=<span class="string">&#x27;紫电&#x27;</span></span><br><span class="line">b=urllib<span class="selector-class">.parse</span><span class="selector-class">.quote</span>(a)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(b)</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span>E<span class="number">7</span><span class="meta">%</span>B<span class="number">4</span><span class="meta">%</span>AB<span class="meta">%</span>E<span class="number">7</span><span class="meta">%</span><span class="number">94</span><span class="meta">%</span>B<span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="unpuote"><a href="#unpuote" class="headerlink" title="unpuote()"></a>unpuote()</h5><p>与quote()相反</p>
+<hr>
+<h2 id="requests使用"><a href="#requests使用" class="headerlink" title="requests使用"></a>requests使用</h2><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def <span class="built_in">get</span>(url, <span class="attribute">params</span>=None, **kwargs)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">a</span>=requests.<span class="built_in">get</span>(<span class="string">&#x27;http://4399.com&#x27;</span>)</span><br><span class="line">print(<span class="keyword">a</span>.<span class="keyword">text</span>)</span><br></pre></td></tr></table></figure>
+<p>若想用post、put、del则直接将get置换之</p>
+<p>json()可将json格式的数据转换为字典</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 简易ip地址查看</span></span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">a</span>=requests.<span class="built_in">get</span>(<span class="string">&#x27;http://httpbin.org/get&#x27;</span>)</span><br><span class="line">print(<span class="keyword">a</span>.json()[<span class="string">&#x27;origin&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>params参数则是传入一个字典转化为参数</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">a=&#123;</span><br><span class="line">    <span class="string">&#x27;as&#x27;</span>:<span class="string">&#x27;sa&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">a=requests<span class="selector-class">.get</span>(<span class="string">&#x27;http://httpbin.org/get&#x27;</span>,params=a)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(a.json()</span></span><span class="selector-attr">[<span class="string">&#x27;url&#x27;</span>]</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">http</span>://httpbin.org/<span class="built_in">get</span>?<span class="keyword">as</span>=sa</span><br></pre></td></tr></table></figure>
+
+<p>添加header与urllib.request.Request()一样,传data不需将其转为bytes</p>
+<h3 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h3><h4 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h4><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">a</span>=requests.<span class="built_in">get</span>(<span class="string">&#x27;http://github.com/favicon.ico&#x27;</span>)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;favicon.ico&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.<span class="built_in">write</span>(<span class="keyword">a</span>.content)</span><br></pre></td></tr></table></figure>
+
+<h4 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">file=&#123;</span><br><span class="line">    <span class="string">&#x27;file&#x27;</span>: <span class="built_in">open</span>(<span class="string">&#x27;favicon.ico&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line">a=requests<span class="selector-class">.post</span>(<span class="string">&#x27;http://httpbin.org/post&#x27;</span>,files=file)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(a.text)</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h4><p>将cookie添加入头部引用即可</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">headers</span>=&#123;</span><br><span class="line">    <span class="string">&#x27;cookie&#x27;</span>: <span class="string">&#x27;cookie&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="requests下cookie保存"><a href="#requests下cookie保存" class="headerlink" title="requests下cookie保存"></a>requests下cookie保存</h4><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">a</span>=requests.<span class="built_in">get</span>(<span class="string">&#x27;http://a.jd.com&#x27;</span>)</span><br><span class="line">b=requests.utils.dict_from_cookiejar(<span class="keyword">a</span>.cookies)    <span class="comment"># cookiejar转dict</span></span><br><span class="line">c=str(b)         <span class="comment"># dict转str</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;cookies.txt&quot;</span>,<span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> d:</span><br><span class="line">    d.<span class="built_in">write</span>(c)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="会话维持"><a href="#会话维持" class="headerlink" title="会话维持"></a>会话维持</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">a=requests<span class="selector-class">.Session</span>()</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-class">.get</span>(<span class="string">&#x27;http://httpbin.org/cookies/set/number/99965&#x27;</span>)</span><br><span class="line">r=<span class="selector-tag">a</span><span class="selector-class">.get</span>(<span class="string">&#x27;http://httpbin.org/cookies&#x27;</span>)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(r.text)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;cookies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;number&quot;</span><span class="punctuation">:</span> <span class="string">&quot;99965&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/khaha/p/8629565.html">dict字典与str字符串互转</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/07/26/%E6%9A%91%E5%81%87%E5%A4%8F%E4%BB%A4%E8%90%A5%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" rel="prev" title="暑假夏令营个人总结">
+                  <i class="fa fa-chevron-left"></i> 暑假夏令营个人总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/08/02/%E2%80%9C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%9D/" rel="next" title="学习正则表达式">
+                  学习正则表达式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

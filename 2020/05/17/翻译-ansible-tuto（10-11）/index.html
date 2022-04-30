@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.notyet.ml","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="翻译: ansible-tuto（10-11) ">
+<meta property="og:url" content="https://blog.notyet.ml/2020/05/17/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8810-11%EF%BC%89/index.html">
+<meta property="og:site_name" content="oneto1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-17T02:08:12.000Z">
+<meta property="article:modified_time" content="2022-04-30T06:22:18.076Z">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="ansible">
+<meta property="article:tag" content="翻译">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.notyet.ml/2020/05/17/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8810-11%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.notyet.ml/2020/05/17/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8810-11%EF%BC%89/","path":"2020/05/17/翻译-ansible-tuto（10-11）/","title":"翻译: ansible-tuto（10-11) "}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>翻译: ansible-tuto（10-11)  | oneto1</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">oneto1</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-杂物堆"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>杂物堆</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#step-10-%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.</span> <span class="nav-text">step-10 模板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HAProxy-%E9%85%8D%E7%BD%AEtemplate%EF%BC%88%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.0.1.</span> <span class="nav-text">HAProxy 配置template（模板)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Haproxy-%E7%9A%84%E5%89%A7%E6%9C%AC"><span class="nav-number">1.0.2.</span> <span class="nav-text">Haproxy 的剧本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#step-11-%E5%86%8D%E6%AC%A1%E6%8E%A2%E7%B4%A2%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">step-11 再次探索变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E8%B0%83%E6%88%91%E4%BB%AC%E7%9A%84-HAProxy-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.0.1.</span> <span class="nav-text">微调我们的 HAProxy 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Group-vars"><span class="nav-number">2.0.2.</span> <span class="nav-text">Group vars</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hosts-vars"><span class="nav-number">2.0.3.</span> <span class="nav-text">Hosts vars</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%A8%A1%E6%9D%BF"><span class="nav-number">2.0.4.</span> <span class="nav-text">更新模板</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description">你说是梦所以才痛 睡醒了再说</div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.notyet.ml/2020/05/17/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8810-11%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oneto1">
+      <meta itemprop="description" content="你说是梦所以才痛 睡醒了再说">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="翻译: ansible-tuto（10-11)  | oneto1">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          翻译: ansible-tuto（10-11) 
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-17 10:08:12" itemprop="dateCreated datePublished" datetime="2020-05-17T10:08:12+08:00">2020-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 14:22:18" itemprop="dateModified" datetime="2022-04-30T14:22:18+08:00">2022-04-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<span id="more"></span>
+
+<h1 id="step-10-模板"><a href="#step-10-模板" class="headerlink" title="step-10 模板"></a>step-10 模板</h1><p>我们将使用 <code>haproxy</code> 作为负载平衡器。 当然，安装就像我们对 apache 所做的一样。 但是现在的配置有点复杂，因为我们需要在 haproxy 的配置中列出所有的 web 服务器。 我们怎么才能做到呢？</p>
+<h3 id="HAProxy-配置template（模板"><a href="#HAProxy-配置template（模板" class="headerlink" title="HAProxy 配置template（模板)"></a>HAProxy 配置template（模板)</h3><p>Ansible 使用了 <a target="_blank" rel="noopener" href="https://jinja.palletsprojects.com/en/2.11.x/">Jinja2</a>, Python 的 一个模板引擎。 当您编写 Jinja2模板时，您可以使用 Ansible 定义的任何变量。</p>
+<p>例如，如果您想输出模板当前生成的主机的库存名称，只需在 <code>jinja</code> 模板中写入 &#96;&amp;#123; inventory hostname &amp;#125; </p>
+<p>或者如果你需要第一个以太网接口的 IP 地址(多亏了 <code>setup</code> 模块，所以ansible 才知道) ，你只需要写:  &amp;#123;&amp;#123; ansible_default_ipv4.address &amp;#125;&amp;#125; (相当于  &amp;#123;&amp;#123; ansible_default_ipv4[‘address’] &amp;#125;&amp;#125; )</p>
+<p>Jinja2模板还支持条件、 for-loop 等。</p>
+<p>让我们创建一个 <code>templates/</code> 目录并在其中创建一个 jinja 模板。 我们称之为<code>haproxy.cfg.j2</code>。 我们使用 <code>.j2</code> 扩展名，以显示这是一个 Jinja2模板，但这是不必要的。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">global</span></span><br><span class="line">    <span class="selector-tag">daemon</span></span><br><span class="line">    <span class="selector-tag">maxconn</span> <span class="number">256</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">defaults</span></span><br><span class="line">    <span class="selector-tag">mode</span> <span class="selector-tag">http</span></span><br><span class="line">    <span class="selector-tag">timeout</span> <span class="selector-tag">connect</span> <span class="number">5000ms</span></span><br><span class="line">    <span class="selector-tag">timeout</span> <span class="selector-tag">client</span> <span class="number">50000ms</span></span><br><span class="line">    <span class="selector-tag">timeout</span> <span class="selector-tag">server</span> <span class="number">50000ms</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">listen</span> <span class="selector-tag">cluster</span></span><br><span class="line">    <span class="selector-tag">bind</span>  <span class="selector-tag">&amp;</span><span class="selector-id">#123</span>; <span class="selector-tag">&amp;</span><span class="selector-id">#123</span>; <span class="selector-tag">ansible_host</span> <span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;<span class="number">80</span></span><br><span class="line">    <span class="selector-tag">mode</span> <span class="selector-tag">http</span></span><br><span class="line">    <span class="selector-tag">stats</span> <span class="selector-tag">enable</span></span><br><span class="line">    <span class="selector-tag">balance</span> <span class="selector-tag">roundrobin</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">&amp;</span><span class="selector-id">#123</span>;% <span class="selector-tag">for</span> <span class="selector-tag">backend</span> <span class="selector-tag">in</span> <span class="selector-tag">groups</span><span class="selector-attr">[<span class="string">&#x27;web&#x27;</span>]</span> %<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;    <span class="selector-tag">server</span>  <span class="selector-tag">&amp;</span><span class="selector-id">#123</span>;<span class="selector-tag">&amp;</span><span class="selector-id">#123</span>; <span class="selector-tag">hostvars</span><span class="selector-attr">[backend]</span><span class="selector-attr">[<span class="string">&#x27;ansible_hostname&#x27;</span>]</span> <span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>; <span class="selector-tag">&amp;</span><span class="selector-id">#123</span>;<span class="selector-tag">&amp;</span><span class="selector-id">#123</span>; <span class="selector-tag">hostvars</span><span class="selector-attr">[backend]</span><span class="selector-class">.ansible_host</span> <span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;<span class="selector-tag">check</span> <span class="selector-tag">port</span> <span class="number">80</span></span><br><span class="line"><span class="selector-tag">&amp;</span><span class="selector-id">#123</span>;% <span class="selector-tag">endfor</span> %<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;    <span class="selector-tag">option</span> <span class="selector-tag">httpchk</span> <span class="selector-tag">HEAD</span> /<span class="selector-tag">index</span><span class="selector-class">.php</span> <span class="selector-tag">HTTP</span>/<span class="number">1.0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>PS： 以上的<code>&amp;#123;</code>为<code>&#123;</code>,<code>&amp;#125;</code>为<code>&#125;</code>，均为markdown语法，这是因为 “&amp;#123;&amp;#123;  &amp;#125;&amp;#125;” 为当前博客模板所使用到的语法，不转义会发生错误</li>
+</ul>
+<p>我们这里有很多新奇事物</p>
+<p>首先，” &amp;#123;&amp;#123; ansible host &amp;#125;&amp;#125;” 将被服务器的第二个 IP 替换，这个 IP 恰好是192.168.33.10。</p>
+<p>然后，我们有一个循环。 此循环用于构建后端服务器列表。 它将循环遍历 <code>[web]组</code> 中列出的每个主机(并将此主机放入后端变量中)。 对于每个主机，它将使用主机的<code>facts</code> 呈现一行。 所有主机的 <code>facts</code> 都在 <code>hostvars</code> 变量中被设置，因此很容易访问其他主机变量(比如它的主机名或在本例中的 IP)。</p>
+<p>我们可以用手写主机列表，因为我们只有两个主机。 但是我们希望这个服务器集群规模能够非常大，我们需要一百个这样的服务器。 因此，向配置中添加服务器或者交换一些服务器可以归结为从 <code>[web]</code> 组中添加或删除主机。</p>
+<h3 id="Haproxy-的剧本"><a href="#Haproxy-的剧本" class="headerlink" title="Haproxy 的剧本"></a>Haproxy 的剧本</h3><p>我们已经完成了这项工作中最困难的部分，编写一个安装和配置 HAproxy 的剧本是一件轻而易举的事情:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">web</span></span><br><span class="line">  <span class="attr">gather_facts:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">haproxy</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Installs</span> <span class="string">haproxy</span> <span class="string">load</span> <span class="string">balancer</span></span><br><span class="line">      <span class="attr">apt:</span></span><br><span class="line">        <span class="attr">pkg:</span> <span class="string">haproxy</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">        <span class="attr">update_cache:</span> <span class="literal">yes</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Pushes</span> <span class="string">configuration</span></span><br><span class="line">      <span class="attr">template:</span></span><br><span class="line">        <span class="attr">src:</span> <span class="string">templates/haproxy.cfg.j2</span></span><br><span class="line">        <span class="attr">dest:</span> <span class="string">/etc/haproxy/haproxy.cfg</span></span><br><span class="line">        <span class="attr">mode:</span> <span class="number">0640</span></span><br><span class="line">        <span class="attr">owner:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">group:</span> <span class="string">root</span></span><br><span class="line">      <span class="attr">notify:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">restart</span> <span class="string">haproxy</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Sets</span> <span class="string">default</span> <span class="string">starting</span> <span class="string">flag</span> <span class="string">to</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">lineinfile:</span></span><br><span class="line">        <span class="attr">dest:</span> <span class="string">/etc/default/haproxy</span></span><br><span class="line">        <span class="attr">regexp:</span> <span class="string">&quot;^ENABLED&quot;</span></span><br><span class="line">        <span class="attr">line:</span> <span class="string">&quot;ENABLED=1&quot;</span></span><br><span class="line">      <span class="attr">notify:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">restart</span> <span class="string">haproxy</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">handlers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">restart</span> <span class="string">haproxy</span></span><br><span class="line">      <span class="attr">service:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">haproxy</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">restarted</span></span><br></pre></td></tr></table></figure>
+
+<p>看起来很眼熟，是吧？ 这里唯一的新模块是 <code>template</code>，它具有与 <code>copy</code> 相同的参数。 我们还将这个剧本限制在 <code>group haproxy</code></p>
+<p>现在… 让我们试试这个。 因为我们的库存只包含集群所需的主机，所以我们不需要限制主机列表，甚至可以同时运行两个剧本。 好吧，说实话，我们必须同时运行这两个服务器，因为 haproxy playbook 需要两个 web 服务器提供 <code>facts</code> 在步骤11中，我们将展示如何避免这种情况。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">$ ansible-playbook -i step-10/hosts step-10/apache.yml step-10/haproxy.yml</span><br><span class="line"></span><br><span class="line">PLAY [web] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">GATHERING FACTS <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">ok: [host1]</span><br><span class="line">ok: [host2]</span><br><span class="line"></span><br><span class="line">TASK: [Updates apt cache] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">ok: [host1]</span></span><br><span class="line"><span class="emphasis">ok: [host2]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Installs necessary packages] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">ok: [host1] =&gt; (item=apache2,libapache2-mod-php,git)</span><br><span class="line">ok: [host2] =&gt; (item=apache2,libapache2-mod-php,git)</span><br><span class="line"></span><br><span class="line">TASK: [Push future default virtual host configuration] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">ok: [host2]</span></span><br><span class="line"><span class="emphasis">ok: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Activates our virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host1]</span><br><span class="line">changed: [host2]</span><br><span class="line"></span><br><span class="line">TASK: [Check that our config is valid] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host1]</span></span><br><span class="line"><span class="emphasis">changed: [host2]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Rolling back - Restoring old default virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">skipping: [host1]</span><br><span class="line">skipping: [host2]</span><br><span class="line"></span><br><span class="line">TASK: [Rolling back - Removing out virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">skipping: [host1]</span></span><br><span class="line"><span class="emphasis">skipping: [host2]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Rolling back - Ending playbook] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">skipping: [host1]</span><br><span class="line">skipping: [host2]</span><br><span class="line"></span><br><span class="line">TASK: [Deploy our awesome application] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">ok: [host2]</span></span><br><span class="line"><span class="emphasis">ok: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Deactivates the default virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host1]</span><br><span class="line">changed: [host2]</span><br><span class="line"></span><br><span class="line">TASK: [Deactivates the default ssl virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host2]</span></span><br><span class="line"><span class="emphasis">changed: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">NOTIFIED: [restart apache] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host2]</span><br><span class="line">changed: [host1]</span><br><span class="line"></span><br><span class="line">PLAY RECAP <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">host1              : ok=10   changed=5    unreachable=0    failed=0</span></span><br><span class="line"><span class="emphasis">host2              : ok=10   changed=5    unreachable=0    failed=0</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">PLAY [haproxy] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line"></span><br><span class="line">GATHERING FACTS <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">ok: [host0]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Installs haproxy load balancer] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host0]</span><br><span class="line"></span><br><span class="line">TASK: [Pushes configuration] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host0]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Sets default starting flag to 1] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host0]</span><br><span class="line"></span><br><span class="line">NOTIFIED: [restart haproxy] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host0]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">PLAY RECAP <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">host0              : ok=5    changed=4    unreachable=0    failed=0</span><br></pre></td></tr></table></figure>
+
+<p>看起来不错，现在去 <a target="_blank" rel="noopener" href="http://192.168.33.10/">http://192.168.33.10/</a> 看看结果，你的集群已经部署好了！</p>
+<p>你甚至可以在 <a target="_blank" rel="noopener" href="http://192.168.33.10/HAProxy?stats">http://192.168.33.10/HAProxy?stats</a> 看到 HAProxy 的统计数据</p>
+<p>现在进入 <code>step-11</code> 中关于“变量”的下一章。</p>
+<h1 id="step-11-再次探索变量"><a href="#step-11-再次探索变量" class="headerlink" title="step-11 再次探索变量"></a>step-11 再次探索变量</h1><p>因此，我们已经设置了负载均衡器，它工作得非常好。 我们从 <code>facts</code> 中获取变量并使用它们来构建配置。 但是 Ansible 也支持其他类型的变量。 我们已经在库存中见过了 <code>ansible_host </code> ，但是现在我们将使用定义在在 <code>host_vars</code> 和 <code>group_vars</code> 文件中的变量。</p>
+<h3 id="微调我们的-HAProxy-配置"><a href="#微调我们的-HAProxy-配置" class="headerlink" title="微调我们的 HAProxy 配置"></a>微调我们的 HAProxy 配置</h3><p>Haproxy 通常检查后端是否是活动的。 当一个后端看起来死了，它就会从后端池中删除，且 HAproxy 不再向它发送请求。</p>
+<p>后端还可以有不同的权重(在0到256之间)。 权重越高，与其他后端相比，后端将接收的连接数量越多。 如果节点的能力不够强大，那么更好地传播流量是很有用的。</p>
+<p>我们将使用变量来配置所有这些参数。</p>
+<h3 id="Group-vars"><a href="#Group-vars" class="headerlink" title="Group vars"></a>Group vars</h3><p>Check interval 将在 haproxy 的 <code>group_vars</code> 文件中设置。 这将确保所有的 <code>haproxy</code> 将继承它。</p>
+<p>我们只需要在库存目录下创建文件 <code>groups_vars/haproxy.yml</code>。 文件必须要以为其定义变量的组命名。 如果我们想为 web 组定义变量，那么这个文件应该命名为 <code>group _vars/web.xml</code></p>
+<p><strong>请注意</strong>。 <code>.yml</code> 是可选的: 我们可以将 haproxy 的组变量文件命名为 <code>groups_vars/haproxy</code> 。这个扩展名只是帮助编辑器选择正确的语法使其高亮。</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">haproxy_check_interval:</span> <span class="number">3000</span></span><br><span class="line"><span class="symbol">haproxy_stats_socket:</span> <span class="keyword">/tmp/</span>sock</span><br></pre></td></tr></table></figure>
+
+<p>这个名字是随意的。 当然，建议使用有意义的名称，这里没有什么必要的语法。 你甚至可以像这样使用 <code>complex variables</code>(也就是 Python dict) :</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">haproxy:</span></span><br><span class="line"><span class="symbol">    check_interval:</span> <span class="number">3000</span></span><br><span class="line"><span class="symbol">    stats_socket:</span> <span class="keyword">/tmp/</span>sock</span><br></pre></td></tr></table></figure>
+
+<p>这只是品味问题。 <code>complex variables</code> 可以更加有逻辑地分组东西。 在某些情况下，它们还可以合并随后定义的键(但是请注意，这不是默认的可合并行为)。 现在我们只使用简单的变量。</p>
+<h3 id="Hosts-vars"><a href="#Hosts-vars" class="headerlink" title="Hosts vars"></a>Hosts vars</h3><p><code>Hosts vars</code> 遵循完全相同的规则，但是文件存储在 <code>host_vars</code> 目录下</p>
+<p>让我们在 <code>hosts_vars/host1.example.com</code> 中定义后端的权重:</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">haproxy_backend_weight</span>: <span class="number">100</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>以及 <code>host_vars/host2.example.com</code>:</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">haproxy_backend_weight</span>: <span class="number">150</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果我们在 <code>group_vars/web</code> 中定义 haproxy 后端权重，它将被用作“缺省” : 在 <code>host_vars</code> 文件中定义的变量将覆盖 <code>group_vars</code> 中定义的变量。</p>
+<h3 id="更新模板"><a href="#更新模板" class="headerlink" title="更新模板"></a>更新模板</h3><p>必须更新模板以使用这些变量。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">global</span></span><br><span class="line">    <span class="selector-tag">daemon</span></span><br><span class="line">    <span class="selector-tag">maxconn</span> <span class="number">256</span></span><br><span class="line"><span class="selector-tag">&amp;</span><span class="selector-id">#123</span>;% <span class="selector-tag">if</span> <span class="selector-tag">haproxy_stats_socket</span> %<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;    <span class="selector-tag">stats</span> <span class="selector-tag">socket</span>  <span class="selector-tag">&amp;</span><span class="selector-id">#123</span>; <span class="selector-tag">&amp;</span><span class="selector-id">#123</span>; <span class="selector-tag">haproxy_stats_socket</span> <span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;<span class="selector-tag">&amp;</span><span class="selector-id">#123</span>;% <span class="selector-tag">endif</span> %<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;</span><br><span class="line"><span class="selector-tag">defaults</span></span><br><span class="line">    <span class="selector-tag">mode</span> <span class="selector-tag">http</span></span><br><span class="line">    <span class="selector-tag">timeout</span> <span class="selector-tag">connect</span> <span class="number">5000ms</span></span><br><span class="line">    <span class="selector-tag">timeout</span> <span class="selector-tag">client</span> <span class="number">50000ms</span></span><br><span class="line">    <span class="selector-tag">timeout</span> <span class="selector-tag">server</span> <span class="number">50000ms</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">listen</span> <span class="selector-tag">cluster</span></span><br><span class="line">    <span class="selector-tag">bind</span>  <span class="selector-tag">&amp;</span><span class="selector-id">#123</span>; <span class="selector-tag">&amp;</span><span class="selector-id">#123</span>; <span class="selector-tag">ansible_all_ipv4_addresses</span><span class="selector-class">.1</span> <span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;<span class="number">80</span></span><br><span class="line">    <span class="selector-tag">mode</span> <span class="selector-tag">http</span></span><br><span class="line">    <span class="selector-tag">stats</span> <span class="selector-tag">enable</span></span><br><span class="line">    <span class="selector-tag">balance</span> <span class="selector-tag">roundrobin</span></span><br><span class="line"><span class="selector-tag">&amp;</span><span class="selector-id">#123</span>;% <span class="selector-tag">for</span> <span class="selector-tag">backend</span> <span class="selector-tag">in</span> <span class="selector-tag">groups</span><span class="selector-attr">[<span class="string">&#x27;web&#x27;</span>]</span> %<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;    <span class="selector-tag">server</span>  <span class="selector-tag">&amp;</span><span class="selector-id">#123</span>; <span class="selector-tag">&amp;</span><span class="selector-id">#123</span>; <span class="selector-tag">hostvars</span><span class="selector-attr">[backend]</span><span class="selector-attr">[<span class="string">&#x27;ansible_hostname&#x27;</span>]</span> <span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>; <span class="selector-tag">&amp;</span><span class="selector-id">#123</span>; <span class="selector-tag">&amp;</span><span class="selector-id">#123</span>; <span class="selector-tag">hostvars</span><span class="selector-attr">[backend]</span><span class="selector-class">.ansible_all_ipv4_addresses</span><span class="selector-class">.1</span> <span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;<span class="selector-tag">check</span> <span class="selector-tag">port</span> <span class="number">80</span></span><br><span class="line"><span class="selector-tag">&amp;</span><span class="selector-id">#123</span>;% <span class="selector-tag">endfor</span> %<span class="selector-tag">&amp;</span><span class="selector-id">#125</span>;    <span class="selector-tag">option</span> <span class="selector-tag">httpchk</span> <span class="selector-tag">HEAD</span> /<span class="selector-tag">index</span><span class="selector-class">.php</span> <span class="selector-tag">HTTP</span>/<span class="number">1.0</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>，我们还引入了<code>&amp;#123;% if...</code> 。 只有在测试为真时，才会使用这个封闭的块。 因此，如果我们在某个地方为负载均衡器定义了 <code>haproxy_stats_socket</code> (我们甚至可以在命令行中使用 <code>--extra-vars“ haproxy_stats_sockets /tmp/sock” </code>) ，那么封闭其中的配置行将出现在生成的配置文件中(注意，建议的设置非常不安全!) </p>
+<p>让我们试试看</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ansible-playbook -i <span class="keyword">step</span>-<span class="number">11</span><span class="regexp">/hosts step-11/</span>haproxy.yml</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>请注意，虽然我们可以，但是没有必要运行 apache 的剧本，因为什么都没有改变，但是我们不得不为此作弊。 以下是最新的 haproxy 剧本:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">web</span></span><br><span class="line">  <span class="attr">gather_facts:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">haproxy</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Installs</span> <span class="string">haproxy</span> <span class="string">load</span> <span class="string">balancer</span></span><br><span class="line">      <span class="attr">apt:</span></span><br><span class="line">        <span class="attr">pkg:</span> <span class="string">haproxy</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">        <span class="attr">update_cache:</span> <span class="literal">yes</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Pushes</span> <span class="string">configuration</span></span><br><span class="line">      <span class="attr">template:</span></span><br><span class="line">        <span class="attr">src:</span> <span class="string">templates/haproxy.cfg.j2</span></span><br><span class="line">        <span class="attr">dest:</span> <span class="string">/etc/haproxy/haproxy.cfg</span></span><br><span class="line">        <span class="attr">mode:</span> <span class="number">0640</span></span><br><span class="line">        <span class="attr">owner:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">group:</span> <span class="string">root</span></span><br><span class="line">      <span class="attr">notify:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">restart</span> <span class="string">haproxy</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Sets</span> <span class="string">default</span> <span class="string">starting</span> <span class="string">flag</span> <span class="string">to</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">lineinfile:</span></span><br><span class="line">        <span class="attr">dest:</span> <span class="string">/etc/default/haproxy</span></span><br><span class="line">        <span class="attr">regexp:</span> <span class="string">&quot;^ENABLED&quot;</span></span><br><span class="line">        <span class="attr">line:</span> <span class="string">&quot;ENABLED=1&quot;</span></span><br><span class="line">      <span class="attr">notify:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">restart</span> <span class="string">haproxy</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">handlers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">restart</span> <span class="string">haproxy</span></span><br><span class="line">      <span class="attr">service:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">haproxy</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">restarted</span></span><br></pre></td></tr></table></figure>
+
+<p>看到了吗？ 我们在顶部为 web 主机添加了一个空的剧本。 它除了收集 <code>facts</code> 以外什么也不做。 但是它必须在这里，因为它将触发 <code>facts</code> 收集在主机上的群组网络。 这是必要的，因为 haproxy playbook 需要从这个组的主机中选择 <code>facts</code> 。 如果我们不这样做，ansible 可能会抱怨说 <code>ansible_all_ipv4_addresses </code>都不存在</p>
+<p>请注意，我们已经在前面的步骤中提到了这一点，但是我们没有提到它。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/ansible/" rel="tag"># ansible</a>
+              <a href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag"># 翻译</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/16/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8808-09%EF%BC%89/" rel="prev" title="翻译: ansible-tuto（08-09）">
+                  <i class="fa fa-chevron-left"></i> 翻译: ansible-tuto（08-09）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/05/18/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8812-13%EF%BC%89/" rel="next" title="翻译: ansible-tuto（12-13）">
+                  翻译: ansible-tuto（12-13） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.notyet.ml","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="翻译: ansible-tuto（02-03）">
+<meta property="og:url" content="https://blog.notyet.ml/2020/05/10/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8802-03%EF%BC%89/index.html">
+<meta property="og:site_name" content="oneto1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-10T12:32:28.000Z">
+<meta property="article:modified_time" content="2022-04-30T06:22:18.074Z">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="ansible">
+<meta property="article:tag" content="翻译">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.notyet.ml/2020/05/10/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8802-03%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.notyet.ml/2020/05/10/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8802-03%EF%BC%89/","path":"2020/05/10/翻译-ansible-tuto（02-03）/","title":"翻译: ansible-tuto（02-03）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>翻译: ansible-tuto（02-03） | oneto1</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">oneto1</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-杂物堆"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>杂物堆</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#step-02-talking-to-nodes"><span class="nav-number">1.</span> <span class="nav-text">step-02 talking to nodes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9A%E4%BA%9B%E6%9C%89%E7%94%A8%E7%9A%84%E4%BA%8B%E6%83%85"><span class="nav-number">1.0.1.</span> <span class="nav-text">做些有用的事情</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell%E6%A8%A1%E5%9D%97"><span class="nav-number">1.0.2.</span> <span class="nav-text">shell模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#copy%E6%A8%A1%E5%9D%97"><span class="nav-number">1.0.3.</span> <span class="nav-text">copy模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E4%B8%8D%E5%90%8C%E7%9A%84%E4%B8%BB%E6%9C%BA%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%90%8C%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">1.0.4.</span> <span class="nav-text">对不同的主机使用相同的命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A%E7%9A%84facts%EF%BC%88%E4%BF%A1%E6%81%AF%EF%BC%89"><span class="nav-number">1.0.5.</span> <span class="nav-text">更多的facts（信息）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E4%B8%BB%E6%9C%BA"><span class="nav-number">1.0.6.</span> <span class="nav-text">选择主机</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#step-03-%E4%B8%BB%E6%9C%BA%E7%BB%84"><span class="nav-number">2.</span> <span class="nav-text">step-03 主机组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="nav-number">2.0.1.</span> <span class="nav-text">设置变量</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description">你说是梦所以才痛 睡醒了再说</div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.notyet.ml/2020/05/10/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8802-03%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oneto1">
+      <meta itemprop="description" content="你说是梦所以才痛 睡醒了再说">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="翻译: ansible-tuto（02-03） | oneto1">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          翻译: ansible-tuto（02-03）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-10 20:32:28" itemprop="dateCreated datePublished" datetime="2020-05-10T20:32:28+08:00">2020-05-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 14:22:18" itemprop="dateModified" datetime="2022-04-30T14:22:18+08:00">2022-04-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<span id="more"></span>
+
+
+<h1 id="step-02-talking-to-nodes"><a href="#step-02-talking-to-nodes" class="headerlink" title="step-02 talking to nodes"></a>step-02 talking to nodes</h1><p>现在我们可以开始了。 让我们用上一章中看到的命令: <code>anable</code> 这个命令是ansible提供的与节点交互的三个命令中的一个</p>
+<h3 id="做些有用的事情"><a href="#做些有用的事情" class="headerlink" title="做些有用的事情"></a>做些有用的事情</h3><p>在前面的命令中,<code>-m ping</code> 的意思是“使用 ping模块”，这个模块是可用的许多模块之一。 <code>Ping</code> 模块非常简单，不需要任何参数。 接受参数的模块通过 <code>-a</code> 来传递参数，让我们看看其他一些模块</p>
+<h3 id="shell模块"><a href="#shell模块" class="headerlink" title="shell模块"></a>shell模块</h3><p>这个模块允许你在远程主机上执行一个 shell 命令:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ansible -i step<span class="number">-02</span>/hosts -m <span class="built_in">shell</span> -<span class="keyword">a</span> <span class="string">&#x27;uname -a&#x27;</span> host0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>输出应该是这样的:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>cool!</p>
+<h3 id="copy模块"><a href="#copy模块" class="headerlink" title="copy模块"></a>copy模块</h3><p>毫无疑问，使用这个模块，您可以将文件从控制机复制到节点，假设我们要将 <code>/etc/hosts</code> 复制到目标节点的 <code>/tmp</code>:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible -i <span class="keyword">step</span>-<span class="number">02</span><span class="regexp">/hosts -m copy -a &#x27;src=/</span>etc<span class="regexp">/hosts dest=/</span>tmp/<span class="string">&#x27; host0</span></span><br></pre></td></tr></table></figure>
+
+<p>输出应该类似于:</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">host0 <span class="string">| success &gt;&gt; &#123;</span></span><br><span class="line">    <span class="string">&quot;changed&quot;</span>: true,</span><br><span class="line">    <span class="string">&quot;dest&quot;</span>: <span class="string">&quot;/tmp/hosts&quot;</span>,</span><br><span class="line">    <span class="string">&quot;group&quot;</span>: <span class="string">&quot;root&quot;</span>,</span><br><span class="line">    <span class="string">&quot;md5sum&quot;</span>: <span class="string">&quot;d41d8cd98f00b204e9800998ecf8427e&quot;</span>,</span><br><span class="line">    <span class="string">&quot;mode&quot;</span>: <span class="string">&quot;0644&quot;</span>,</span><br><span class="line">    <span class="string">&quot;owner&quot;</span>: <span class="string">&quot;root&quot;</span>,</span><br><span class="line">    <span class="string">&quot;size&quot;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&quot;src&quot;</span>: <span class="string">&quot;/root/.ansible/tmp/ansible-1362910475.9-246937081757218/source&quot;</span>,</span><br><span class="line">    <span class="string">&quot;state&quot;</span>: <span class="string">&quot;file&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Ansible (更准确地说是在节点上执行的复制模块)以 JSON 格式回复了大量有用的信息,我们稍后将看到如何使用它。</p>
+<p>我们将在下面看到其他有用的模块,有一个巨大的[模块仓库](<a target="_blank" rel="noopener" href="https://docs.ansible.com/ansible/latest/modules/list_of_all_modules.html%EF%BC%89%EF%BC%8C%E5%87%A0%E4%B9%8E%E6%B6%B5%E7%9B%96%E4%BA%86%E4%BD%A0%E5%8F%AF%E4%BB%A5%E5%9C%A8%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%81%9A%E7%9A%84%E4%BB%BB%E4%BD%95%E4%BA%8B%E6%83%85%E3%80%82">https://docs.ansible.com/ansible/latest/modules/list_of_all_modules.html），几乎涵盖了你可以在系统上做的任何事情。</a> 如果您找不到合适的模块，那么编写一个模块非常简单(甚至不必是 Python，只需要使用 JSON)</p>
+<h3 id="对不同的主机使用相同的命令"><a href="#对不同的主机使用相同的命令" class="headerlink" title="对不同的主机使用相同的命令"></a>对不同的主机使用相同的命令</h3><p>好的，上面的内容很有趣，但是我们有很多节点需要管理。让我们在其他主机上也尝试一下</p>
+<p>让我们假设我们想要得到一些关于节点的信息，例如，想知道我们在节点上部署了哪个 Ubuntu 版本，这很简单:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ansible -<span class="selector-tag">i</span> step-<span class="number">02</span>/hosts -m shell -<span class="selector-tag">a</span> <span class="string">&#x27;grep DISTRIB_RELEASE /etc/lsb-release&#x27;</span> <span class="attribute">all</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>All 是一个快捷方式，意思是“在目录文件中找到的所有主机”。它会返回:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">host1 | success | <span class="attribute">rc</span>=0 &gt;&gt;</span><br><span class="line"><span class="attribute">DISTRIB_RELEASE</span>=14.04</span><br><span class="line"></span><br><span class="line">host2 | success | <span class="attribute">rc</span>=0 &gt;&gt;</span><br><span class="line"><span class="attribute">DISTRIB_RELEASE</span>=14.04</span><br><span class="line"></span><br><span class="line">host0 | success | <span class="attribute">rc</span>=0 &gt;&gt;</span><br><span class="line"><span class="attribute">DISTRIB_RELEASE</span>=14.04</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="更多的facts（信息）"><a href="#更多的facts（信息）" class="headerlink" title="更多的facts（信息）"></a>更多的facts（信息）</h3><p>这很简单，然而，如果我们想要更多的信息(ip 地址，RAM 大小等等)，它会很快变得很麻烦. 这个解决方案来自另一个非常方便的模块，叫做<code>setup</code>: 它专门收集节点的facts（信息）</p>
+<p>尝试一下:</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ansible -i step<span class="number">-02</span>/hosts -m setup host0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>提供大量信息:</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;ansible_facts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;ansible_all_ipv4_addresses&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;192.168.0.60&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;ansible_all_ipv6_addresses&quot;</span>: [],</span><br><span class="line">    <span class="string">&quot;ansible_architecture&quot;</span>: <span class="string">&quot;x86_64&quot;</span>,</span><br><span class="line">    <span class="string">&quot;ansible_bios_date&quot;</span>: <span class="string">&quot;01/01/2007&quot;</span>,</span><br><span class="line">    <span class="string">&quot;ansible_bios_version&quot;</span>: <span class="string">&quot;Bochs&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">---snip---</span></span><br><span class="line">    <span class="string">&quot;ansible_virtualization_role&quot;</span>: <span class="string">&quot;guest&quot;</span>,</span><br><span class="line">    <span class="string">&quot;ansible_virtualization_type&quot;</span>: <span class="string">&quot;kvm&quot;</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">&quot;changed&quot;</span>: <span class="literal">false</span>,</span><br><span class="line"><span class="string">&quot;verbose_override&quot;</span>: <span class="literal">true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>为了简短起见，对它进行了截断，但是您可以在返回的数据中找到许多有趣的,您还可以过滤返回的键，以防您正在寻找某些特定的东西。</p>
+<p>例如，让我们假设你想知道你在所有主机上有多少内存，简单地使用 <code>ansible -i step-02/hosts -m setup -a &quot;filter= ansible_memtotal_mb&quot; all:</code></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">host2 <span class="string">| success &gt;&gt; &#123;</span></span><br><span class="line">    <span class="string">&quot;ansible_facts&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;ansible_memtotal_mb&quot;</span>: <span class="number">187</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;changed&quot;</span>: false</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">host1 <span class="string">| success &gt;&gt; &#123;</span></span><br><span class="line">    <span class="string">&quot;ansible_facts&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;ansible_memtotal_mb&quot;</span>: <span class="number">187</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;changed&quot;</span>: false</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">host0 <span class="string">| success &gt;&gt; &#123;</span></span><br><span class="line">    <span class="string">&quot;ansible_facts&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;ansible_memtotal_mb&quot;</span>: <span class="number">187</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;changed&quot;</span>: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>请注意，与前面的输出相比，主机的回复顺序不同，这是因为 ansible 与主机的通信是并行化的！</p>
+<p>顺便说一句，在使用 <code>setup</code> 模块时，可以在 <code>filter=</code> 表达式中使用 <code>*</code>，它与<code>shell</code>相似</p>
+<h3 id="选择主机"><a href="#选择主机" class="headerlink" title="选择主机"></a>选择主机</h3><p>我们看到 <code>all</code> 意味着所有的主机，但 ansible 提供了许多其他的方法来<a target="_blank" rel="noopener" href="https://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html">选择主机</a>:</p>
+<ul>
+<li><code>host0:host1</code>  将在 host0和 host1上运行</li>
+<li><code>host*</code> host开头的主机都会运行 (就像 shell语法一样)</li>
+</ul>
+<p>还有其他涉及主机组的方式，我们将在step-03中看到。</p>
+<h1 id="step-03-主机组"><a href="#step-03-主机组" class="headerlink" title="step-03 主机组"></a>step-03 主机组</h1><p>库存中的主机可以任意分组，例如，您可以有一个 <code>debian</code> 组、一个 <code>web-server</code> 组、一个 <code>production</code> 组等等</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[debian]</span></span><br><span class="line">host0</span><br><span class="line">host1</span><br><span class="line">host2</span><br></pre></td></tr></table></figure>
+
+<p>这甚至可以用更简短的方式来表达:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[debian]</span></span><br><span class="line">host<span class="selector-attr">[0:2]</span></span><br></pre></td></tr></table></figure>
+
+<p>如果您希望使用子组，只需定义一个 <code>[ groupname: children ]</code> 并在其中添加子组，例如，假设我们有不同发行版的 linux 运行，我们可以这样组织我们的库存:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[ubuntu]</span></span><br><span class="line">host0</span><br><span class="line"></span><br><span class="line"><span class="selector-attr">[debian]</span></span><br><span class="line">host<span class="selector-attr">[1:2]</span></span><br><span class="line"></span><br><span class="line"><span class="selector-attr">[linux:children]</span></span><br><span class="line">ubuntu</span><br><span class="line">debian</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置变量"><a href="#设置变量" class="headerlink" title="设置变量"></a>设置变量</h3><p>您可以在几个地方为主机分配变量: 库存文件、主机变量文件、组 v变量文件等等</p>
+<p>我通常将大部分变量设置在组变量或主机变量文件中(稍后将详细介绍)。但是，我经常直接在目录文件中使用一些变量，比如<code>ansible_host</code> 可以为主机设置 IP 地址。 默认情况下，Ansible 会在通过 SSH 连接时尝试解析主机的名称。 当在你启动一个主机时，它可能还没有一个确定的 IP 地址，<code>ansible_host</code> 用在这里很方便</p>
+<p>当使用 <code>ansible</code> 或 <code>ansible-playbook</code> 命令时，也可以使用参数 <code>--extra-vars</code> (或<code>-e</code>)来设置变量，作为空格分隔的<code>key=val</code> 列表(对于每个变量的初始化，可以多次使用该方法)。 我们将在下一步讨论<code>ansible-playbook</code></p>
+<p>您可以猜到，<code>ansible_port</code>指定一个 SSH 端口尝试连接</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu]</span><br><span class="line">host0 <span class="attribute">ansible_host</span>=192.168.0.12 <span class="attribute">ansible_port</span>=2222</span><br></pre></td></tr></table></figure>
+
+<p>Ansible 将在组和主机变量文件中查找其他变量定义,这些文件在主目录文件所在的目录下的 <code>group_vars</code> 和 <code>host_vars</code> 的目录中搜索</p>
+<p>文件将按名称搜索，例如，使用前面提到的库存文件，<code>host0</code>变量将在这些文件中搜索</p>
+<ul>
+<li><code>group_vars/linux</code></li>
+<li><code>group_vars/ubuntu</code></li>
+<li><code>host_vars/host0</code><br>~~~<br>这些文件是否存在并不重要，但是如果它们存在，ansible 将使用它们</li>
+</ul>
+<p>现在我们已经了解了模块、库存和变量的基本知识，让我们通过剧本来探索 Ansible 的真正力量</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/ansible/" rel="tag"># ansible</a>
+              <a href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag"># 翻译</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/10/LVS%E5%AD%A6%E4%B9%A0/" rel="prev" title="LVS学习">
+                  <i class="fa fa-chevron-left"></i> LVS学习
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/05/13/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8804-05%EF%BC%89/" rel="next" title="翻译: ansible-tuto（04-05）">
+                  翻译: ansible-tuto（04-05） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

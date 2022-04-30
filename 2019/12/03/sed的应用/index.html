@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.notyet.ml","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="sed的应用">
+<meta property="og:url" content="https://blog.notyet.ml/2019/12/03/sed%E7%9A%84%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="oneto1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.notyet.ml/images/20191208=0.png">
+<meta property="article:published_time" content="2019-12-03T07:47:10.000Z">
+<meta property="article:modified_time" content="2022-04-30T06:22:18.070Z">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="sed">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.notyet.ml/images/20191208=0.png">
+
+
+<link rel="canonical" href="https://blog.notyet.ml/2019/12/03/sed%E7%9A%84%E5%BA%94%E7%94%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.notyet.ml/2019/12/03/sed%E7%9A%84%E5%BA%94%E7%94%A8/","path":"2019/12/03/sed的应用/","title":"sed的应用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>sed的应用 | oneto1</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">oneto1</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-杂物堆"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>杂物堆</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description">你说是梦所以才痛 睡醒了再说</div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.notyet.ml/2019/12/03/sed%E7%9A%84%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oneto1">
+      <meta itemprop="description" content="你说是梦所以才痛 睡醒了再说">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="sed的应用 | oneto1">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sed的应用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-12-03 15:47:10" itemprop="dateCreated datePublished" datetime="2019-12-03T15:47:10+08:00">2019-12-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 14:22:18" itemprop="dateModified" datetime="2022-04-30T14:22:18+08:00">2022-04-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<span id="more"></span>
+
+<p>sed每次处理的单位是一行</p>
+<p>sed默认并不修改实际文件，若需修改加上参数 -i 或加上重定向</p>
+<p>替换|删除|新增|打印|插入<br>:–:|:–:|:–:|:–:|:–:|:–:<br>s&#x2F;old&#x2F;new&#x2F; | nd(n为行号) | a | 1，5p | i </p>
+<p>替换指定内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"> <span class="built_in">echo</span> <span class="string">&quot;123 123 123&quot;</span> &gt; 123</span></span><br><span class="line">123 123 123 </span><br><span class="line"></span><br><span class="line">sed -e &#x27;s/123/!/  123</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">! 123 123</span></span><br><span class="line"></span><br><span class="line">sed &#x27;s/123/!/g  123</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">! ! !</span></span><br><span class="line"></span><br><span class="line">可见末尾加g是全匹配的</span><br></pre></td></tr></table></figure>
+
+
+<p>参数 -e 后面接的是要处理的表达式    </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> 删除第一第二行</span><br><span class="line">sed -e <span class="string">&quot;1d&quot;</span> -e <span class="string">&quot;2d&quot;</span>   </span><br></pre></td></tr></table></figure>
+
+<p>删除首部为字母的行  </p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">&#x27;/^[A-Z]/d&#x27;</span></span><br><span class="line"></span><br><span class="line">^为锚点的一种，意思是从最开始匹配，而另一种是<span class="variable">$，</span>是末尾匹配</span><br></pre></td></tr></table></figure>
+
+<p>删除末尾n个字符  </p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sed  &#x27;s/<span class="symbol">\(</span>.*<span class="symbol">\)</span><span class="symbol">\(</span>.\&#123;7\&#125;<span class="symbol">\)</span>/\1/g&#x27;</span><br><span class="line"></span><br><span class="line">()为分组，\1为一分组，\2为二分组，上句为将字符</span><br><span class="line">分为两组（一组为要保留的，另一组为要删除的，s/ 则是将</span><br><span class="line">原先字符替换为 \1分组内的内容 （要保留的） </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意在grep 、sed内 使用正则时特殊符号要加转义，或加上参数 -r</li>
+<li>需要加转义的符号：<br>（ ） { }  \ </li>
+<li>曾经付出惨痛代价，一度怀疑我用的是假的</li>
+</ul>
+<p>也可以在一个表达式中执行多个命令,用；分开</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sed -e <span class="string">&#x27;s/123/!/;p&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$ </span>! <span class="number">123</span> <span class="number">123</span></span><br><span class="line"><span class="variable">$ </span>! <span class="number">123</span> <span class="number">123</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>样例分析<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">原始数据:</span><br><span class="line">74<span class="string">-67</span>-F7<span class="string">-53</span><span class="string">-8</span>A-A4 NY6<span class="string">-416</span><span class="string">-538</span>AA4       ap6522   v4022                6 days, 0:30:23</span><br><span class="line">74<span class="string">-67</span>-F7-BE-C5<span class="string">-38</span> BJ9<span class="string">-510</span>-BEC538       ap6522   v4018                2 days, 1:15:39</span><br><span class="line">74<span class="string">-67</span>-F7-AC-BA-BC BJ8<span class="string">-523</span>-ACBABC       ap6522   v4017                unknown              None</span><br><span class="line">74<span class="string">-67</span>-F7<span class="string">-52</span><span class="string">-3</span>E-F8 NY6<span class="string">-406</span><span class="string">-523</span>EF8       ap6522   v4022                6 days, 0:29:38</span><br><span class="line">74<span class="string">-67</span>-F7-B7-C1<span class="string">-8</span>C BJ9<span class="string">-421</span>-B7C18C       ap6522   v4018                2 days, 1:15:39</span><br><span class="line">74<span class="string">-67</span>-F7-AF-B2-C4 BJ8<span class="string">-508</span>-AFB2C4       ap6522   v4017                unknown              None</span><br><span class="line">74<span class="string">-67</span>-F7<span class="string">-53</span><span class="string">-87</span><span class="string">-28</span> NY6<span class="string">-402</span><span class="string">-538728</span>       ap6522   v4022                6 days, 0:30:08</span><br><span class="line">74<span class="string">-67</span>-F7<span class="string">-52</span>-CC<span class="string">-98</span> NY6<span class="string">-407</span><span class="string">-52</span>CC98       ap6522   v4022                6 days, 0:30:23</span><br><span class="line"></span><br><span class="line">......</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>刚开始干这个的时候需要复制到word里一个一个查找出需要的信息并手动排版，虽然不难，但心累啊</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&#x27;NY&#x27;</span>  sedtest \                 ## grep 用于筛选  </span><br><span class="line">|  sed <span class="string">&#x27;s/^.*NY//&#x27;</span>  \                ## 删除 NY之前的字符</span><br><span class="line">|  sed <span class="string">&#x27;s/ap.*//&#x27;</span> \                  ## 由于ap 前的mac地址为随机的，故先删除ap后面的</span><br><span class="line">|  sed <span class="string">&#x27;s/\(.*\)\(.\&#123;6\&#125;\)/\1/g&#x27;</span>     ## 删除最后面<span class="number">6</span>个空格</span><br><span class="line">|  sed <span class="string">&#x27;/^[A-Z]/d&#x27;</span> |sed <span class="string">&#x27;s/ //&#x27;</span> \    ## 删除字母开头的行</span><br><span class="line">|  sed <span class="string">&#x27;s/\(.*\)\(.\&#123;7\&#125;\)/\1/&#x27;</span> \    ## 去掉数字后的mac地址</span><br><span class="line">|  sed <span class="string">&#x27;$!N;s/\n/\t/&#x27;</span>\               ## 将每两行合并为一行</span><br><span class="line">|  sed <span class="string">&#x27;$!N;s/\n/\t/&#x27;</span> \              ## 将每两行合并为一行</span><br><span class="line">|  sed <span class="string">&#x27;1s/^/南院: \n/&#x27;</span> \            ## 在开头添加字样</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/461191/what-is-the-meaning-of-an-in-a-sed-command">What is the meaning of :a;$!N; in a sed command?</a><br><a target="_blank" rel="noopener" href="https://blog.51cto.com/goome/1749171">关于合并两行为什么是 sed ‘$!N;s&#x2F;\n&#x2F;\t&#x2F;‘</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jjzd/p/6892891.html?utm_source=itdadao&utm_medium=referral">sed行处理详解(交换行,合并行,删除行等)</a></p>
+<ul>
+<li>nl 命令可在每一行前加序号</li>
+</ul>
+<p>回顾下正则<br><img src="/images/20191208=0.png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/sed/" rel="tag"># sed</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/12/01/%E5%88%B7%E9%A2%98%E5%B0%8F%E6%80%BB%E7%BB%93%E4%B9%8B%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" rel="prev" title="刷题小总结之二分搜索">
+                  <i class="fa fa-chevron-left"></i> 刷题小总结之二分搜索
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/12/21/linux-%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91%E8%AE%B0/" rel="next" title="linux 软件安装踩坑记">
+                  linux 软件安装踩坑记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

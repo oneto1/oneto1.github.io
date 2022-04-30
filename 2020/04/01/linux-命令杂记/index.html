@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.notyet.ml","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="linux 命令杂记">
+<meta property="og:url" content="https://blog.notyet.ml/2020/04/01/linux-%E5%91%BD%E4%BB%A4%E6%9D%82%E8%AE%B0/index.html">
+<meta property="og:site_name" content="oneto1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-01T14:48:57.000Z">
+<meta property="article:modified_time" content="2022-04-30T06:22:18.074Z">
+<meta property="article:tag" content="linxu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.notyet.ml/2020/04/01/linux-%E5%91%BD%E4%BB%A4%E6%9D%82%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.notyet.ml/2020/04/01/linux-%E5%91%BD%E4%BB%A4%E6%9D%82%E8%AE%B0/","path":"2020/04/01/linux-命令杂记/","title":"linux 命令杂记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>linux 命令杂记 | oneto1</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">oneto1</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-杂物堆"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>杂物堆</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#grep"><span class="nav-number">1.</span> <span class="nav-text">grep</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE"><span class="nav-number">2.0.1.</span> <span class="nav-text">备份数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%8C%BA"><span class="nav-number">2.0.2.</span> <span class="nav-text">分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%AE%B9"><span class="nav-number">2.0.3.</span> <span class="nav-text">扩容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swap"><span class="nav-number">2.0.4.</span> <span class="nav-text">swap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD"><span class="nav-number">2.0.5.</span> <span class="nav-text">挂载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#uuid"><span class="nav-number">2.0.6.</span> <span class="nav-text">uuid</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grub"><span class="nav-number">3.</span> <span class="nav-text">grub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#brightness"><span class="nav-number">4.</span> <span class="nav-text">brightness</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4"><span class="nav-number">5.</span> <span class="nav-text">启动时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zabbix"><span class="nav-number">6.</span> <span class="nav-text">zabbix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NAT%E8%BD%AC%E6%8D%A2"><span class="nav-number">6.0.1.</span> <span class="nav-text">NAT转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#snmp"><span class="nav-number">6.0.2.</span> <span class="nav-text">snmp</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lol%E5%AE%89%E8%A3%85"><span class="nav-number">7.</span> <span class="nav-text">lol安装</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description">你说是梦所以才痛 睡醒了再说</div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.notyet.ml/2020/04/01/linux-%E5%91%BD%E4%BB%A4%E6%9D%82%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oneto1">
+      <meta itemprop="description" content="你说是梦所以才痛 睡醒了再说">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="linux 命令杂记 | oneto1">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux 命令杂记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-04-01 22:48:57" itemprop="dateCreated datePublished" datetime="2020-04-01T22:48:57+08:00">2020-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 14:22:18" itemprop="dateModified" datetime="2022-04-30T14:22:18+08:00">2022-04-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<span id="more"></span>
+
+<h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h1><p>根据某个字符串，查询该字符串前后文本信息命令：grep-A|B n”key”file</p>
+<p>其中：<br>    A：表示在字符串之后 after  context<br>    B：表示在字符串之前 before context<br>    n：要获取多少行文本 line number</p>
+<p>实例：grep -A 100 -B 100 -i ‘111’ catalina.out</p>
+<ul>
+<li>-i表示忽略大小写。</li>
+</ul>
+<p>当然，如果我们想获取异常日志的前10行和后10行，不用加-A和-B，使用如下命令就可以了：</p>
+<ul>
+<li>实例：grep -10 -i ‘111’ catalina.out</li>
+</ul>
+<h1 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h1><p>mke2fs -t ext4 &#x2F;dev&#x2F;name</p>
+<p>mkfs</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkfs           mkfs<span class="selector-class">.cramfs</span>    mkfs<span class="selector-class">.ext3</span>      mkfs<span class="selector-class">.hfs</span>       mkfs<span class="selector-class">.minix</span>     mkfs<span class="selector-class">.reiserfs</span></span><br><span class="line">mkfs<span class="selector-class">.bfs</span>       mkfs<span class="selector-class">.exfat</span>     mkfs<span class="selector-class">.ext4</span>      mkfs<span class="selector-class">.hfsplus</span>   mkfs<span class="selector-class">.msdos</span>     mkfs<span class="selector-class">.vfat</span>    </span><br><span class="line">mkfs<span class="selector-class">.btrfs</span>     mkfs<span class="selector-class">.ext2</span>      mkfs<span class="selector-class">.fat</span>       mkfs<span class="selector-class">.jfs</span>       mkfs<span class="selector-class">.ntfs</span>      mkfs<span class="selector-class">.xfs</span>  </span><br></pre></td></tr></table></figure>
+
+<h3 id="备份数据"><a href="#备份数据" class="headerlink" title="备份数据"></a>备份数据</h3><p>rsync </p>
+<blockquote>
+<p>  Transfer files either to or from a remote host (not between two remote hosts).<br>  Can transfer single files, or multiple files matching a pattern.</p>
+</blockquote>
+<ul>
+<li>可用来转移数据,传输文件</li>
+</ul>
+<p><code>rsync -av </code>原地址 目的地址</p>
+<ul>
+<li>a包含文件所有信息(This is equivalent to -rlptgoD),如原本权限,修改时间,子目录等等</li>
+<li>v为显示传输过程,P为更为详细的信息输出</li>
+</ul>
+<p>既可以拉取数据,也可以发送数据</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Pull: rsync <span class="comment">[OPTION...]</span> <span class="comment">[USER@]</span>HOST:SRC... <span class="comment">[DEST]</span></span><br><span class="line">Push: rsync <span class="comment">[OPTION...]</span> SRC... <span class="comment">[USER@]</span>HOST:DEST</span><br></pre></td></tr></table></figure>
+
+<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><p>查看分区信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line"></span><br><span class="line"><span class="built_in">df</span> -h</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>具体分区操作</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/设备名</span><br><span class="line"></span><br><span class="line"><span class="symbol">:p</span>  查看设备分区情况</span><br><span class="line"><span class="symbol">:F</span>  查看设备未分区的块</span><br><span class="line"><span class="symbol">:d</span>  删除一个分区</span><br><span class="line"><span class="symbol">:n</span>  建立一个分区</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建完分区记得创建文件系统</li>
+</ul>
+<h3 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h3><p>resize2fs   &#x2F;dev&#x2F;mapper&#x2F;cl00-root  </p>
+<h3 id="swap"><a href="#swap" class="headerlink" title="swap"></a>swap</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/FengGeBlog/p/10239067.html">https://www.cnblogs.com/FengGeBlog/p/10239067.html</a></p>
+<h3 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h3><p>开机自动挂载需修改<code>/etc/fstab</code></p>
+<h3 id="uuid"><a href="#uuid" class="headerlink" title="uuid"></a>uuid</h3><p>blkid &#x2F;dev&#x2F;name</p>
+<h1 id="grub"><a href="#grub" class="headerlink" title="grub"></a>grub</h1><p>quit 为简单输出</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">GRUB_CMDLINE_LINUX_DEFAULT</span>=<span class="string">&quot;quiet splash&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>为默认启动内核参数,一直有效(包括救援模式)</li>
+<li>splash 为显示linux发行版logo</li>
+</ul>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX<span class="operator">=</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>为救援模式的启动参数</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/etc/</span><span class="keyword">default</span>/grub</span><br><span class="line">update-grub</span><br></pre></td></tr></table></figure>
+
+<p>或在开机出现logo前按ESC再按e可修改启动参数(本次启动有效)</p>
+<h1 id="brightness"><a href="#brightness" class="headerlink" title="brightness"></a>brightness</h1><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">systemctl</span> <span class="built_in">list-units</span> | <span class="string">grep</span> <span class="string">backlight</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>发现一个启动失败,可能是发生了冲突</li>
+</ul>
+<p>禁用其一</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl mask systemd-backlight@backlight:acpi_video0.service </span><br><span class="line">Created symlink <span class="regexp">/etc/</span>systemd<span class="regexp">/system/</span>systemd-backlight@backlight:acpi_video0.service → <span class="regexp">/dev/</span></span><br><span class="line"><span class="keyword">null</span>.</span><br></pre></td></tr></table></figure>
+
+
+<p>重启另外一个</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart systemd-backlight<span class="variable">@backlight</span><span class="symbol">:nvidia_0</span>.service </span><br></pre></td></tr></table></figure>
+<ul>
+<li>重启机器发现亮度已经可以正常恢复</li>
+</ul>
+<h1 id="启动时间"><a href="#启动时间" class="headerlink" title="启动时间"></a>启动时间</h1><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">system</span>d-analyze  </span><br><span class="line"></span><br><span class="line"><span class="params">system</span>d-analyze blame</span><br><span class="line"></span><br><span class="line"><span class="params">system</span>d-analyze critical-chain</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以根据以上命令输出关闭一些不常用服务以加速开机 &#96;systemctl mask(disable)</li>
+<li>有些服务需要用但就是慢可以尝试手动修改 <code>服务名.service</code>文件,将其加上<code>After = graphical.target</code>,也就是在先等桌面加载玩再加载服务</li>
+</ul>
+<h1 id="zabbix"><a href="#zabbix" class="headerlink" title="zabbix"></a>zabbix</h1><h3 id="NAT转换"><a href="#NAT转换" class="headerlink" title="NAT转换"></a>NAT转换</h3><p>在虚拟机上部署zabbix时,虚拟机使用了NAT网桥,<code>telnet</code>能通,当server一直连不上</p>
+<ul>
+<li>最后在agent配置文件上server的地址加上网关地址<br><a target="_blank" rel="noopener" href="https://sysadmin.xyz/main/2018/01/08/zabbix-nat-problem/">https://sysadmin.xyz/main/2018/01/08/zabbix-nat-problem/</a></li>
+</ul>
+<h3 id="snmp"><a href="#snmp" class="headerlink" title="snmp"></a>snmp</h3><p>安装使用</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.net-snmp.org/wiki/index.php/Tutorials">http://www.net-snmp.org/wiki/index.php/Tutorials</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bbwangj/article/details/80981098">https://blog.csdn.net/bbwangj/article/details/80981098</a></li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">telnet</span> <span class="number">192.168.1.1</span> <span class="number">161</span> Connection refused</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定用udp扫描端口161</span></span><br><span class="line"><span class="attribute">nmap</span> -sU <span class="number">192.168.1.1</span> -p161</span><br></pre></td></tr></table></figure>
+
+<h1 id="lol安装"><a href="#lol安装" class="headerlink" title="lol安装"></a>lol安装</h1><p><a target="_blank" rel="noopener" href="https://www.reddit.com/r/leagueoflinux/comments/alfbep/league_on_linux_mint_19/">https://www.reddit.com/r/leagueoflinux/comments/alfbep/league_on_linux_mint_19/</a></p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">sudo apt install snapd</span></span><br><span class="line"></span><br><span class="line"><span class="comment">snap install leagueoflegends</span> <span class="literal">--</span><span class="comment">edge</span> <span class="literal">--</span><span class="comment">devmode</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>很简单粗暴,没有国服</p>
+</li>
+<li><p>Please consider using the Nouveau driver instead.<br><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/267936/how-do-i-get-rid-of-broken-nvidia-randr-detected-falling-back-to-randr-1-0">https://askubuntu.com/questions/267936/how-do-i-get-rid-of-broken-nvidia-randr-detected-falling-back-to-randr-1-0</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linxu/" rel="tag"># linxu</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/03/26/zabbix%E6%8A%98%E8%85%BE%E8%AE%B0/" rel="prev" title="zabbix折腾记-安装篇">
+                  <i class="fa fa-chevron-left"></i> zabbix折腾记-安装篇
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/04/06/%E4%BD%BF%E7%94%A8ufw%E9%85%8D%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99/" rel="next" title="使用ufw配置防火墙">
+                  使用ufw配置防火墙 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

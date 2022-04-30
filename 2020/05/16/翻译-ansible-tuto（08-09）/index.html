@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/pink/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.notyet.ml","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="翻译: ansible-tuto（08-09）">
+<meta property="og:url" content="https://blog.notyet.ml/2020/05/16/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8808-09%EF%BC%89/index.html">
+<meta property="og:site_name" content="oneto1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-16T02:26:11.000Z">
+<meta property="article:modified_time" content="2022-04-30T06:22:18.063Z">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="ansible">
+<meta property="article:tag" content="翻译">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.notyet.ml/2020/05/16/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8808-09%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.notyet.ml/2020/05/16/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8808-09%EF%BC%89/","path":"2020/05/16/翻译-ansible-tuto（08-09）/","title":"翻译: ansible-tuto（08-09）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>翻译: ansible-tuto（08-09） | oneto1</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">oneto1</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-杂物堆"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>杂物堆</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#step08-%E4%BB%8E-git-%E9%83%A8%E7%BD%B2%E6%88%91%E4%BB%AC%E7%9A%84%E7%BD%91%E7%AB%99"><span class="nav-number">1.</span> <span class="nav-text">step08 从 git 部署我们的网站</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-%E6%A8%A1%E5%9D%97"><span class="nav-number">1.0.1.</span> <span class="nav-text">Git 模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#step-09-%E6%B7%BB%E5%8A%A0%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA-webserver"><span class="nav-number">2.</span> <span class="nav-text">step-09 添加另外一个 webserver</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%BA%93%E5%AD%98%E6%96%87%E4%BB%B6"><span class="nav-number">2.0.1.</span> <span class="nav-text">更新库存文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%8F%A6%E4%B8%80%E4%B8%AA-webserver"><span class="nav-number">2.0.2.</span> <span class="nav-text">部署另一个 webserver</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description">你说是梦所以才痛 睡醒了再说</div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.notyet.ml/2020/05/16/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8808-09%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="oneto1">
+      <meta itemprop="description" content="你说是梦所以才痛 睡醒了再说">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="翻译: ansible-tuto（08-09） | oneto1">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          翻译: ansible-tuto（08-09）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-16 10:26:11" itemprop="dateCreated datePublished" datetime="2020-05-16T10:26:11+08:00">2020-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-30 14:22:18" itemprop="dateModified" datetime="2022-04-30T14:22:18+08:00">2022-04-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <hr>
+<span id="more"></span>
+
+<h1 id="step08-从-git-部署我们的网站"><a href="#step08-从-git-部署我们的网站" class="headerlink" title="step08 从 git 部署我们的网站"></a>step08 从 git 部署我们的网站</h1><p>我们已经安装了 apache，设置了虚拟主机，并安全地重新启动了服务器。 现在我们将使用 git 模块来部署我们的应用程序。</p>
+<h3 id="Git-模块"><a href="#Git-模块" class="headerlink" title="Git 模块"></a>Git 模块</h3><p>这是一个小放松，没有什么新的东西。<code>git</code> 模块只是另一个模块。 尽管我们只是为了好玩而尝试。当它涉及 <code>ansible-pull </code>以后，我们将更加熟悉它，</p>
+<p>我们的虚拟机已经设置好了，但是我们需要一些更改来完成部署。 首先，我们正在部署一个 PHP 应用程序。 因此，我们需要安装 <code>libapache2-mod-php</code> 包。 其次，我们必须安装 git，因为 <code>git</code> 模块(用于克隆我们应用程序的 git 存储库)将使用它。</p>
+<p>我们可以这样做:</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">- name: Installs apache web server</span><br><span class="line">  apt:</span><br><span class="line">    pkg: apache2</span><br><span class="line">    <span class="keyword">state</span>: present</span><br><span class="line">    update_cache: true</span><br><span class="line"></span><br><span class="line">- name: Installs php module</span><br><span class="line">  apt:</span><br><span class="line">    pkg: libapache2-mod-php</span><br><span class="line">    <span class="keyword">state</span>: present</span><br><span class="line"></span><br><span class="line">- name: Installs git</span><br><span class="line">  apt:</span><br><span class="line">    pkg: git</span><br><span class="line">    <span class="keyword">state</span>: present</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>但是 ansible 提供了一种更易读的编写方式。 Ansible 可以在一系列 <code>items</code> 上循环遍历，并在一个动作中使用每个 <code>item</code> :</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="string">hosts: web</span></span><br><span class="line">  <span class="attribute">tasks</span><span class="punctuation">:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">name: Installs necessary packages</span></span><br><span class="line">      <span class="attribute">apt</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">pkg</span><span class="punctuation">:</span> <span class="string">&quot;&#123;&#123; item &#125;&#125;&quot;</span></span><br><span class="line">        <span class="attribute">state</span><span class="punctuation">:</span> <span class="string">latest</span></span><br><span class="line">        <span class="attribute">update_cache</span><span class="punctuation">:</span> <span class="string">true</span></span><br><span class="line">      <span class="attribute">with_items</span><span class="punctuation">:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">apache2</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">libapache2-mod-php</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">git</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="string">name: Push future default virtual host configuration</span></span><br><span class="line">      <span class="attribute">copy</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">src</span><span class="punctuation">:</span> <span class="string">files/awesome-app</span></span><br><span class="line">        <span class="attribute">dest</span><span class="punctuation">:</span> <span class="string">/etc/apache2/sites-available/</span></span><br><span class="line">        <span class="attribute">mode</span><span class="punctuation">:</span> <span class="string">0640</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="string">name: Activates our virtualhost</span></span><br><span class="line">      <span class="attribute">command</span><span class="punctuation">:</span> <span class="string">a2ensite awesome-app</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="string">name: Check that our config is valid</span></span><br><span class="line">      <span class="attribute">command</span><span class="punctuation">:</span> <span class="string">apache2ctl configtest</span></span><br><span class="line">      <span class="attribute">register</span><span class="punctuation">:</span> <span class="string">result</span></span><br><span class="line">      <span class="attribute">ignore_errors</span><span class="punctuation">:</span> <span class="string">True</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="string">name: Rolling back - Restoring old default virtualhost</span></span><br><span class="line">      <span class="attribute">command</span><span class="punctuation">:</span> <span class="string">a2ensite default</span></span><br><span class="line">      <span class="attribute">when</span><span class="punctuation">:</span> <span class="string">result is failed</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="string">name: Rolling back - Removing out virtualhost</span></span><br><span class="line">      <span class="attribute">command</span><span class="punctuation">:</span> <span class="string">a2dissite awesome-app</span></span><br><span class="line">      <span class="attribute">when</span><span class="punctuation">:</span> <span class="string">result is failed</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="string">name: Rolling back - Ending playbook</span></span><br><span class="line">      <span class="attribute">fail</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">msg</span><span class="punctuation">:</span> <span class="string">&quot;Configuration file is not valid. Please check that before re-running the playbook.&quot;</span></span><br><span class="line">      <span class="attribute">when</span><span class="punctuation">:</span> <span class="string">result is failed</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="string">name: Deploy our awesome application</span></span><br><span class="line">      <span class="attribute">git</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">repo</span><span class="punctuation">:</span> <span class="string">https://github.com/leucos/ansible-tuto-demosite.git</span></span><br><span class="line">        <span class="attribute">dest</span><span class="punctuation">:</span> <span class="string">/var/www/awesome-app</span></span><br><span class="line">      <span class="attribute">tags</span><span class="punctuation">:</span> <span class="string">deploy</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="string">name: Deactivates the default virtualhost</span></span><br><span class="line">      <span class="attribute">command</span><span class="punctuation">:</span> <span class="string">a2dissite default</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="string">name: Deactivates the default ssl virtualhost</span></span><br><span class="line">      <span class="attribute">command</span><span class="punctuation">:</span> <span class="string">a2dissite default-ssl</span></span><br><span class="line">      <span class="attribute">notify</span><span class="punctuation">:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">restart apache</span></span><br><span class="line"></span><br><span class="line">  <span class="attribute">handlers</span><span class="punctuation">:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">name: restart apache</span></span><br><span class="line">      <span class="attribute">service</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">name</span><span class="punctuation">:</span> <span class="string">apache2</span></span><br><span class="line">        <span class="attribute">state</span><span class="punctuation">:</span> <span class="string">restarted</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来开始吧：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">$ ansible-playbook -i step-08/hosts -l host1 step-08/apache.yml</span><br><span class="line"></span><br><span class="line">PLAY [web] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">GATHERING FACTS <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">ok: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Updates apt cache] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">ok: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Installs necessary packages] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host1] =&gt; (item=apache2,libapache2-mod-php,git)</span><br><span class="line"></span><br><span class="line">TASK: [Push future default virtual host configuration] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Activates our virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Check that our config is valid] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Rolling back - Restoring old default virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">skipping: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Rolling back - Removing out virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">skipping: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Rolling back - Ending playbook] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">skipping: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Deploy our awesome application] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Deactivates the default virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Deactivates the default ssl virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">NOTIFIED: [restart apache] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host1]</span><br><span class="line"></span><br><span class="line">PLAY RECAP <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">host1              : ok=10   changed=8    unreachable=0    failed=0</span></span><br></pre></td></tr></table></figure>
+<p>你现在可以浏览 <a target="_blank" rel="noopener" href="http://192.168.33.11,它应该会显示一张图片和服务器的主机名./">http://192.168.33.11，它应该会显示一张图片和服务器的主机名。</a></p>
+<p><strong>注意</strong> <code>tags: deploy</code>  这一行允许您只执行 playbook 的一部分。 比如说你为你的网站推出了一个新版本。 您希望加快处理速度，只执行处理 <code>deploy</code> 的部分。 标签允许你这样做。 当然，<code>deploy</code> 只是一个字符串，它没有任何特定的含义，可以是任何东西。 让我们来看看如何使用它:</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ ansible-playbook -i step-08/hosts -l host1 step-08/apache.yml -t deploy</span><br><span class="line">X11 forwarding request failed on channel 0</span><br><span class="line"></span><br><span class="line">PLAY [web] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">GATHERING FACTS <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">ok: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Deploy our awesome application] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">PLAY RECAP <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">host1              : ok=2    changed=1    unreachable=0    failed=0</span><br></pre></td></tr></table></figure>
+
+<p>让我们在 <code>step-09</code> 中部署另一个 web 服务器。</p>
+<h1 id="step-09-添加另外一个-webserver"><a href="#step-09-添加另外一个-webserver" class="headerlink" title="step-09 添加另外一个 webserver"></a>step-09 添加另外一个 webserver</h1><p>我们已经有了一个 webserver，让我们添加另外一个</p>
+<h3 id="更新库存文件"><a href="#更新库存文件" class="headerlink" title="更新库存文件"></a>更新库存文件</h3><p>由于我们对此抱有有很大的期望，我们将添加另一个 web 服务器和一个负载均衡器，我们将在下一步配置它。让我们完成它。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[web]</span><br><span class="line">host1 <span class="attribute">ansible_host</span>=192.168.33.11 <span class="attribute">ansible_user</span>=root</span><br><span class="line">host2 <span class="attribute">ansible_host</span>=192.168.33.12 <span class="attribute">ansible_user</span>=root</span><br><span class="line"></span><br><span class="line">[haproxy]</span><br><span class="line">host0 <span class="attribute">ansible_host</span>=192.168.33.10 <span class="attribute">ansible_user</span>=root</span><br></pre></td></tr></table></figure>
+<p>请记住，<code>ansible_host</code> 在这里指定可接受的主机，因为主机的 IP 与预期的不同(或者无法解析)。 您可以将这些主机添加到您的 <code>/etc/hosts</code> 中，而不必担心，或者使用真正的主机名(这是典型情况下应该做的)。</p>
+<h3 id="部署另一个-webserver"><a href="#部署另一个-webserver" class="headerlink" title="部署另一个 webserver"></a>部署另一个 webserver</h3><p>部署另一个 webserver 很简单</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">$ ansible-playbook -i step-09/hosts step-09/apache.yml</span><br><span class="line"></span><br><span class="line">PLAY [web] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">GATHERING FACTS <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">ok: [host2]</span><br><span class="line">ok: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Updates apt cache] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">ok: [host1]</span></span><br><span class="line"><span class="emphasis">ok: [host2]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Installs necessary packages] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">ok: [host1] =&gt; (item=apache2,libapache2-mod-php,git)</span><br><span class="line">changed: [host2] =&gt; (item=apache2,libapache2-mod-php,git)</span><br><span class="line"></span><br><span class="line">TASK: [Push future default virtual host configuration] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">ok: [host1]</span></span><br><span class="line"><span class="emphasis">changed: [host2]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Activates our virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host2]</span><br><span class="line">changed: [host1]</span><br><span class="line"></span><br><span class="line">TASK: [Check that our config is valid] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host2]</span></span><br><span class="line"><span class="emphasis">changed: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Rolling back - Restoring old default virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">skipping: [host1]</span><br><span class="line">skipping: [host2]</span><br><span class="line"></span><br><span class="line">TASK: [Rolling back - Removing out virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">skipping: [host1]</span></span><br><span class="line"><span class="emphasis">skipping: [host2]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Rolling back - Ending playbook] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">skipping: [host1]</span><br><span class="line">skipping: [host2]</span><br><span class="line"></span><br><span class="line">TASK: [Deploy our awesome application] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">ok: [host1]</span></span><br><span class="line"><span class="emphasis">changed: [host2]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">TASK: [Deactivates the default virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host1]</span><br><span class="line">changed: [host2]</span><br><span class="line"></span><br><span class="line">TASK: [Deactivates the default ssl virtualhost] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">changed: [host2]</span></span><br><span class="line"><span class="emphasis">changed: [host1]</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">NOTIFIED: [restart apache] <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span></span><br><span class="line">changed: [host1]</span><br><span class="line">changed: [host2]</span><br><span class="line"></span><br><span class="line">PLAY RECAP <span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="emphasis">*</span></span><br><span class="line"><span class="emphasis">host1              : ok=10   changed=5    unreachable=0    failed=0</span></span><br><span class="line"><span class="emphasis">host2              : ok=10   changed=8    unreachable=0    failed=0</span></span><br><span class="line"><span class="emphasis"></span></span><br></pre></td></tr></table></figure>
+<p>我们所要做的就是从命令行中移除 <code>-l host1</code>。 记住 <code>-l</code> 是一个参数，它限制了 playbook 在特定主机上运行。 现在我们不再限制，它将运行在所有的主机上，在这些主机上的剧本打算运行(即 web组)。</p>
+<p>如果我们在 group <code>web</code> 中有其他服务器，但是希望将 playbook 限制为一个子集，我们可以使用，例如:<code>-l firstthost: secondhost:...</code></p>
+<p>现在我们已经有了这个不错的 web 服务器组，让我们通过在 <code>step-10</code> 中在它们前面放置一个负载均衡器，将它变成为一个集群。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/ansible/" rel="tag"># ansible</a>
+              <a href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag"># 翻译</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/15/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8806-07%EF%BC%89/" rel="prev" title="翻译: ansible-tuto（06-07）">
+                  <i class="fa fa-chevron-left"></i> 翻译: ansible-tuto（06-07）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/05/17/%E7%BF%BB%E8%AF%91-ansible-tuto%EF%BC%8810-11%EF%BC%89/" rel="next" title="翻译: ansible-tuto（10-11) ">
+                  翻译: ansible-tuto（10-11)  <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>
